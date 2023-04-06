@@ -1,0 +1,14 @@
+@inproceedings{cooper2024talkinshort,
+author = {Lee, Katherine and Cooper, A. Feder and Grimmelmann, James},
+title = {{Talkin' 'Bout AI Generation: Copyright and the Generative-AI Supply Chain (The Short Version)}},
+year = {2024},
+isbn = {9798400703331},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3614407.3643696},
+doi = {10.1145/3614407.3643696},
+booktitle = {Proceedings of the Symposium on Computer Science and Law},
+pages = {48–63},
+numpages = {16},
+series = {CSLAW '24}
+}

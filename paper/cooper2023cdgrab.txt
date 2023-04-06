@@ -1,0 +1,8 @@
+
+@inproceedings{cooper2023cdgrab,
+	title={{Coordinating Distributed Example Orders for Provably Accelerated Training}},
+	author={A. Feder Cooper and Wentao Guo and Khiem Pham and Tiancheng Yuan and Charlie F. Ruan and Yucheng Lu and Christopher De Sa},
+	booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+	year={2023},
+	url={https://openreview.net/forum?id=ISRyILhAyS}
+}

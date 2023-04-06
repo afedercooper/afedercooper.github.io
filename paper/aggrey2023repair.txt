@@ -1,0 +1,5 @@
+@misc{aggrey2023repair,
+      title={{Repairing Regressors for Fair Classification at Any Decision Threshold}}, 
+      author={Kweku Kwegyir-Aggrey and Jessica Dai and A. Feder Cooper and John Dickerson and Keegan Hines},
+      year={2023}
+}

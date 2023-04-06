@@ -1,0 +1,10 @@
+@article{cooper2024variance, 
+	title={{Arbitrariness and Social Prediction: The Confounding Role of Variance in Fair Classification}}, 
+	volume={38}, 
+	number={20}, 
+	journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+	author={Cooper, A. Feder and Lee, Katherine and Choksi, Madiha Zahrah and Barocas, Solon and De Sa, Christopher and Grimmelmann, James and Kleinberg, Jon and Sen, Siddhartha and Zhang, Baobao}, 	
+	year={2024}, 
+	month=mar, 
+	pages={22004-22012}
+}

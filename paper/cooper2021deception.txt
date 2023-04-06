@@ -1,0 +1,10 @@
+@inproceedings{cooper2021deception,
+	author = {Cooper, A. Feder and Lu, Yucheng and Forde, Jessica and De Sa, Christopher M},
+	booktitle = {Advances in Neural Information Processing Systems},
+	editor = {M. Ranzato and A. Beygelzimer and Y. Dauphin and P.S. Liang and J. Wortman Vaughan},
+	pages = {3081--3095},
+	publisher = {Curran Associates, Inc.},
+	title = {{Hyperparameter Optimization Is Deceiving Us, and How to Stop It}},
+	volume = {34},
+	year = {2021}
+}

@@ -1,0 +1,10 @@
+@inproceedings{zhang2020tunamh,
+	author = {Zhang, Ruqi and Cooper, A. Feder and De Sa, Christopher M},
+	booktitle = {Advances in Neural Information Processing Systems},
+	editor = {H. Larochelle and M. Ranzato and R. Hadsell and M.F. Balcan and H. Lin},
+	pages = {19500--19510},
+	publisher = {Curran Associates, Inc.},
+	title = {{Asymptotically Optimal Exact Minibatch Metropolis-Hastings}},
+	volume = {33},
+	year = {2020}
+}

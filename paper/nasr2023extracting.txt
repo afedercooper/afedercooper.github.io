@@ -1,0 +1,6 @@
+@article{nasr2023scalable,
+      title={{Scalable Extraction of Training Data from (Production) Language Models}}, 
+      author={Milad Nasr and Nicholas Carlini and Jonathan Hayase and Matthew Jagielski and A. Feder Cooper and Daphne Ippolito and Christopher A. Choquette-Choo and Eric Wallace and Florian Tramèr and Katherine Lee},
+      year={2023},
+      journal={arXiv preprint arXiv:2311.17035},
+}

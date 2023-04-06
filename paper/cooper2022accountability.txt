@@ -1,0 +1,18 @@
+@inproceedings{cooper2022accountability,
+	author = {Cooper, A. Feder and Moss, Emanuel and Laufer, Benjamin and Nissenbaum, Helen},
+	title = {{Accountability in an Algorithmic Society: Relationality, Responsibility, and Robustness in Machine Learning}},
+	year = {2022},
+	isbn = {9781450393522},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	doi = {10.1145/3531146.3533150},
+	booktitle = {Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency},
+	pages = {864–876},
+	numpages = {13},
+	keywords = {robustness, relationality, data-driven algorithmic systems, accountability, moral philosophy},
+	location = {Seoul, Republic of Korea},
+	series = {FAccT '22}
+}
+
+  
+

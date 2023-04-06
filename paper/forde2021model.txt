@@ -1,0 +1,6 @@
+@article{forde2021model,
+      title={{Model Selection's Disparate Impact in Real-World Deep Learning Applications}}, 
+      author={Jessica Zosa Forde and A. Feder Cooper and Kweku Kwegyir-Aggrey and Chris De Sa and Michael Littman},
+      year={2021},
+      journal={arXiv preprint arXiv:2104.00606}
+}

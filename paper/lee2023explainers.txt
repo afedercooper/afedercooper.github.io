@@ -1,0 +1,5 @@
+@misc{lee2023explainers,
+	title={{AI and Law: The Next Generation}},
+	author={Katherine Lee and A. Feder Cooper and James Grimmelmann and Daphne Ippolito},
+	year={2023}
+}
