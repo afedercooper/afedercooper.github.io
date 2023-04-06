@@ -1,0 +1,15 @@
+@inproceedings{cooper2021tecnologica,
+    title = "{{`}Tecnologica cosa{'}: Modeling Storyteller Personalities in Boccaccio{'}s {`}Decameron{'}}",
+    author = "Cooper, A. Feder  and
+      Antoniak, Maria  and
+      De Sa, Christopher  and
+      Migiel, Marilyn  and
+      Mimno, David",
+    booktitle = "Proceedings of the 5th Joint SIGHUM Workshop on Computational Linguistics for Cultural Heritage, Social Sciences, Humanities and Literature",
+    month = nov,
+    year = "2021",
+    address = "Punta Cana, Dominican Republic (online)",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2021.latechclfl-1.17",
+    pages = "147--153",
+}

@@ -1,0 +1,10 @@
+@InProceedings{zhang2020amagold,  
+	title =  {{AMAGOLD: Amortized Metropolis Adjustment for Efficient Stochastic Gradient MCMC}},  
+	author =       {Zhang, Ruqi and Cooper, A. Feder and Sa, Christopher De},  
+	booktitle =  {Proceedings of the Twenty Third International Conference on Artificial Intelligence and Statistics},  
+	pages =  {2142--2152},  
+	year =  {2020}, 
+	editor =  {Chiappa, Silvia and Calandra, Roberto},  
+	volume =  {108},  
+	series =  {Proceedings of Machine Learning Research},  publisher =    {PMLR}
+} 

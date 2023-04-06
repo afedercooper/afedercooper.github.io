@@ -1,0 +1,6 @@
+@article{cooper2023report,
+      title={{Report of the 1st Workshop on Generative AI and Law}}, 
+      author={A. Feder Cooper and Katherine Lee and James Grimmelmann and Daphne Ippolito and Christopher Callison-Burch and Christopher A. Choquette-Choo and Niloofar Mireshghallah and Miles Brundage and David Mimno and Madiha Zahrah Choksi and Jack M. Balkin and Nicholas Carlini and Christopher De Sa and Jonathan Frankle and Deep Ganguli and Bryant Gipson and Andres Guadamuz and Swee Leng Harris and Abigail Z. Jacobs and Elizabeth Joh and Gautam Kamath and Mark Lemley and Cass Matthews and Christine McLeavey and Corynne McSherry and Milad Nasr and Paul Ohm and Adam Roberts and Tom Rubin and Pamela Samuelson and Ludwig Schubert and Kristen Vaccaro and Luis Villa and Felix Wu and Elana Zeide},
+    year={2023},
+    journal={arXiv preprint arXiv:2311.06477}
+}

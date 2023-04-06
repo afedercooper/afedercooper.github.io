@@ -1,0 +1,6 @@
+@article{cooper2023variance,
+      title={{Arbitrariness and Prediction: The Confounding Role of Variance in Fair Classification}}, 
+      author={A. Feder Cooper and Katherine Lee and Madiha Choksi and Solon Barocas and Christopher De Sa and James Grimmelmann and Jon Kleinberg and Siddhartha Sen and Baobao Zhang},
+      year={2023},
+      journal={arXiv preprint arXiv:2301.11562}
+}

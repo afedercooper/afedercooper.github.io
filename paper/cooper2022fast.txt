@@ -1,0 +1,8 @@
+@article{cooper2022fast,
+	title={{Fast or Accurate? Governing Conflicting Goals in Highly Autonomous Vehicles}},
+	author={A. Feder Cooper and Karen Levy},
+	journal={Colorado Technology Law Journal},
+	volume={20},
+	pages={249--277},
+	year={2022}
+}

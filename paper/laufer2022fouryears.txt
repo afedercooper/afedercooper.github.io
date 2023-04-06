@@ -1,0 +1,19 @@
+@inproceedings{laufer2023fouryears,
+	author = {Laufer, Benjamin and Jain, Sameer and Cooper, A. Feder and Kleinberg, Jon and Heidari, Hoda},
+	title = {{Four Years of FAccT: A Reflexive, Mixed-Methods Analysis of Research Contributions, Shortcomings, and Future Prospects}},
+	year = {2022},
+	isbn = {9781450393522},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3531146.3533107},
+	doi = {10.1145/3531146.3533107},
+	booktitle = {Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency},
+	pages = {401–426},
+	numpages = {26},
+	keywords = {impact, topics, mixed methods, values, community perspectives, FAccT, reflexivity},
+	location = {Seoul, Republic of Korea},
+	series = {FAccT '22}
+}
+
+  
+

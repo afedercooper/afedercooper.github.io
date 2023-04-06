@@ -1,0 +1,6 @@
+@article{gokaslan2023commoncanvas,
+	title={{CommonCanvas: An Open Diffusion Model Trained with Creative-Commons Images}}, 
+	author={Aaron Gokaslan and A. Feder Cooper and Jasmine Collins and Landan Seguin and Austin Jacobson and Mihir Patel and Jonathan Frankle and Cory Stephenson and Volodymyr Kuleshov},
+	year={2023},
+        journal={arXiv preprint arXiv:2310.16825}
+}

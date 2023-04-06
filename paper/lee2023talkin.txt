@@ -1,0 +1,6 @@
+@article{lee2023talkin,
+	title={{Talkin' 'Bout AI Generation: Copyright and the Generative-AI Supply Chain}}, 
+	author={Katherine Lee and A. Feder Cooper and James Grimmelmann},
+	year={2023},
+        journal={arXiv preprint arXiv:2309.08133}
+}

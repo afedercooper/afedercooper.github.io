@@ -1,0 +1,18 @@
+@inproceedings{cooper2021emergent,
+	author = {Cooper, A. Feder and Abrams, Ellen and NA, NA},
+	title = {{Emergent Unfairness in Algorithmic Fairness-Accuracy Trade-Off Research}},
+	year = {2021},
+	isbn = {9781450384735},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	doi = {10.1145/3461702.3462519},
+	booktitle = {Proceedings of the 2021 AAAI/ACM Conference on AI, Ethics, and Society},
+	pages = {46–54},
+	numpages = {9},
+	keywords = {algorithmic fairness, societal implications of AI, machine learning},
+	location = {Virtual Event, USA},
+	series = {AIES '21}
+}
+
+  
+
