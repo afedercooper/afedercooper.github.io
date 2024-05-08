@@ -150,6 +150,12 @@
       padding-bottom: 2px;
       font-weight: bold;
     }
+
+    ul {
+      list-style-type: none; 
+      padding: 0;
+    } 
+
   </style>
 </head>
 
@@ -159,7 +165,7 @@
     <div class="text-center">
       <div id="home" style="font-weight:bold; font-size:175%; margin-top:20px">
 
-        <!--<a href="/shade">😎</a> -->Full List of Papers, Articles, and Other Writing<!--<a href="/pasta">🍝</a>
+        <!--<a href="/shade">😎</a> -->Written work<!--<a href="/pasta">🍝</a>
         <br><br>
           <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
         <a href="https://arxiv.org/a/cooper_a_1.html"><img border="0"alt="arxiv" src="arxiv.png" width="35" height="35"></a>
@@ -175,13 +181,10 @@
   <div id="pubs-list" class="col-sm-12" style="margin-bottom:20px">
 
   <br>
-    *Equal contribution; listed by year of completion (can differ by publication year)
+    *Equal contribution
   <br><br>
-
-  <h2>Ph.D. projects</h2>
     
-  <h3>2024</h3>
-    <ol reversed start="27">    
+    <ul reversed start="27">    
       <li> Nicholas Carlini, Daniel Paleka, Krishnamurthy Dj Dvijotham, Thomas Steinke, Jonathan Hayase, <strong>A. Feder Cooper</strong>, Katherine Lee, Matthew Jagielski, Milad Nasr, Arthur Conmy, Eric Wallace, David Rolnick, Florian Tramèr. "<a href="./carlini2024extracting.pdf">Stealing Part of a Production Language Model</a>." <i>ICML 2024</i>. [<a href="./carlini2024extracting.txt">bibtex</a>] <span class="proceedings">Proceedings</span>
       </li>
       <br> 
@@ -193,10 +196,7 @@
       <li> Daniel McDuff, Tim Korjakow, Scott Cambo, Jesse Josua Benjamin, Jenny Lee, Yacine Jernite, Carlos Muñoz Ferrandis, Aaron Gokaslan, Alek Tarkowski, Joseph Lindley, <strong>A. Feder Cooper</strong>, and Danish Contractor "<a href="./mcduff2024license.pdf">On the Standardization of Behavioral Use Clauses and Their Adoption for Responsible Licensing of AI</a>."  <i>ICML 2024</i>. [<a href="./mcduff2024license.txt">bibtex</a>] <span class="proceedings">Proceedings</span> 
       </li>
       <br>
-    </ol>
 
-  <h3>2023</h3>
-    <ol reversed start="24">
       <li><strong>A. Feder Cooper</strong>*, Katherine Lee*, and James Grimmelmann*. "<a href="./lee2023talkin.pdf">Talkin’ ‘Bout AI Generation: Copyright and the Generative-AI Supply Chain</a>." Forthcoming, <i>Journal of the Copyright Society</i>, 2024. [<a href="./lee2023talkin.txt">bibtex</a>] <span class="journal">Journal</span>
       </li>
       <br>
@@ -228,10 +228,7 @@
       <li> <strong>A. Feder Cooper</strong>, Katherine Lee, Madiha Choksi, Solon Barocas, Christopher De Sa, James Grimmelmann, Jon Kleinberg, Siddhartha Sen, and Baobao Zhang. "Distribution Justice: Variance, Uncertainty, and Rules in Machine Learning and Law." <i>Data (Re)Makes the World Conference</i>, Information Society Project at Yale Law School; <i>Privacy Law Scholars Conference</i>. 2023. <span class="workshop">Workshop</span>
       </li>
       <br>
-    </ol>
 
-  <h3>2022</h3>
-    <ol reversed start="16">
       <li> <strong>A. Feder Cooper</strong>*, Emanuel Moss*, Benjamin Laufer, and Helen Nissenbaum. "<a href="./cooper2022accountability.pdf">Accountability in an Algorithmic Society: Relationality, Responsibility, and Robustness in Machine Learning</a>." <i> FAccT 2022</i>. [<a href="./cooper2022accountability.txt">bibtex</a>] <span class="proceedings">Proceedings</span>
       </li>
       <br>
@@ -258,10 +255,7 @@
       <li> Kweku Kwegyir-Aggrey, <strong>A. Feder Cooper</strong>, Jessica Dai, John Dickerson, Keegan Hines, and Suresh Venkatasubramanian. "<a href="./aggrey2023repair.pdf">Repairing Regressors for Fair Classification at Any Decision Threshold</a>." <i>Algorithmic Fairness through the Lens of Time Workshop</i> at <i>NeurIPS 2023</i>. [<a href="./aggrey2023repair.txt">bibtex</a>] <span class="workshop">Workshop</span> <span class="award">Oral</span>
       </li>
       <br>
-    </ol>
-    
-  <h3>2021</h3>
-    <ol reversed start="9">
+
       <li> <strong> A. Feder Cooper</strong>, Yucheng Lu, Jessica Zosa Forde, and Christopher De Sa. "<a href="./cooper2021deception.pdf">Hyperparameter Optimization Is Deceiving Us, and How to Stop It</a>." <i>NeurIPS 2021</i>. [<a href="./cooper2021deception.txt">bibtex</a>] <span class="proceedings">Proceedings</span>
       </li>
       <br>
@@ -281,10 +275,7 @@
       <li> <strong>A. Feder Cooper</strong>*, Jessica Zosa Forde*, Kweku Kwegyir-Aggrey, Christopher De Sa, and Michael Littman. "<a href="./forde2021model.pdf">Model Selection's Disparate Impact in Real-World Deep Learning Applications</a>." <i>Science of Deep Learning Workshop</i> at <i>ICLR 2021</i>. [<a href="./forde2021model.txt">bibtex</a>] <span class="workshop">Workshop</span> <span class="award">Oral</span>
       </li>
       <br> 
-    </ol>
-    
-  <h3>2020</h3>
-    <ol reversed start="4">
+
       <li><strong>A. Feder Cooper</strong>*, Ruqi Zhang*, and Christopher De Sa. "<a href="./zhang2020tunamh.pdf">Asymptotically Optimal Exact Minibatch Metropolis-Hastings</a>." <i>NeurIPS 2020</i>. [<a href="./zhang2020tunamh.txt">bibtex</a>] <span class="proceedings">Proceedings</span> <span class="award">Spotlight</span>
       </li>
       <br>
@@ -292,21 +283,15 @@
       <li> <strong> A. Feder Cooper</strong>, Karen Levy, and Christopher De Sa. "<a href="./cooper2021eaamo.pdf">Accuracy-Efficiency Trade-Offs and Accountability in Distributed ML Systems</a>." <i>EAAMO 2021</i>. [<a href="./cooper2021eaamo.txt">bibtex</a>] <span class="proceedings">Proceedings</span> <span class="award">Oral</span>
       </li>
       <br>
-    </ol>
 
-    <h3>2019</h3>
-    <ol reversed start="2">
       <li>Ruqi Zhang, <strong> A. Feder Cooper</strong>, and Christopher De Sa. "<a href="./zhang2020amagold.pdf">AMAGOLD: Amortized Metropolis Adjustment for Efficient Stochastic Gradient MCMC</a>." <i>AISTATS 2020</i>. [<a href="./zhang2020amagold.txt">bibtex</a>] <span class="proceedings">Proceedings</span>
       </li>
       <br>
-    </ol>
 
-  <h3>2018</h3>
-    <ol reversed start="1">
       <li> <strong> A. Feder Cooper</strong>. "Imperfection is the Norm: A Computer Systems Perspective on IoT and Enforcement." <i>(Im)Perfect Enforcement Conference</i>, Information Society Project at Yale Law School. 2019. <span class="workshop">Workshop</span> <span class="award">Plenary Session</span>
       </li>
       <br>
-    </ol>
+    </ul>
 </body>
 
 </html>
