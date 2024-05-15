@@ -1,0 +1,7 @@
+@article{hayes2025npextraction,
+      title={{Measuring memorization in language models via probabilistic extraction}}, 
+      author={Jamie Hayes and Marika Swanberg and Harsh Chaudhari and Itay Yona and Ilia Shumailov and Milad Nasr and Christopher A. Choquette-Choo and Katherine Lee and A. Feder Cooper},
+      year={2025},
+      journal={arXiv preprint arXiv:2410.19482}
+}
+
