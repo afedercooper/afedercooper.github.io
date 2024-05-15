@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>A. Feder Cooper</title>
+  <title>A. Feder Cooper, Ph.D.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -14,89 +14,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <style> 
-  .header {
-    <!--background-color: #ffbf00;-->
-    padding: 30px;
-    text-align: center;
-  } 
-  
+    .header {
+      <!--background-color: #ffbf00;-->
+      padding: 30px;
+      text-align: center;
+    } 
+    
 
-  .news {
-    padding: 40px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-  }
+    .news {
+      padding: 40px;
+      text-align: center;
+      background: #1abc9c;
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+    }
 
-  #navbar {
-    overflow: hidden;
-    background-color: #ffe6cc;
-    z-index: 4;
-  }
+    #navbar {
+      overflow: hidden;
+      background-color: #ffe6cc;
+      z-index: 4;
+    }
 
-  #navbar a {
-    float: left;
-    display: block;
-    color: #222222;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
+    #navbar a {
+      float: left;
+      display: block;
+      color: #222222;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
 
-  #navbar a.active {
-    background-color: #ff8000;
-    color: white;
-  }
+    #navbar a.active {
+      background-color: #ff8000;
+      color: white;
+    }
 
-  #navbar a:focus {
-    background-color: #ff8000;
-    color: white;
-  }
+    #navbar a:focus {
+      background-color: #ff8000;
+      color: white;
+    }
 
-  .content {
-    padding: 16px;
-  }
+    .content {
+      padding: 16px;
+    }
 
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
+    .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
 
-  .sticky + .content {
-    padding-top: 60px;
-  }
+    .sticky + .content {
+      padding-top: 60px;
+    }
 
-  .img {
+    .img {
       width:100%;
       z-index: 3;
     }
+    
     .container{
       display: flex;
       flex-wrap: wrap;
     }
+    
     .tabbed{
       padding-left:1em;
     }
+    
     table {
       border-spacing: 5px;
     }
+    
     p {
       font-size: 115%;
     }
 
     @viewport {
       width: device-width ;
-      zoom: 1.0 ;
+      zoom: 1.05 ;
     }
 
     ul {
       list-style-type: none; 
       padding: 0;
-    } 
+    }
+
+    .paper {
+      color: white;
+      padding-left: 5px;
+      padding-right: 5px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      font-weight: bold;
+      border-radius: 15%;
+    }
+
+    .journal {
+      background-color: darkred;
+    }
+
+    .proceedings {
+      background-color: darkblue;
+    }
+
+    .workshop{
+      background-color: darkviolet;
+    }
+
+    .preprint{
+      background-color: darkorange;
+    }
+
+    .blog{
+      background-color: darkgray;
+    }
+
+    .thesis{
+      background-color: crimson;
+    }
+
+    .award {
+      background-color: gold;
+      color: black;
+    }
   </style>
 </head>
 
@@ -106,7 +149,7 @@
     <div class="text-center">
       <div id="home" style="font-weight:bold; font-size:175%; margin-top:20px">
 
-        <!--<a href="/shade">😎</a> -->A. Feder Cooper<!--<a href="/pasta">🍝</a>
+        <!--<a href="/shade">😎</a> -->A. Feder Cooper, Ph.D.<!--<a href="/pasta">🍝</a>
         <br><br>
           <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
         <a href="https://arxiv.org/a/cooper_a_1.html"><img border="0" alt="arxiv" src="arxiv.png" width="35" height="35"></a>
@@ -128,14 +171,13 @@
           
             <td width=45%>
               <div align="center">
-                Ph.D., Computer Science
-                <br>
-                Postdoc, Microsoft Research 
-                <br> 
-                Affiliate researcher, Stanford HAI
-                <br>
                 Incoming Assistant Professor, Yale CS
-                <br><span class="glyphicon glyphicon-envelope"></span> afedercooper [AT] gmail [DOT] com
+                <br>
+                Postdoctoral Researcher, Microsoft Research 
+                <br> 
+                Postdoctoral Affiliate, Stanford 
+                <br>
+                <span class="glyphicon glyphicon-envelope"></span> afedercooper [AT] gmail [DOT] com
                 <br><br>
                 <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
                 <!--
@@ -145,8 +187,10 @@
                 <img border="0" alt="twitter" src="twitter.png" width="35" height="35"></a>-->
                 <a href="https://arxiv.org/a/cooper_a_1.html">
                 <img border="0" alt="arxiv" src="arxiv.png" width="35" height="35"></a>
-                <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=xjVV6xgAAAAJ">
+                <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=SCuVOk0AAAAJ">
                 <img border="0" alt="scholar" src="scholar.png" width="35" height="35"></a>
+                <br>
+                <a href='writing/index.html'>Writing</a>
               </div>
             </td>
             <td width=10%>
@@ -184,21 +228,23 @@
       </div>
     </div>
   </div>
-
-      I research topics on reliable measurement and evaluation of machine learning systems. 
-      I'm a co-founder of the <a href="https://genlaw.org">GenLaw Center</a>, an Affiliate at the <a href="https://cyber.harvard.edu/">Berkman Klein Center for Internet & Society</a> at Harvard University, and a postdoctoral researcher at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a>.
-      I'll also be affiliated with <a href="https://hai.stanford.edu/">Stanford HAI</a>, <a href="https://reglab.stanford.edu/">RegLab</a>, and <a href="https://crfm.stanford.edu/">CRFM</a> working with Percy Liang and Dan Ho on research and policy questions regarding the governance of foundation models. 
+      I research a variety of topics in reliable, scalable machine learning. 
+      I'm a co-founder of the <a href="https://genlaw.org">GenLaw Center</a>, a postdoctoral researcher at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a> and a postdoctoral affiliate at <a href="https://hai.stanford.edu/">Stanford HAI</a>, <a href="https://reglab.stanford.edu/">RegLab</a>, and <a href="https://crfm.stanford.edu/">CRFM</a> working with Percy Liang and Dan Ho.
+      I am also a Faculty Associate at the <a href="https://cyber.harvard.edu/">Berkman Klein Center for Internet & Society</a> at Harvard University. 
       In 2026, I'll be appointed as an Assistant Professor of Computer Science at Yale University. 
       I'll also be affiliated with the <a href="https://law.yale.edu/isp">Information Society Project</a> at Yale Law School, the <a href="https://cadmy.yale.edu/">Center for Algorithms, Data, and Market Design</a>, and the <a href="https://fds.yale.edu/">Institute for Foundations of Data Science</a>. 
       <br><br>
-      My research develops quality metrics for ML capabilities, and makes sure that we can effectively measure these metrics at scale and in practice. 
       My contributions span uncertainty estimation, privacy and security of generative-AI systems, distributed training, hyperparameter optimization, and model selection. 
-      I also do work in tech policy and law, and spend a lot of time finding ways to effectively communicate the capabilities and limits of AI/ML to interdisciplinary audiences and the public.
+      I also do work in tech policy and law, and spend a lot of time finding ways to effectively communicate the capabilities and limits of AI/ML to interdisciplinary audiences and the public. 
+      My research has received spotlights, orals, and best-paper accolades at top AI/ML and computing venues, including <i>NeurIPS</i>, <i>ICML</i>, <i>AAAI</i>, and <i>AIES</i>. 
+      Law collaborations on copyright and Generative AI have been lauded as "landmark" work among technology law scholars and the popular press.
+      I occasionally write about machine learning and related topics <a href="writing/index.html">here</a>. 
       <br><br>
       In the past I interned at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a> and at <a href="https://ai.google/discover/research/">Google Research</a>, and was named a <a href="https://risingstars21-eecs.mit.edu/participants/">"Rising Star in EECS"</a> by MIT. 
-      My doctoral was generously supported by the John T. and Catherine D. MacArthur Foundation through <a href="http://aipp.cis.cornell.edu/">AIPP</a>. 
-      <br><br>
+      My doctoral work was generously supported by the John T. and Catherine D. MacArthur Foundation through <a href="http://aipp.cis.cornell.edu/">AIPP</a>. 
       Prior to my research career, I worked for several years as a software engineer at companies both (really) big and (really) small. I specialized in designing, building, and monitoring large-scale backend data-processing systems. 
+      <br><br>
+      <strong>(I am not recruiting students for Fall 2025 -- my appointment at Yale starts in 2026.)</strong>
       <br><br>
  
   </div>
@@ -209,39 +255,58 @@
 
     <h3>Selected work</h3>
     <div>
-    *Equal contribution; <a href="./paper/index.html">full list</a>
+    *First author; <a href="./paper/index.html">full list</a>
       <ul>
-        <li><strong>A. Feder Cooper</strong>*, Katherine Lee*, and James Grimmelmann*. "Talkin’ ‘Bout AI Generation: Copyright and the Generative-AI Supply Chain." <i>Journal of the Copyright Society</i>, 2024. [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4523551">ssrn</a> | <a href="https://arxiv.org/abs/2309.08133">arxiv</a>]
+        <li> Jamie Hayes, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>. "Measuring memorization in language models via probabilistic extraction." <i>NAACL 2025</i>. [<a href="https://arxiv.org/abs/2410.19482v2">arxiv</a> | proceedings] <span class="paper proceedings">Proceedings</span> 
         </li>
         <br>
 
-        <li> Milad Nasr*, Nicholas Carlini*, Jonathan Hayase, Matthew Jagielski, <strong>A. Feder Cooper</strong>, Daphne Ippolito, Christopher A. Choquette-Choo, Eric Wallace, Florian Tramèr, and Katherine Lee. "Scalable Extraction of Training Data from (Production) Language Models." 2023. [<a href="https://arxiv.org/abs/2311.17035">arxiv</a>] 
-        </li>
-        <br> 
-
-        <li> Nicholas Carlini, Daniel Paleka, Krishnamurthy Dj Dvijotham, Thomas Steinke, Jonathan Hayase, <strong>A. Feder Cooper</strong>, Katherine Lee, Matthew Jagielski, Milad Nasr, Arthur Conmy, Eric Wallace, David Rolnick, Florian Tramèr. "Stealing Part of a Production Language Model." <i>ICML 2024.</i> [<a href="https://arxiv.org/abs/2403.06634">arxiv</a>]
-        </li>
-        <br> 
-
-        <li> Aaron Gokaslan, <strong>A. Feder Cooper</strong>, Jasmine Collins, Landan Seguin, Austin Jacobson, Mihir Patel, Jonathan Frankle, Cory Stephenson, and Volodymyr Kuleshov. "CommonCanvas: An Open Diffusion Model Trained with Creative-Commons Images." <i>CVPR 2024</i>. [<a href="https://arxiv.org/abs/2310.16825">arxiv</a>]
+        <li> <strong>A. Feder Cooper</strong>*, Christopher A. Choquette-Choo*, Miranda Bogen*, Matthew Jagielski*, Katja Filippova*, Ken Ziyu Liu* et al. "Machine Unlearning Doesn't Do What You Think: Lessons for Generative AI Policy, Research, and Practice." 2024.  [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5060253">ssrn</a> | <a href="https://arxiv.org/abs/2412.06966">arxiv</a>] <span class="paper preprint">arXiv</span>
         </li>
         <br>
 
-        <li><strong>A. Feder Cooper</strong>*, Ruqi Zhang*, and Christopher De Sa. "Asymptotically Optimal Exact Minibatch Metropolis-Hastings." <i>NeurIPS 2020</i> <strong>Spotlight</strong>. [<a href="https://arxiv.org/abs/2006.11677">arxiv</a> | <a href="https://papers.nips.cc/paper/2020/hash/e2a7555f7cabd6e31aef45cb8cda4999-Abstract.html">proceedings</a>]
+        <li> <strong>A. Feder Cooper</strong>* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." Forthcoming, <i>Chicago-Kent Law Review</i>, (written in 2024, forthcoming 2025). [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4803118">ssrn</a> | <a href="https://arxiv.org/abs/2404.12590">arxiv</a> | journal] <span class="paper journal">Journal</span>
         </li>
         <br>
 
-        <li> <strong> A. Feder Cooper</strong>, Yucheng Lu, Jessica Zosa Forde, and Christopher De Sa. "Hyperparameter Optimization Is Deceiving Us, and How to Stop It." <i>NeurIPS 2021</i>. [<a href="https://arxiv.org/abs/2102.03034">arxiv</a> | <a href="https://proceedings.neurips.cc/paper/2021/hash/17fafe5f6ce2f1904eb09d2e80a4cbf6-Abstract.html">proceedings</a>]
+        <li><strong>A. Feder Cooper</strong>*, Katherine Lee*, and James Grimmelmann*. "Talkin’ ‘Bout AI Generation: Copyright and the Generative-AI Supply Chain." <i>Journal of the Copyright Society</i>, (written in 2023, forthcoming 2025). [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4523551">ssrn</a> | <a href="https://arxiv.org/abs/2309.08133">arxiv</a> | journal] <span class="paper journal">Journal</span>
         </li>
         <br>
 
-        <li> <strong>A. Feder Cooper</strong>, Katherine Lee, Madiha Choksi, Solon Barocas, Christopher De Sa, James Grimmelmann, Jon Kleinberg, Siddhartha Sen, and Baobao Zhang. "Arbitrariness and Social Prediction: The Confounding Role of Variance in Fair Classification." <i>AAAI 2024</i> <strong>Best Student Paper Honorable Mention</strong>. [<a href="https://arxiv.org/abs/2301.11562">arxiv</a>]
+        <li> Nicholas Carlini, Daniel Paleka, Krishnamurthy Dj Dvijotham, Thomas Steinke, Jonathan Hayase, <strong>A. Feder Cooper</strong> et al. "Stealing Part of a Production Language Model." <i>ICML 2024</i>. [<a href="https://arxiv.org/abs/2403.06634">arxiv</a> | <a href="https://openreview.net/forum?id=VE3yWXt3KB">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Best Paper Award</span>
         </li>
         <br>
 
-        <li><strong>A. Feder Cooper</strong>*, Wentao Guo*, Khiem Pham*, Tiancheng Yuan, Charlie F. Ruan, Yucheng Lu, and Christopher De Sa. "Coordinating Distributed Example Orders for Provably Accelerated Training." <i>NeurIPS 2023</i>. [<a href="https://arxiv.org/abs/2302.00845">arxiv</a> | <a href="https://openreview.net/forum?id=ISRyILhAyS">proceedings</a>]
+        <li> <strong>A. Feder Cooper</strong> et al. "Arbitrariness and Social Prediction: The Confounding Role of Variance in Fair Classification." <i>AAAI 2024</i>. [<a href="https://arxiv.org/abs/2301.11562">arxiv</a> | <a href="https://ojs.aaai.org/index.php/AAAI/article/view/30203">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Best Student Paper Honorable Mention</span>
         </li>
         <br>
+
+        <li> Aaron Gokaslan, <strong>A. Feder Cooper</strong> et al. "CommonCanvas: Open Diffusion Models Trained on  Creative-Commons Images." <i>CVPR 2024</i>. [<a href="https://arxiv.org/abs/2310.16825">arxiv</a> | <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Gokaslan_CommonCanvas_Open_Diffusion_Models_Trained_on_Creative-Commons_Images_CVPR_2024_paper.html">proceedings</a>] <span class="paper proceedings">Proceedings</span>
+        </li>
+        <br>
+
+        <li> Milad Nasr*, Nicholas Carlini*, Jonathan Hayase, Matthew Jagielski, <strong>A. Feder Cooper</strong> et al. "Scalable Extraction of Training Data from (Production) Language Models." 2023. [<a href="https://arxiv.org/abs/2311.17035">arxiv</a>] <span class="paper preprint">arXiv</span>
+        </li>
+        <br>
+
+        <li><strong>A. Feder Cooper</strong>*, Wentao Guo*, Khiem Pham* et al. "Coordinating Distributed Example Orders for Provably Accelerated Training." <i>NeurIPS 2023</i>. [<a href="https://arxiv.org/abs/2302.00845">arxiv</a> | <a href="https://openreview.net/forum?id=ISRyILhAyS">proceedings</a>] <span class="paper proceedings">Proceedings</span>
+        </li>
+        <br>
+
+        <!--
+        <li> <strong>A. Feder Cooper</strong>*, Emanuel Moss* et al. "Accountability in an Algorithmic Society: Relationality, Responsibility, and Robustness in Machine Learning." <i> FAccT 2022</i>. [<a href="https://arxiv.org/abs/2202.05338">arxiv</a> | <a href="https://dl.acm.org/doi/abs/10.1145/3531146.3533150">proceedings</a>] <span class="paper proceedings">Proceedings</span>
+        </li>
+        <br>
+        -->
+
+        <li> <strong> A. Feder Cooper</strong> et al. "Hyperparameter Optimization Is Deceiving Us, and How to Stop It." <i>NeurIPS 2021</i>. [<a href="https://arxiv.org/abs/2102.03034">arxiv</a> | <a href="https://proceedings.neurips.cc/paper/2021/hash/17fafe5f6ce2f1904eb09d2e80a4cbf6-Abstract.html">proceedings</a>] <span class="paper proceedings">Proceedings</span>
+        </li>
+        <br>
+    
+        <li><strong>A. Feder Cooper</strong>*, Ruqi Zhang*, and Christopher De Sa. "Asymptotically Optimal Exact Minibatch Metropolis-Hastings." <i>NeurIPS 2020</i>. [<a href="https://arxiv.org/abs/2006.11677">arxiv</a> | <a href="https://papers.nips.cc/paper/2020/hash/e2a7555f7cabd6e31aef45cb8cda4999-Abstract.html">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Spotlight</span>
+        </li>
+        <br>
+        
       </ul>
     </div>
     <br>

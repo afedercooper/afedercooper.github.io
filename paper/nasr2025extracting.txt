@@ -1,0 +1,7 @@
+@inproceedings{nasr2025scalable,
+    title={{Scalable Extraction of Training Data from Aligned, Production Language Models}},
+    author={Milad Nasr and Javier Rando and Nicholas Carlini and Jonathan Hayase and Matthew Jagielski and A. Feder Cooper and Daphne Ippolito and Christopher A. Choquette-Choo and Florian Tram{\`e}r and Katherine Lee},
+    booktitle={The Thirteenth International Conference on Learning Representations},
+    year={2025},
+    url={https://openreview.net/forum?id=vjel3nWP2a}
+}

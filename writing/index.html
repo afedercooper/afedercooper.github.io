@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Writing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto Slab', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .year-block {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .year-block h2 {
+            margin-top: 0;
+        }
+        .post-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .post-item {
+            margin: 10px 0;
+        }
+        .post-item a {
+            text-decoration: none;
+            color: #007bff; /* Linked title color */
+            font-weight: bold;
+        }
+        .post-item a:hover {
+            text-decoration: underline; /* Hover effect */
+        }
+        .post-item span {
+            font-weight: lighter; /* Lighter description text */
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Writing</h1>
+    </header>
+    <div class="container">
+        <a href="../index.html" class="back-link">&#8592; main</a>
+
+        <!-- Year Block 2025 -->
+        <div class="year-block">
+            <h2>2025</h2>
+            <ul class="post-list">
+                <li class="post-item">
+                    <h3><a href="np-memorization.html">A probabilistic perspective on memorization in LLMs</a>: <span>Coming soon</span></h3>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Year Block 2024 -->
+        <div class="year-block">
+            <h2>2024</h2>
+            <ul class="post-list">
+                <li class="post-item">
+                    <h3><a href="https://blog.genlaw.org/explainers/files.html">The Files are in the Computer: Copyright, Memorization, and Generative-AI Systems (The Blog Post)</a>: <span> (with James Grimmelmann) Memorized training data are "copied" inside models (in the way that copyright law cares about "copies")</span></h3>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Year Block 2023 -->
+        <div class="year-block">
+            <h2>2023</h2>
+            <ul class="post-list">
+                <li class="post-item">
+                    <h3><a href="https://blog.genlaw.org/explainers/talkin.html">Talkin’ ’Bout AI Generation: Copyright and the Generative-AI Supply Chain (The Blog Post)</a>: <span> (with Katherine Lee and James Grimmelmann) Outlining the very many relationships between complex generative-AI supply chains and U.S. copyright law</span></h3>
+                </li>
+                <li class="post-item">
+                    <h3><a href="https://blog.genlaw.org/explainers/training-data.html">The Devil is in the Training Data</a>: <span> (with Katherine Lee and Daphne Ippolito) Generative-AI training datasets are really different from training datasets in more traditional machine learning</span></h3>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

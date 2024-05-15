@@ -1,0 +1,10 @@
+@misc{cooper2024shortdiss,
+  author       = {Cooper, A. Feder},
+  title        = {{Between Randomness and Arbitrariness: Some Lessons 
+                   for Reliable Machine Learning at Scale (The Short
+                   Version)}},
+  month        = may,
+  year         = 2024,
+  doi          = {10.5281/zenodo.11454382},
+  url          = {https://doi.org/10.5281/zenodo.11454382}
+}
