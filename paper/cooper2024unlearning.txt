@@ -1,0 +1,6 @@
+@article{cooper2024unlearning,
+      title={{Machine Unlearning Doesn't Do What You Think: Lessons for Generative AI Policy, Research, and Practice}}, 
+      author={A. Feder Cooper and Christopher A. Choquette-Choo and Miranda Bogen and Matthew Jagielski and Katja Filippova and Ken Ziyu Liu and Alexandra Chouldechova and Jamie Hayes and Yangsibo Huang and Niloofar Mireshghallah and Ilia Shumailov and Eleni Triantafillou and Peter Kairouz and Nicole Mitchell and Percy Liang and Daniel E. Ho and Yejin Choi and Sanmi Koyejo and Fernando Delgado and James Grimmelmann and Vitaly Shmatikov and Christopher De Sa and Solon Barocas and Amy Cyphert and Mark Lemley and danah boyd and Jennifer Wortman Vaughan and Miles Brundage and David Bau and Seth Neel and Abigail Z. Jacobs and Andreas Terzis and Hanna Wallach and Nicolas Papernot and Katherine Lee},
+      year={2024},
+      journal={arXiv preprint arXiv:2412.06966},
+}
