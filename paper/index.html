@@ -1,169 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>A. Feder Cooper, Ph.D.</title>
+  <title>A. Feder Cooper, Ph.D. | Scholarship</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="academicons.min.css"/>
-  <!--link rel="icon" href="cse_logo.jpg" type="image/gif" sizes="16x16"-->
-  <!--<link rel="shortcut icon" href="machevuoi.jpg" type="image/jpg">-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <style> 
-  .header {
-    <!--background-color: #ffbf00;-->
-    padding: 30px;
-    text-align: center;
-  } 
-  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
-  .news {
-    padding: 40px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-  }
-
-  #navbar {
-    overflow: hidden;
-    background-color: #ffe6cc;
-    z-index: 4;
-  }
-
-  #navbar a {
-    float: left;
-    display: block;
-    color: #222222;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  #navbar a.active {
-    background-color: #ff8000;
-    color: white;
-  }
-
-  #navbar a:focus {
-    background-color: #ff8000;
-    color: white;
-  }
-
-  .content {
-    padding: 16px;
-  }
-
-  .sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-
-  .sticky + .content {
-    padding-top: 60px;
-  }
-
-  .img {
-      width:100%;
-      z-index: 3;
-    }
-    .container{
-      display: flex;
-      flex-wrap: wrap;
-    }
-    .tabbed{
-      padding-left:1em;
-    }
-    table {
-      border-spacing: 5px;
-    }
-    p {
-      font-size: 115%;
+  <style>
+    /* Body and Global Styling */
+    body {
+      font-family: 'Roboto Slab', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9; /* Light grey background */
     }
 
-    @viewport {
-      width: device-width ;
-      zoom: 1.0 ;
+    /* Header Styling */
+    header {
+      background-color: #003366; /* Navy blue */
+      color: #fff;
+      padding: 40px;
+      text-align: center;
     }
 
-    .paper {
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 1.5rem;
+    }
+
+    /* Container */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navigation Bar Styling */
+    .navbar {
+      background-color: #003366; /* Navy blue */
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .navbar a {
+      float: left;
+      display: block;
       color: white;
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-top: 2px;
-      padding-bottom: 2px;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .navbar a:hover {
+      background-color: #007bff; /* Blue hover effect */
+      color: white;
+    }
+
+    /* Content Section */
+    .content {
+      padding: 40px 20px;
+      background-color: #fff; /* White background for content */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .content p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .content a {
+      color: #007bff; /* Blue links */
+      text-decoration: none;
+    }
+
+    .content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Table */
+    .contact-table {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 900px;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-table td {
+      padding: 15px;
+    }
+
+    .img-thumbnail {
+      border-radius: 10px;
+    }
+
+    /* Publications Section */
+    .publications {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .publications ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .publications ul li {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .publications .paper {
       font-weight: bold;
-      border-radius: 15%;
+      padding: 2px 6px;
+      border-radius: 12px;
     }
 
-    .journal {
-      background-color: darkred;
+    .paper.journal {
+      background-color: #e74c3c; /* Red */
+      color: white;
     }
 
-    .proceedings {
-      background-color: darkblue;
+    .paper.proceedings {
+      background-color: #2980b9; /* Blue */
+      color: white;
     }
 
-    .workshop{
-      background-color: darkviolet;
+    .paper.preprint {
+      background-color: #16a085; /* Teal */
+      color: white;
     }
 
-    .preprint{
-      background-color: darkorange;
-    }
-
-    .blog{
-      background-color: darkgray;
-    }
-
-    .thesis{
-      background-color: crimson;
-    }
-
-    .award {
-      background-color: gold;
+    .paper.award {
+      background-color: #f39c12; /* Yellow */
       color: black;
     }
 
+    .paper.blog {
+      background-color: #7f8c8d; /* Grey */
+      color: white;
+    }
+    .paper.workshop {
+      background-color: #8e44ad; /* Purple */
+      color: white;
+    }
+    .paper.thesis {
+      background-color: #e67e22; /* Deep Orange */
+      color: white;
+    }
+
+    /* Adjustments to make everything consistent */
+    .content, .publications {
+      width: 80%; /* Align with container width */
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .social-icons a {
+      margin-right: 15px;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .cv-button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cv-button:hover {
+      background-color: #0056b3;
+    }
+
+    .cv-button-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cv-button-container a {
+      text-decoration: none;
+    }
+
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .cv-button, .writing-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .cv-button:hover, .writing-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Make the CV and Writing buttons flush with the others */
+    .cv-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cv-button-container a {
+      text-decoration: none;
+    }
+
+    /* Remove extra margin around selected work title */
+    .publications h3 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    /* Add vertical space between sections */
+    #publications {
+      margin-top: 40px; /* Adjust the space as needed */
+    }
+    .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #007bff;
+            text-decoration: none;
+    }
+    .back-link:hover {
+            text-decoration: underline;
+    }
   </style>
 </head>
 
-<body>
+<header>
+    <h1>Scholarship</h1>
+</header>
 
-  <div class="header">
-    <div class="text-center">
-      <div id="home" style="font-weight:bold; font-size:175%; margin-top:20px">
-
-        <!--<a href="/shade">😎</a> -->Scholarship<!--<a href="/pasta">🍝</a>
-        <br><br>
-          <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
-        <a href="https://arxiv.org/a/cooper_a_1.html"><img border="0"alt="arxiv" src="arxiv.png" width="35" height="35"></a>
-        <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=xjVV6xgAAAAJ"><img border="0" alt="scholar" src="scholar.png" width="35" height="35"></a>
-      -->
-      </div>
-    </div>
-  </div>
-  <!--</div>-->
-
-  <br><br>
-
-  <div id="pubs-list" class="col-sm-12" style="margin-bottom:20px">
-
-  <a href="../index.html" class="back-link">&#8592; main</a>
-  <br>
-  <br>
-    *First author
-  <br><br>
-    
-    <ol reversed>   
-      <li> Jamie Hayes, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>. "<a href ="./hayes2024npextraction.pdf">Measuring memorization in language models via probabilistic extraction</a>." <i>NAACL 2025</i>. [<a href="./hayes2024npextraction.txt">bibtex</a> | <a href="https://arxiv.org/abs/2410.19482v2">arxiv</a> | <a href="">proceedings</a>] <span class="paper proceedings">Proceedings</span> 
+<div id="publications">
+    <div class="publications content">
+      <a href="../index.html" class="back-link">&#8592; main</a>
+      <h3>Full list</h3>
+      <p>*First author; informal writing <a href="../writing/index.html">here</a></p>
+      <ul>
+      <li>  Alexandra Chouldechova, <strong>A. Feder Cooper</strong>, Solon Barocas, Abhinav Palia, Dann Vann, and Hanna Wallach. "When Can Red Teaming Attack Success Rates Be Compared?" 2025. <span class="paper preprint">arXiv</span>
+      </li>
+      <br>
+         
+      <li> Jamie Hayes, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>. "<a href ="./hayes2024npextraction.pdf">Measuring memorization in language models via probabilistic extraction</a>." <i>NAACL 2025</i>. [<a href="./hayes2024npextraction.txt">bibtex</a> | <a href="https://arxiv.org/abs/2410.19482">arxiv</a> | <a href="">proceedings</a> | <a href="https://drive.google.com/file/d/1_6KHAWLG8stgLrT-_Y9hrjNexBiIon6Y/view">talk</a>] <span class="paper proceedings">Proceedings</span> 
       </li>
       <br>
 
@@ -176,10 +286,6 @@
       <br>
 
       <li> Milad Nasr*,Javier Rando*, Nicholas Carlini*, Jonathan Hayase, Matthew Jagielski, <strong>A. Feder Cooper</strong>, Daphne Ippolito, Christopher A. Choquette-Choo, Florian Tramèr, and Katherine Lee. "<a href="./nasr2025extracting.pdf">Scalable Extraction of Training Data from Aligned, Production Language Models</a>." <i>ICLR 2025</i>. [<a href="./nasr2025extracting.txt">bibtex</a> | <a href="https://openreview.net/forum?id=vjel3nWP2a">OpenReview</a>] <span class="paper proceedings">Proceedings</span>
-      </li>
-      <br>
-
-      <li>  Alexandra Chouldechova, <strong>A. Feder Cooper</strong>, Abhinav Palia, Dann Vann, Chad Atalla, Hannah Washington, Emily Sheng, and Hanna Wallach. "When Can Red Teaming Attack Success Rates Be Compared?" 2025. <span class="paper preprint">Preprint</span>
       </li>
       <br>
 
@@ -305,7 +411,6 @@
       <li> <strong> A. Feder Cooper</strong>. "Imperfection is the Norm: A Computer Systems Perspective on IoT and Enforcement." <i>(Im)Perfect Enforcement Conference</i>, Information Society Project at Yale Law School. 2019. <span class="paper workshop">Workshop</span> <span class="paper award">Plenary Session</span>
       </li>
       <br>
-    </ol>
-</body>
-
-</html>
+    </ul>
+    </div>
+  </div>
