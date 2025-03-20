@@ -4,260 +4,381 @@
   <meta charset="utf-8">
   <title>A. Feder Cooper, Ph.D.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="academicons.min.css"/>
-  <!--link rel="icon" href="cse_logo.jpg" type="image/gif" sizes="16x16"-->
-  <!--<link rel="shortcut icon" href="machevuoi.jpg" type="image/jpg">-->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <style> 
-    .header {
-      <!--background-color: #ffbf00;-->
-      padding: 30px;
-      text-align: center;
-    } 
-    
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
-    .news {
+  <style>
+    /* Body and Global Styling */
+    body {
+      font-family: 'Roboto Slab', serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9; /* Light grey background */
+    }
+
+    /* Header Styling */
+    header {
+      background-color: #003366; /* Navy blue */
+      color: #fff;
       padding: 40px;
       text-align: center;
-      background: #1abc9c;
-      color: white;
-      font-size: 30px;
-      font-weight: bold;
     }
 
-    #navbar {
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 1.5rem;
+    }
+
+    /* Container */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navigation Bar Styling */
+    .navbar {
+      background-color: #003366; /* Navy blue */
       overflow: hidden;
-      background-color: #ffe6cc;
-      z-index: 4;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
-    #navbar a {
+    .navbar a {
       float: left;
       display: block;
-      color: #222222;
+      color: white;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
-      font-size: 17px;
+      font-size: 18px;
     }
 
-    #navbar a.active {
-      background-color: #ff8000;
+    .navbar a:hover {
+      background-color: #007bff; /* Blue hover effect */
       color: white;
     }
 
-    #navbar a:focus {
-      background-color: #ff8000;
-      color: white;
-    }
-
+    /* Content Section */
     .content {
-      padding: 16px;
+      padding: 40px 20px;
+      background-color: #fff; /* White background for content */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
     }
 
-    .sticky {
-      position: fixed;
-      top: 0;
-      width: 100%;
+    .content p {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
     }
 
-    .sticky + .content {
-      padding-top: 60px;
+    .content a {
+      color: #007bff; /* Blue links */
+      text-decoration: none;
     }
 
-    .img {
-      width:100%;
-      z-index: 3;
+    .content a:hover {
+      text-decoration: underline;
     }
-    
-    .container{
+
+    /* Contact Section */
+
+    .contact-table {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 40px 20px;
+      background-color: #fff;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .contact-container {
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .contact-info {
+      text-align: center;
+    }
+
+    .profile-image {
+      text-align: center;
+    }
+
+    .img-thumbnail {
+      border-radius: 10px;
+    }
+
+    /* Publications Section */
+    .publications {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .publications ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .publications ul li {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .publications .paper {
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 12px;
+    }
+
+    .paper.journal {
+      background-color: #e74c3c; /* Red */
+      color: white;
+    }
+
+    .paper.proceedings {
+      background-color: #2980b9; /* Blue */
+      color: white;
+    }
+
+    .paper.preprint {
+      background-color: #16a085; /* Teal */
+      color: white;
+    }
+
+    .paper.award {
+      background-color: #f39c12; /* Yellow */
+      color: black;
+    }
+
+    .paper.blog {
+      background-color: #7f8c8d; /* Grey */
+      color: white;
+    }
+
+    /* Adjustments to make everything consistent */
+    .content, .publications {
+      width: 80%; /* Align with container width */
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .social-icons a {
+      margin-right: 15px;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .cv-button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .cv-button:hover {
+      background-color: #0056b3;
+    }
+
+    .cv-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    
-    .tabbed{
-      padding-left:1em;
-    }
-    
-    table {
-      border-spacing: 5px;
-    }
-    
-    p {
-      font-size: 115%;
+
+    .cv-button-container a {
+      text-decoration: none;
     }
 
-    @viewport {
-      width: device-width ;
-      zoom: 1.05 ;
+    .contact-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
     }
 
-    ul {
-      list-style-type: none; 
-      padding: 0;
-    }
-
-    .paper {
+    .cv-button, .writing-button {
+      padding: 10px 20px;
+      background-color: #007bff;
       color: white;
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-top: 2px;
-      padding-bottom: 2px;
-      font-weight: bold;
-      border-radius: 15%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
     }
 
-    .journal {
-      background-color: darkred;
+    .cv-button:hover, .writing-button:hover {
+      background-color: #0056b3;
     }
 
-    .proceedings {
-      background-color: darkblue;
+    /* Make the CV and Writing buttons flush with the others */
+    .cv-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
     }
 
-    .workshop{
-      background-color: darkviolet;
+    .cv-button-container a {
+      text-decoration: none;
     }
 
-    .preprint{
-      background-color: darkorange;
+    /* Remove extra margin around selected work title */
+    .publications h3 {
+      margin-top: 0;
+      font-size: 2rem;
     }
 
-    .blog{
-      background-color: darkgray;
+    /* Add vertical space between sections */
+    #publications {
+      margin-top: 40px; /* Adjust the space as needed */
     }
 
-    .thesis{
-      background-color: crimson;
+    #contact {
+      margin-top: 40px; /* Adjust the space as needed */
+      margin-bottom: 40px;
     }
 
-    .award {
-      background-color: gold;
-      color: black;
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .contact-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      
+      .contact-info {
+        flex: 1;
+        min-width: 300px;
+      }
+      
+      .profile-image {
+        flex: 0 0 auto;
+      }
+      
+      .cv-button-container {
+        flex: 1 0 100%;
+        margin-top: 20px;
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 480px) {
+      .contact-table {
+        width: 95%;
+        padding: 20px 10px;
+      }
+      
+      .img-thumbnail {
+        max-width: 150px;
+      }
+      
+      .cv-button, .writing-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Global responsive adjustments */
+    @media (max-width: 768px) {
+      .container, .content, .publications {
+        width: 95%;
+      }
+      
+      header {
+        padding: 20px;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header h2 {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <div class="text-center">
-      <div id="home" style="font-weight:bold; font-size:175%; margin-top:20px">
+  <header>
+    <h1>A. Feder Cooper, Ph.D.</h1>
+  </header>
 
-        <!--<a href="/shade">😎</a> -->A. Feder Cooper, Ph.D.<!--<a href="/pasta">🍝</a>
-        <br><br>
-          <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
-        <a href="https://arxiv.org/a/cooper_a_1.html"><img border="0" alt="arxiv" src="arxiv.png" width="35" height="35"></a>
-        <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=xjVV6xgAAAAJ"><img border="0" alt="scholar" src="scholar.png" width="35" height="35"></a>
-      -->
-      </div>
+<div class="contact-table" id="contact">
+  <div class="contact-container">
+    <div class="contact-info">
+      <p>Incoming Assistant Professor, Department of Computer Science, Yale University</p>
+      <p>Postdoctoral Researcher, Microsoft Research, New York</p>
+      <p>Postdoctoral Affiliate, Stanford University</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> afedercooper [AT] gmail [DOT] com</p>
+    </div>
+    
+    <div class="profile-image">
+      <img id="selfpic" src="hiking-2.jpg" class="img-thumbnail" alt="A. Feder Cooper" width="200px">
+    </div>
+    
+    <div class="cv-button-container">
+      <a href="https://arxiv.org/a/cooper_a_1.html" target="_blank">
+        <img src="arxiv.png" width="35" height="35" alt="arxiv">
+      </a>
+      <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=SCuVOk0AAAAJ" target="_blank">
+        <img src="scholar.png" width="35" height="35" alt="Google Scholar">
+      </a>
+      <a href="CV.pdf" class="cv-button">CV</a>
+      <a href="writing/index.html" class="writing-button">Writing</a>
     </div>
   </div>
-  <!--</div>-->
+</div>
 
-  <br><br>
-  
-  <div align="center">
-    <div id="contact">
-      <div align="center">
-        
-        <table align="center">
-          <tr>
-          
-            <td width=45%>
-              <div align="center">
-                Incoming Assistant Professor, Yale CS
-                <br>
-                Postdoctoral Researcher, Microsoft Research 
-                <br> 
-                Postdoctoral Affiliate, Stanford 
-                <br>
-                <span class="glyphicon glyphicon-envelope"></span> afedercooper [AT] gmail [DOT] com
-                <br><br>
-                <a href='CV.pdf'><button style="width:35px;height:35px;vertical-align:top;">CV</button></a>
-                <!--
-                <a href="https://github.com/pasta41"></a>
-                <img border="0" alt="github" src="github.png" width="35" height="35"></a>
-                <a href="https://twitter.com/afedercooper">
-                <img border="0" alt="twitter" src="twitter.png" width="35" height="35"></a>-->
-                <a href="https://arxiv.org/a/cooper_a_1.html">
-                <img border="0" alt="arxiv" src="arxiv.png" width="35" height="35"></a>
-                <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=SCuVOk0AAAAJ">
-                <img border="0" alt="scholar" src="scholar.png" width="35" height="35"></a>
-                <br>
-                <a href='writing/index.html'>Writing</a>
-              </div>
-            </td>
-            <td width=10%>
 
-            </td>
-            <td width=45%>
-                <img id="selfpic" src="hiking-2.jpg" class="img-thumbnail" alt="A. Feder Cooper" width=200px>
-            </td>
-          </tr>
-          <!--
-          <tr>
-            <td width=50%>
-              <button id="picswitcher" style="min-width: 200px; margin-top:10px" onclick="switchPic()">Professional Picture</button>
-
-                  <script>
-                    function switchPic() {
-                      if (document.getElementById('picswitcher').innerHTML=="Professional Picture") {
-                        document.getElementById('selfpic').src="me.jpg"
-                        document.getElementById('picswitcher').innerHTML = "Picture";
-                      }
-                      else {
-                        document.getElementById('selfpic').src='hiking-2.jpg';
-                        document.getElementById('picswitcher').innerHTML = "Professional Picture";
-                      }
-                    }
-                  </script>
-            </td>
-            <td width=50%>
-            </td>
-          </tr>
-        -->
-        </table>
-      
-        <br>
-      </div>
-    </div>
-  </div>
-      I research a variety of topics in reliable, scalable machine learning. 
-      I'm a co-founder of the <a href="https://genlaw.org">GenLaw Center</a>, a postdoctoral researcher at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a> and a postdoctoral affiliate at <a href="https://hai.stanford.edu/">Stanford HAI</a>, <a href="https://reglab.stanford.edu/">RegLab</a>, and <a href="https://crfm.stanford.edu/">CRFM</a> working with Percy Liang and Dan Ho.
-      I am also a Faculty Associate at the <a href="https://cyber.harvard.edu/">Berkman Klein Center for Internet & Society</a> at Harvard University. 
-      In 2026, I'll be appointed as an Assistant Professor of Computer Science at Yale University. 
-      I'll also be affiliated with the <a href="https://law.yale.edu/isp">Information Society Project</a> at Yale Law School, the <a href="https://cadmy.yale.edu/">Center for Algorithms, Data, and Market Design</a>, and the <a href="https://fds.yale.edu/">Institute for Foundations of Data Science</a>. 
-      <br><br>
-      My contributions span uncertainty estimation, privacy and security of generative-AI systems, distributed training, hyperparameter optimization, and model selection. 
-      I also do work in tech policy and law, and spend a lot of time finding ways to effectively communicate the capabilities and limits of AI/ML to interdisciplinary audiences and the public. 
-      My research has received spotlights, orals, and best-paper accolades at top AI/ML and computing venues, including <i>NeurIPS</i>, <i>ICML</i>, <i>AAAI</i>, and <i>AIES</i>. 
-      Law collaborations on copyright and Generative AI have been lauded as "landmark" work among technology law scholars and the popular press.
-      I occasionally write about machine learning and related topics <a href="writing/index.html">here</a>. 
-      <br><br>
-      In the past I interned at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a> and at <a href="https://ai.google/discover/research/">Google Research</a>, and was named a <a href="https://risingstars21-eecs.mit.edu/participants/">"Rising Star in EECS"</a> by MIT. 
-      My doctoral work was generously supported by the John T. and Catherine D. MacArthur Foundation through <a href="http://aipp.cis.cornell.edu/">AIPP</a>. 
-      Prior to my research career, I worked for several years as a software engineer at companies both (really) big and (really) small. I specialized in designing, building, and monitoring large-scale backend data-processing systems. 
-      <br><br>
-      <strong>(I am not recruiting students for Fall 2025 -- my appointment at Yale starts in 2026.)</strong>
-      <br><br>
- 
+  <div class="container content">
+    <p>I research a variety of topics in reliable, scalable machine learning. 
+    I'm a co-founder of the <a href="https://genlaw.org">GenLaw Center</a>, a postdoctoral researcher at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a>, and a postdoctoral affiliate at <a href="https://hai.stanford.edu/">Stanford HAI</a>, <a href="https://reglab.stanford.edu/">RegLab</a>, and <a href="https://crfm.stanford.edu/">CRFM</a> working with Percy Liang and Dan Ho. 
+    I am also a Faculty Associate at the <a href="https://cyber.harvard.edu/">Berkman Klein Center for Internet & Society</a> at Harvard University. 
+    In 2026, I'll be appointed as an Assistant Professor of Computer Science at Yale University. 
+    I'll also be affiliated with the <a href="https://law.yale.edu/isp">Information Society Project</a> at Yale Law School, the <a href="https://cadmy.yale.edu/">Center for Algorithms, Data, and Market Design</a>, and the <a href="https://fds.yale.edu/">Institute for Foundations of Data Science</a>.</p>
+    
+    <p>My contributions span privacy, security, and evaluation of generative-AI systems, MLSys, and uncertainty estimation. 
+    I also do work in tech policy and law, and spend a lot of time finding ways to effectively communicate the capabilities and limits of AI/ML to interdisciplinary audiences and the public. 
+    My research has received spotlights, orals, and best-paper accolades at top AI/ML and computing venues, including <i>NeurIPS</i>, <i>ICML</i>, <i>AAAI</i>, and <i>AIES</i>. 
+    Law collaborations on copyright and Generative AI have been lauded as "landmark" work among technology law scholars and the popular press.
+    I occasionally write about machine learning and related topics <a href="writing/index.html">here</a>.</p>
+    
+    <p>In the past I interned at <a href="https://www.microsoft.com/en-us/research/lab/microsoft-research-new-york/">Microsoft Research</a> and at <a href="https://ai.google/discover/research/">Google Research</a>, and was named a <a href="https://risingstars21-eecs.mit.edu/participants/">"Rising Star in EECS"</a> by MIT. 
+    My doctoral work was generously supported by the John T. and Catherine D. MacArthur Foundation through <a href="http://aipp.cis.cornell.edu/">AIPP</a>.
+    Prior to my research career, I worked for several years as a software engineer at companies both (really) big and (really) small. I specialized in designing, building, and monitoring large-scale backend data-processing systems.</p>
+    <p><strong>(I am not recruiting students for Fall 2025 -- my appointment at Yale starts in 2026.)</strong></p>
   </div>
 
-  <div id="publications" class="col-sm-12" style="margin-bottom:20px">
-
-  <br>
-
-    <h3>Selected work</h3>
-    <div>
-    *First author; <a href="./paper/index.html">full list</a>
+  <div id="publications">
+    <div class="publications content">
+      <h3>Selected recent work</h3>
+      <p>*First author; <a href="./paper/index.html">full list</a></p>
       <ul>
-        <li> Jamie Hayes, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>. "Measuring memorization in language models via probabilistic extraction." <i>NAACL 2025</i>. [<a href="https://arxiv.org/abs/2410.19482v2">arxiv</a> | proceedings] <span class="paper proceedings">Proceedings</span> 
+        <li> Jamie Hayes, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>. "Measuring memorization in language models via probabilistic extraction." <i>NAACL 2025</i>. [<a href="https://arxiv.org/abs/2410.19482">arxiv</a> | proceedings] <span class="paper proceedings">Proceedings</span> 
         </li>
         <br>
 
@@ -277,10 +398,6 @@
         </li>
         <br>
 
-        <li> <strong>A. Feder Cooper</strong> et al. "Arbitrariness and Social Prediction: The Confounding Role of Variance in Fair Classification." <i>AAAI 2024</i>. [<a href="https://arxiv.org/abs/2301.11562">arxiv</a> | <a href="https://ojs.aaai.org/index.php/AAAI/article/view/30203">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Best Student Paper Honorable Mention</span>
-        </li>
-        <br>
-
         <li> Aaron Gokaslan, <strong>A. Feder Cooper</strong> et al. "CommonCanvas: Open Diffusion Models Trained on  Creative-Commons Images." <i>CVPR 2024</i>. [<a href="https://arxiv.org/abs/2310.16825">arxiv</a> | <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Gokaslan_CommonCanvas_Open_Diffusion_Models_Trained_on_Creative-Commons_Images_CVPR_2024_paper.html">proceedings</a>] <span class="paper proceedings">Proceedings</span>
         </li>
         <br>
@@ -292,24 +409,9 @@
         <li><strong>A. Feder Cooper</strong>*, Wentao Guo*, Khiem Pham* et al. "Coordinating Distributed Example Orders for Provably Accelerated Training." <i>NeurIPS 2023</i>. [<a href="https://arxiv.org/abs/2302.00845">arxiv</a> | <a href="https://openreview.net/forum?id=ISRyILhAyS">proceedings</a>] <span class="paper proceedings">Proceedings</span>
         </li>
         <br>
-
-        <!--
-        <li> <strong>A. Feder Cooper</strong>*, Emanuel Moss* et al. "Accountability in an Algorithmic Society: Relationality, Responsibility, and Robustness in Machine Learning." <i> FAccT 2022</i>. [<a href="https://arxiv.org/abs/2202.05338">arxiv</a> | <a href="https://dl.acm.org/doi/abs/10.1145/3531146.3533150">proceedings</a>] <span class="paper proceedings">Proceedings</span>
-        </li>
-        <br>
-        -->
-
-        <li> <strong> A. Feder Cooper</strong> et al. "Hyperparameter Optimization Is Deceiving Us, and How to Stop It." <i>NeurIPS 2021</i>. [<a href="https://arxiv.org/abs/2102.03034">arxiv</a> | <a href="https://proceedings.neurips.cc/paper/2021/hash/17fafe5f6ce2f1904eb09d2e80a4cbf6-Abstract.html">proceedings</a>] <span class="paper proceedings">Proceedings</span>
-        </li>
-        <br>
-    
-        <li><strong>A. Feder Cooper</strong>*, Ruqi Zhang*, and Christopher De Sa. "Asymptotically Optimal Exact Minibatch Metropolis-Hastings." <i>NeurIPS 2020</i>. [<a href="https://arxiv.org/abs/2006.11677">arxiv</a> | <a href="https://papers.nips.cc/paper/2020/hash/e2a7555f7cabd6e31aef45cb8cda4999-Abstract.html">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Spotlight</span>
-        </li>
-        <br>
-        
       </ul>
     </div>
-    <br>
-</body>
+  </div>
 
+</body>
 </html>
