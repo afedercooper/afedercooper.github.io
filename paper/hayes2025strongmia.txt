@@ -1,0 +1,6 @@
+@article{hayes2025strongmia,
+      title={{Strong Membership Inference Attacks on Massive Datasets and (Moderately) Large Language Models}}, 
+      author={Jamie Hayes and Ilia Shumailov and Christopher A. Choquette-Choo and Matthew Jagielski and George Kaissis and Katherine Lee and Milad Nasr and Sahra Ghalebikesabi and Niloofar Mireshghallah and Meenatchi Sundaram Mutu Selva Annamalai and Igor Shilov and Matthieu Meeus and Yves-Alexandre de Montjoye and Franziska Boenisch and Adam Dziedzic and A. Feder Cooper},
+      year={2025},
+      journal={arXiv preprint arXiv:2505.18773},
+}
