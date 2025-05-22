@@ -1,7 +1,23 @@
-@article{hayes2025npextraction,
-      title={{Measuring memorization in language models via probabilistic extraction}}, 
-      author={Jamie Hayes and Marika Swanberg and Harsh Chaudhari and Itay Yona and Ilia Shumailov and Milad Nasr and Christopher A. Choquette-Choo and Katherine Lee and A. Feder Cooper},
-      year={2025},
-      journal={arXiv preprint arXiv:2410.19482}
+@inproceedings{hayes2025npextraction,
+    title = "Measuring memorization in language models via probabilistic extraction",
+    author = "Hayes, Jamie  and
+      Swanberg, Marika  and
+      Chaudhari, Harsh  and
+      Yona, Itay  and
+      Shumailov, Ilia  and
+      Nasr, Milad  and
+      Choquette-Choo, Christopher A.  and
+      Lee, Katherine  and
+      Cooper, A. Feder",
+    editor = "Chiruzzo, Luis  and
+      Ritter, Alan  and
+      Wang, Lu",
+    booktitle = "Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)",
+    month = apr,
+    year = "2025",
+    address = "Albuquerque, New Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.naacl-long.469/",
+    pages = "9266--9291"
 }
 
