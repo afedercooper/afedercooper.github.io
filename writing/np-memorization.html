@@ -72,6 +72,11 @@
         .back-link:hover {
             text-decoration: underline;
         }
+        .citation {
+            border-bottom: 1px dotted #888;
+            cursor: help;
+            color: #003366;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +97,10 @@
         <!-- Post Content -->
         <div class="post-content">
             <p>Coming soon</p>
+
+            <p>This builds on the work of <span class="citation" title="S. Arora, Y. Liang, and T. Ma, 'A Simple but Tough-to-Beat Baseline for Sentence Embeddings', ICLR 2017"> Arora et al. (2017)</span>, who proposed...
+            </p>
+
         </div>
 
         <!-- Citations Section
@@ -104,6 +113,18 @@
             </ul>
         </div>
         -->
+
+        <div class="citations">
+        <h2>References</h2>
+        <ul>
+            <li id="ref-arora2017">
+                Arora, S., Liang, Y., & Ma, T. (2017). 
+                <em>A Simple but Tough-to-Beat Baseline for Sentence Embeddings.</em> 
+                International Conference on Learning Representations (ICLR).
+            </li>
+        </ul>
+        </div>
+
     </div>
 
 </body>
