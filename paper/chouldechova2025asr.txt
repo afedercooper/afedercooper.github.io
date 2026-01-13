@@ -1,0 +1,8 @@
+@inproceedings{
+chouldechova2025asr,
+title={{Comparison requires valid measurement: Rethinking attack success rate comparisons in {AI} red teaming}},
+author={Alexandra Chouldechova and A. Feder Cooper and Solon Barocas and Abhinav Palia and Dan Vann and Hanna Wallach},
+booktitle={The Thirty-Ninth Annual Conference on Neural Information Processing Systems Position Paper Track},
+year={2025},
+url={https://openreview.net/forum?id=d7hqAhLvWG}
+}
