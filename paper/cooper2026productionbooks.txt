@@ -1,0 +1,6 @@
+@article{cooper2026productionbooks,
+      title={Extracting books from production language models}, 
+      author={Ahmed Ahmed and A. Feder Cooper and Sanmi Koyejo  and Percy Liang},
+      year={2025},
+      journal={arXiv preprint arXiv:2601.02671},
+}
