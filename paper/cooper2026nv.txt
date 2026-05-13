@@ -1,4 +1,4 @@
-@article{cooper2026productionbooks,
+@article{cooper2026nv,
       title={Estimating near-verbatim extraction risk in language models with decoding-constrained beam search}, 
       author={A. Feder Cooper and Mark A. Lemley and Christopher De Sa and Lea Duesterwald and Allison Casasola and Jamie Hayes and Katherine Lee and Daniel E. Ho and Percy Liang},
       year={2026},
