@@ -1,116 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing — A. Feder Cooper</title>
+  <meta name="description" content="Informal writing by A. Feder Cooper on machine learning, memorization, and AI &amp; law.">
 
-    <title>Writing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    <style>
-        body {
-            font-family: 'Roboto Slab', serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        header {
-            background-color: #003366;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            font-family: 'Roboto Slab', serif;
-        }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .year-block {
-            background-color: #fff;
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .year-block h2 {
-            margin-top: 0;
-        }
-        .post-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .post-item {
-            margin: 10px 0;
-        }
-        .post-item a {
-            text-decoration: none;
-            color: #007bff; /* Linked title color */
-            font-weight: bold;
-        }
-        .post-item a:hover {
-            text-decoration: underline; /* Hover effect */
-        }
-        .post-item span {
-            font-weight: lighter; /* Lighter description text */
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            color: #007bff;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <!-- Open Graph / social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="A. Feder Cooper">
+  <meta property="og:title" content="Writing — A. Feder Cooper">
+  <meta property="og:description" content="Informal notes and explainers on machine learning, memorization, and AI &amp; law.">
+  <meta property="og:url" content="https://afedercooper.info/writing/">
+  <meta property="og:image" content="https://afedercooper.info/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A. Feder Cooper — machine learning researcher">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Writing — A. Feder Cooper">
+  <meta name="twitter:description" content="Informal notes and explainers on machine learning, memorization, and AI &amp; law.">
+  <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
 </head>
 <body>
-    <header>
-        <h1>Writing</h1>
-    </header>
-    <div class="container">
-        <a href="../index.html" class="back-link">&#8592; main</a>
 
-        <!-- Year Block 2025 -->
-        <div class="year-block">
-            <h2>2025</h2>
-            <ul class="post-list">
-                <li class="post-item">
-                    <h3><a href="np-memorization.html">A probabilistic perspective on memorization in LLMs</a>: <span>Coming soon</span></h3>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Year Block 2024 -->
-        <div class="year-block">
-            <h2>2024</h2>
-            <ul class="post-list">
-                <li class="post-item">
-                    <h3><a href="https://blog.genlaw.org/explainers/files.html">The Files are in the Computer: Copyright, Memorization, and Generative-AI Systems (The Blog Post)</a>: <span> (with James Grimmelmann) Memorized training data are "copied" inside models (in the way that copyright law cares about "copies")</span></h3>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Year Block 2023 -->
-        <div class="year-block">
-            <h2>2023</h2>
-            <ul class="post-list">
-                <li class="post-item">
-                    <h3><a href="https://blog.genlaw.org/explainers/talkin.html">Talkin’ ’Bout AI Generation: Copyright and the Generative-AI Supply Chain (The Blog Post)</a>: <span> (with Katherine Lee and James Grimmelmann) Outlining the very many relationships between complex generative-AI supply chains and U.S. copyright law</span></h3>
-                </li>
-                <li class="post-item">
-                    <h3><a href="https://blog.genlaw.org/explainers/training-data.html">The Devil is in the Training Data</a>: <span> (with Katherine Lee and Daphne Ippolito) Generative-AI training datasets are really different from training datasets in more traditional machine learning</span></h3>
-                </li>
-            </ul>
-        </div>
+  <nav class="nav">
+    <a href="../index.html" class="nav__home">A. Feder Cooper</a>
+    <div class="nav__links">
+      <a href="../publications.html">Papers</a>
+      <a href="index.html" class="is-current">Writing</a>
+      <a href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
     </div>
+  </nav>
+
+  <main>
+    <header class="wrap--wide hero">
+      <h1 class="hero__name" style="font-size:clamp(2rem,5vw,2.8rem)">Writing</h1>
+      <p class="page-intro">Informal notes and explainers on machine learning, memorization, and AI &amp; law.</p>
+    </header>
+
+    <section class="wrap--wide">
+      <div class="entry-year">
+        <p class="entry-year__label">2025</p>
+        <div class="entry">
+          <p class="entry__title">
+            A brief(ish) note on (probabilistic) extraction, memorization and language models
+            <span class="entry__soon">Coming soon</span>
+          </p>
+          <p class="entry__desc">A self-contained tour of what memorization and extraction actually mean for language models, and why thinking in terms of extraction <em>probabilities</em> sharpens the picture.</p>
+        </div>
+      </div>
+
+      <div class="entry-year">
+        <p class="entry-year__label">2024</p>
+        <div class="entry">
+          <p class="entry__title">
+            <a href="https://blog.genlaw.org/explainers/files.html" target="_blank" rel="noopener">The Files are in the Computer: Copyright, Memorization, and Generative-AI Systems (The Blog Post)</a>
+          </p>
+          <p class="entry__desc">With James Grimmelmann. Memorized training data are “copied” inside models — in the way that copyright law cares about “copies.”</p>
+        </div>
+      </div>
+
+      <div class="entry-year">
+        <p class="entry-year__label">2023</p>
+        <div class="entry">
+          <p class="entry__title">
+            <a href="https://blog.genlaw.org/explainers/talkin.html" target="_blank" rel="noopener">Talkin’ ’Bout AI Generation: Copyright and the Generative-AI Supply Chain (The Blog Post)</a>
+          </p>
+          <p class="entry__desc">With Katherine Lee and James Grimmelmann. Mapping the many relationships between complex generative-AI supply chains and U.S. copyright law.</p>
+        </div>
+        <div class="entry">
+          <p class="entry__title">
+            <a href="https://blog.genlaw.org/explainers/training-data.html" target="_blank" rel="noopener">The Devil is in the Training Data</a>
+          </p>
+          <p class="entry__desc">With Katherine Lee and Daphne Ippolito. Generative-AI training datasets are really different from datasets in more traditional machine learning.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap--wide footer-inner">
+      <span>© A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="../index.html">Home</a>
+        <a href="../publications.html">Papers</a>
+        <a href="../pasta/index.html" class="icon-link" aria-label="Pasta" title="Pasta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M18.5 12a6.5 6.5 0 0 1-13 0"/><path d="M9 8c-1-1 1-2 0-3.5"/><path d="M12 8c-1-1 1-2 0-3.5"/><path d="M15 8c-1-1 1-2 0-3.5"/></svg></a>
+        <button class="grouch" type="button" aria-label="Oscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </span>
+    </div>
+    <div class="grouch-pop"><img src="/Oscar-the-Grouch-is-grumpy.jpg" alt="Oscar the Grouch, looking grumpy"></div>
+  </footer>
+
+  <script src="../app.js"></script>
 </body>
 </html>

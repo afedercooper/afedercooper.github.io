@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A probabilistic perspective on memorization in LLMs</title>
+    <title>A brief(ish) note on (probabilistic) extraction, memorization and language models</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
@@ -72,17 +72,96 @@
         .back-link:hover {
             text-decoration: underline;
         }
-        .citation {
-            border-bottom: 1px dotted #888;
-            cursor: help;
+        .section-link {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .section-link:hover {
+            text-decoration: underline;
+        }
+        .citation-tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            border-bottom: 1px dotted #555;
             color: #003366;
+        }
+        .citation-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 280px;
+            background-color: #fefefe;
+            color: #333;
+            text-align: left;
+            border-radius: 4px;
+            padding: 8px 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            white-space: normal;
+        }
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .image-grid img {
+            flex: 0 0 300px;
+            width: 300px; 
+            height: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            display: block;
+        }
+        .footnote {
+          color: #007bff;
+          cursor: help;
+          position: relative;
+          text-decoration: none;
+        }
+        .footnote::after {
+          content: attr(data-footnote);
+          position: absolute;
+          bottom: 125%; /* Position above the number */
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #ffffff;
+          color: #333;
+          padding: 8px 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          white-space: normal;
+          width: max-content;
+          max-width: 250px;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+          z-index: 10;
+        }
+        .footnote:hover::after {
+          opacity: 1;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>A probabilistic perspective on memorization in LLMs</h1>
+        <h1>A brief(ish) note on (probabilistic) extraction,<br> memorization and language models</h1>
     </header>
 
     <div class="container">
@@ -91,38 +170,286 @@
 
         <!-- Post Author and Date -->
         <div class="post-date">
-            <strong>A. Feder Cooper</strong> | <strong>TBD</strong>
+            <strong>A. Feder Cooper</strong> | <strong>June 11, 2025</strong>
         </div>
 
-        <!-- Post Content -->
         <div class="post-content">
-            <p>Coming soon</p>
 
-            <p>This builds on the work of <span class="citation" title="S. Arora, Y. Liang, and T. Ma, 'A Simple but Tough-to-Beat Baseline for Sentence Embeddings', ICLR 2017"> Arora et al. (2017)</span>, who proposed...
+            <h2 id="intro">Intro</h2>
+
+            <p style="color: red;">
+                Memorization, extraction, regurgitation, language models. All over the place. Topic studied for a while in machine learning (ML) security research, much of which originated from Google DeepMind (cites). 
+                The latter case because not just of research interest in ML community, poses all sorts of interesting  but of increasing interest to general public because of ongoing debates about privacy, intellectual property, and more. (cites)
+                These words, originate from scientific context, take on new lives/ meanings and relevance in these broader conceptual debates. 
+                Actual measurements that take to reflect these concepts sometimes get lost in the mix, misunderstood.
+                Have written about this a lot with respect to memorization, most recently in work led by my colleagues at Microsoft (cite). 
             </p>
 
+            <p> All of that work is research papers, which are either published or in peer review at law journals and ML conference venues. 
+                It's also all pretty long. 
+                (And perhaps a bit long-winded, for those who don't spend their time reading this type of stuff for their day job.) 
+                So I'm going to try to do something a little different here. 
+                I'm going to aim for a concise and high-level description of what we're talking about when we say "memorization" and "extraction" in the context of LLMs, which which also hopefully be helpful and interesting for a more general audience.<sup><span class="footnote" data-footnote="This is a blog post, not a scientific or law paper. I'm going to be precise enough to be accurate, but won't be nearly as precise as the papers that I talk about.">1</span></sup>
+            </p>
+
+            <p> I'm going to cover two different topics.</p>
+            <ol>
+                <li>
+                    The first has to do with "memorization" and "extraction" in language models, which in the last few years have come up in a variety contexts outside of ML, like privacy and copyright. 
+                    I'll talk about technical (not broader) aspects of these terms at a high level, but will draw from very detailed 
+                    <a href="#ref-cooper2024" class="citation-tooltip">
+                        work
+                            <span class="tooltip-text">
+                                A. Feder Cooper* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." Forthcoming, <em>Chicago-Kent Law Review</em>, 2025. 
+                            </span>
+                    </a>
+                    with <a href="https://james.grimmelmann.net/">James Grimmelmann</a>, and some recent 
+                    <a href="#ref-wallach2025" class="citation-tooltip">
+                        research
+                            <span class="tooltip-text">
+                                Hanna Wallach, Meera Desai, A Feder Cooper, Angelina Wang, Chad Atalla, Solon Barocas, Su Lin Blodgett, Alexandra Chouldechova, Emily Corvi, P Alex Dow, Jean Garcia-Gathright, Alexandra Olteanu, Nicholas Pangakis, Stefanie Reed, Emily Sheng, Dan Vann, Jennifer Wortman Vaughan, Matthew Vogel, Hannah Washington, and Abigail Z Jacobs. "Position: Evaluating Generative AI Systems is a Social Science Measurement Challenge." <i>ICML 2025</i>. 
+                            </span>
+                    </a>
+                    on measurement and the social sciences led by <a href="https://www.microsoft.com/en-us/research/people/wallach/">Hanna Wallach</a> at Microsoft Research.
+                    My hope is that disentangling some of the details is useful for those that want to understand memorization and extraction a bit better, in terms of the technical details they involve. 
+                </li>
+                <br>
+
+                <li> 
+                    If that's all you're interested in, no need to keep reading after <a href="#part-1" class="section-link">Part I</a>. 
+                    But I really hope you stick around, because <a href="#part-2" class="section-link">Part II</a> builds on this background to describe a recent 
+                    <a href="#ref-hayes2025a" class="citation-tooltip">
+                            paper 
+                            <span class="tooltip-text">
+                                Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                            </span>
+                    </a> with my collaborators at Google DeepMind led by <a href="https://jamiehay.es/">Jamie Hayes</a>. 
+                    I think this paper is really important, and represents a huge advance (relying on a—I think elegantly—simple shift in thinking) in memorization science for LLMs. 
+                    We describe a new measurement technique that, using tools from probability and statistics, takes a <em>probabilistic</em> perspective on extraction and memorization. 
+                    And while this might sound complicated, in practice, it relies on math that many high school students should be familiar with. 
+                    We need to multiply some numbers<sup><span class="footnote" data-footnote="These numbers are all probabilities, so they're between 0 and 1.">2</span></sup> together to get these measurements. 
+                    The explanation for <em>why</em> we are multiplying numbers together (and <em>which</em> specific numbers we're multiplying) is the harder, conceptual part. 
+                    So I'll spend some time explaining this, but ultimately the math itself is very simple. 
+                </li>
+            </ol>
+
+            <p> 
+                I'm going to hold off on writing a detailed <a href="#part-3" class="section-link">Part III</a> for now. 
+                But a potential future <a href="#part-3" class="section-link">Part III</a> (or separate post) would discuss how the metric we developed in 
+                <a href="#ref-hayes2025a" class="citation-tooltip">
+                        Hayes et al. (2025a)
+                        <span class="tooltip-text">
+                            Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                        </span>
+                </a> 
+                made it possible to finish our <a href="#ref-cooper2025" class="citation-tooltip">
+                        study
+                        <span class="tooltip-text">
+                            A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025.
+                        </span>
+                </a> that (begins to quantify) memorization of books in popular open-weight models.
+                Talking about these results would make this post far too long (and wide), so for now, <a href="#part-3" class="section-link">Part III</a> will defer to the extremely clear and concise Bluesky thread that <a href="https://james.grimmelmann.net/">James</a> wrote about this work.
+            </p>
+
+            <p>
+                Overall, this blog post goes into the technical details of probabilistic extraction, but at a slower clip than either of these two ML extraction papers. 
+                The main point of 
+                <a href="#part-1" class="section-link">Part I</a> and <a href="#part-2" class="section-link">Part II</a> is to summarize the novel work on probabilistic extraction from 
+                <a href="#ref-hayes2025a" class="citation-tooltip">
+                        Hayes et al. (2025a)
+                        <span class="tooltip-text">
+                            Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                        </span>
+                </a>. 
+                For those interested in the 
+                <a href="#ref-cooper2025" class="citation-tooltip">
+                        books paper
+                        <span class="tooltip-text">
+                            A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025.
+                        </span>
+                </a> briefly mentioned in <a href="#part-3" class="section-link">Part III</a>, Parts <a href="#part-1" class="section-link">I</a> and <a href="#part-2" class="section-link">II</a> are a (friendlier, general-audience) stand-in for Section 2 and parts of Section 3 in that paper. 
+            </p>
+
+            <h2 id="part-1">Part I: What is memorization? What is extraction? Are they the same thing?</h2>
+
+            <h3 id="part-1-generation">What is generation?</h3>
+
+            <h3 id="part-1-extraction">So that's generation. How is this different from extraction?</h3>
+
+            <h3 id="part-1-memorization">What does extraction have to do with this other thing called memorization?</h3>
+
+            <h3 id="part-1-extractable">Can all memorized training data be extracted?</h3>
+
+            <h3 id="part-1-happenstance">Is it possible to generate (near-exact) copies of training data without those data being  memorized?</h3>
+
+            <h2 id="part-2">Part II: How can thinking about extraction probabilities help us make more nuanced observations about extraction and memorization?</h2>
+
+            <h3 id="part-2-probability">What exactly do we mean by "extraction probability"?</h3>
+
+            <h3 id="part-2-compute">How do we compute the extraction probability for a particular piece of text?</h3>
+
+            <h3 id="part-2-high-prob">What is a "high" extraction probability?</h3>
+
+            <h2 id="part-3">(Non-existent) Part III: Probabilistic extraction, memorization, and books</h2>
+
+            <p>In a recently completed 
+                <a href="#ref-cooper2025" class="citation-tooltip">
+                    paper
+                    <span class="tooltip-text">
+                        A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025.
+                    </span>
+                </a>, 
+            my colleagues and I applied this probabilistic perspective on extraction and memorization to books and popular open-weight LLMs. 
+            I'm not going to get into the details here, because this post is just meant to untangle some key concepts and metrics in memorization science.
+            There's a lot more to say about that project that extends beyond the science to potential broader implications.
+            For a summary, I'll refer to an excellent <a href="https://bsky.app/profile/jtlg.bsky.social/post/3lqfhihmjpc2r">thread</a> (screenshots below) that my frequent collaborator, <a href="https://james.grimmelmann.net/">James Grimmelmann</a>, wrote on Bluesky.
+            He nails both the big picture and (a selection of) the low-level details, which (in my biased opinion) show why this work is interesting and important.
+            </p>  
+
+            <div class="image-grid">
+              <img src="img/jg-bsky-books-1.png" alt="Alt text 1">
+              <img src="img/jg-bsky-books-2.png" alt="Alt text 2">
+              <img src="img/jg-bsky-books-3.png" alt="Alt text 3">
+              <img src="img/jg-bsky-books-4.png" alt="Alt text 4">
+              <img src="img/jg-bsky-books-5.png" alt="Alt text 5">
+              <img src="img/jg-bsky-books-6.png" alt="Alt text 6">
+              <img src="img/jg-bsky-books-7.png" alt="Alt text 7">
+              <img src="img/jg-bsky-books-8.png" alt="Alt text 8">
+            </div>
+
+            <h2 id="end">Closing thoughts</h2>
+
+            <p>
+                There's a ton more work to do on probabilistic extraction and what it means for memorization.
+            </p>
+
+            <p style="color: red;">
+                Open questions and future work
+                Possibly seriously undercounting memorization. Verbatim / exact. No typos, alternate spellings (American vs. British English, in case of HP), misplaced commas, etc. 
+                Future work, look into this more, how to set this threshold more precisely. 
+            </p>
+
+            <p style="color: red;">
+                Measurement stream out out of Microsoft Research, how instantiate metric in practice (i.e., operationalize it), measurement instrument and apply. Cite Wallach et al. How can use these measurements to make reliable and valid claims about generative AI models, systems, and their outputs. 
+                A ton more work to do here. 
+            </p>
+
+            <h3 id="personal">Some more personal closing thoughts</h3>
+
+            <p>So those are the research-y closing thoughts. 
+            I'm going to indulge myself in some personal ones (which are really just for me, so please feel free to stop reading.)
+            Since I didn't get to wrap up this work before publishing my dissertation, I couldn't write then about how it all fits together. 
+            And with the completion of 
+            <a href="#ref-hayes2025a" class="citation-tooltip">
+                    Hayes et al. (2025a)
+                    <span class="tooltip-text">
+                        Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                    </span>
+            </a> and 
+            <a href="#ref-cooper2025" class="citation-tooltip">
+                    Cooper et al. (2025)
+                    <span class="tooltip-text">
+                        A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025.
+                    </span>
+            </a>, I (almost) feel like I've finally finished my Ph.D., so I'm going to write a little about it now.</p>
+
+            <p>
+            My contributions to <a href="#ref-hayes2025a" class="citation-tooltip">
+                    Hayes et al. (2025a)
+                    <span class="tooltip-text">
+                        Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                    </span>
+            </a> and the 
+            <a href="#ref-cooper2025" class="citation-tooltip">
+                    books project
+                    <span class="tooltip-text">
+                        A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025.
+                    </span>
+            </a>
+            both started in spring 2024 with my wonderful Ph.D. committee member, <a href="https://james.grimmelmann.net/">James Grimmelmann</a>. 
+            During my academic job search, we wrote a paper (that was supposed to be very short) called
+            <a href="#ref-cooper2024" class="citation-tooltip">
+                <em>The Files Are in the Computer</em>
+                    <span class="tooltip-text">
+                        A. Feder Cooper* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." Forthcoming, <em>Chicago-Kent Law Review</em>, 2025. 
+                    </span>
+            </a>.  
+            That paper is about how memorized training data are copied inside the model. 
+            (It was really cool to see <em>Files</em> mentioned in the recent pre-publication version of Part 3 of the United States Copyright Office's 
+            <a href="#ref-copyright3" class="citation-tooltip">
+                report 
+                    <span class="tooltip-text">
+                        United States Copyright Office. "Copyright And Artificial Intelligence — Part 3: Generative AI Training (A Report of the Register of Copyrights, pre-publication version." May 2025.
+                    </span>
+            </a> on Copyright and Artificial Intelligence.) 
+            <em>Files</em> was a follow-on to our paper 
+            <a href="#ref-lee2023" class="citation-tooltip">
+                <em>Talkin' 'Bout AI Generation: Copyright and the Generative-AI Supply Chain</em>
+                    <span class="tooltip-text">
+                        Katherine Lee*, A. Feder Cooper*, and James Grimmelmann*. "Talkin' 'Bout AI Generation: Copyright and the Generative-AI Supply Chain." Forthcoming, <em>Journal of the Copyright Society</em>, 2025. 
+                    </span>
+            </a>, which we wrote with <a href="https://katelee168.github.io/">Katherine Lee</a> starting in late 2022, and the 
+            <a href="#ref-cooper2023" class="citation-tooltip">
+                report
+                    <span class="tooltip-text">
+                        A. Feder Cooper*, Katherine Lee*, James Grimmelmann*, Daphne Ippolito*, Christopher Callison-Burch, Christopher A. Choquette-Choo, Niloofar Mireshghallah, Miles Brundage, David Mimno, Madiha Zahrah Choksi, Jack M. Balkin, Nicholas Carlini, Christopher De Sa, Jonathan Frankle, Deep Ganguli, Bryant Gipson, Andres Guadamuz, Swee Leng Harris, Abigail Z. Jacobs, Elizabeth Joh, Gautam Kamath, Mark Lemley, Cass Matthews, Christine McLeavey, Corynne McSherry, Milad Nasr, Paul Ohm, Adam Roberts, Tom Rubin, Pamela Samuelson, Ludwig Schubert, Kristen Vaccaro, Luis Villa, Felix Wu, and Elana Zeide. "Report of the 1st Workshop on Generative AI and Law." 2023.
+                    </span>
+            </a> 
+            we wrote together with the participants in the 1st Workshop on Generative AI and Law at <em>ICML 2023</em>. 
+            </p>
+            
+            <p>While writing 
+            <a href="#ref-cooper2024" class="citation-tooltip">
+                <em>Files</em>
+                    <span class="tooltip-text">
+                        A. Feder Cooper* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." Forthcoming, <em>Chicago-Kent Law Review</em>, 2025. 
+                    </span>
+            </a> with James, I realized that probabilistic extraction could be a more nuanced way to quantify memorization.
+            Over a year ago (an eon in ML time spans), we wrote about this in Part II.D in that paper,  and I started working on the ML side of things with books text. 
+            It turned out that some of my colleagues at Google DeepMind (led by the amazing security researcher, <a href="https://jamiehay.es/">Jamie Hayes</a>) were also thinking about probabilistic extraction, and were much farther along than me. 
+            I'm really grateful that they invited me to join the project, and that I now got to finish up how I started with books.
+            </p>
         </div>
 
-        <!-- Citations Section
         <div class="citations">
             <h2>References</h2>
-            <ul>
-                <li id="ref-1">[1] Author Name, "Title of Paper," Journal Name, Year.</li>
-                <li id="ref-2">[2] Another Author, "Title of Another Paper," Another Journal, Year.</li>
-                <li id="ref-3">[3] Yet Another Author, "Title of Yet Another Paper," Yet Another Journal, Year.</li>
-            </ul>
-        </div>
-        -->
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li id="ref-cooper2023"> 
+                    A. Feder Cooper*, Katherine Lee*, James Grimmelmann*, Daphne Ippolito*, Christopher Callison-Burch, Christopher A. Choquette-Choo, Niloofar Mireshghallah, Miles Brundage, David Mimno, Madiha Zahrah Choksi, Jack M. Balkin, Nicholas Carlini, Christopher De Sa, Jonathan Frankle, Deep Ganguli, Bryant Gipson, Andres Guadamuz, Swee Leng Harris, Abigail Z. Jacobs, Elizabeth Joh, Gautam Kamath, Mark Lemley, Cass Matthews, Christine McLeavey, Corynne McSherry, Milad Nasr, Paul Ohm, Adam Roberts, Tom Rubin, Pamela Samuelson, Ludwig Schubert, Kristen Vaccaro, Luis Villa, Felix Wu, and Elana Zeide. "Report of the 1st Workshop on Generative AI and Law." 2023. [<a href="https://arxiv.org/abs/2311.06477">link</a>].
+                </li>
+                <br>
 
-        <div class="citations">
-        <h2>References</h2>
-        <ul>
-            <li id="ref-arora2017">
-                Arora, S., Liang, Y., & Ma, T. (2017). 
-                <em>A Simple but Tough-to-Beat Baseline for Sentence Embeddings.</em> 
-                International Conference on Learning Representations (ICLR).
-            </li>
-        </ul>
+                <li id="ref-cooper2024">
+                    A. Feder Cooper* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." <i>Chicago-Kent Law Review</i>, 2025 (forthcoming). [<a href="https://arxiv.org/abs/2404.12590" target="_blank">link</a>]. 
+                </li>
+                <br>
+
+                <li id="ref-cooper2025"> 
+                    A. Feder Cooper, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Mark A. Lemley, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." 2025. [<a href="https://arxiv.org/abs/2505.12546" target="_blank">link</a>].
+                </li>
+                <br>
+
+                <li id="ref-hayes2025a">
+                    Jamie Hayes*, Marika Swanberg*, Harsh Chaudhari, Itay Yona, Ilia Shumailov, Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and A. Feder Cooper*. "Measuring memorization in language models via probabilistic extraction." <em>NAACL 2025</em>. 
+                    [<a href="https://aclanthology.org/2025.naacl-long.469/" target="_blank">link</a>]
+                </li>
+                <br>
+
+                <li id="ref-lee2023">
+                    Katherine Lee*, A. Feder Cooper*, and James Grimmelmann*. "Talkin’ ‘Bout AI Generation: Copyright and the Generative-AI Supply Chain." <i>Journal of the Copyright Society</i>, 2025 (forthcoming). [<a href="https://arxiv.org/abs/2404.12590">link</a>]
+                </li>
+                <br>
+
+                <li id="ref-copyright3">
+                    United States Copyright Office. "Copyright And Artificial Intelligence — Part 3: Generative AI Training." A Report of the Register of Copyrights, pre-publication version." May 2025. [<a href="../Copyright-and-Artificial-Intelligence-Part-3-Generative-AI-Training-Report-Pre-Publication-Version.pdf" target="_blank">link</a>]
+                </li>
+                <br>
+
+                <li id="ref-wallach2025"> 
+                    Hanna Wallach, Meera Desai, A Feder Cooper, Angelina Wang, Chad Atalla, Solon Barocas, Su Lin Blodgett, Alexandra Chouldechova, Emily Corvi, P Alex Dow, Jean Garcia-Gathright, Alexandra Olteanu, Nicholas Pangakis, Stefanie Reed, Emily Sheng, Dan Vann, Jennifer Wortman Vaughan, Matthew Vogel, Hannah Washington, and Abigail Z Jacobs. "Position: Evaluating Generative AI Systems is a Social Science Measurement Challenge." <i>ICML 2025</i>. [<a href="https://arxiv.org/abs/2502.00561">link</a>]. 
+                </li>
+                <br>
+            </ul>
         </div>
 
     </div>

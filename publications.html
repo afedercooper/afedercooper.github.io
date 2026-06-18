@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Papers — A. Feder Cooper</title>
+  <meta name="description" content="Papers by A. Feder Cooper.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Open Graph / social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="A. Feder Cooper">
+  <meta property="og:title" content="Papers — A. Feder Cooper">
+  <meta property="og:description" content="Selected and full list of papers by A. Feder Cooper.">
+  <meta property="og:url" content="https://afedercooper.info/publications.html">
+  <meta property="og:image" content="https://afedercooper.info/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A. Feder Cooper — machine learning researcher">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Papers — A. Feder Cooper">
+  <meta name="twitter:description" content="Selected and full list of papers by A. Feder Cooper.">
+  <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav__home">A. Feder Cooper</a>
+    <div class="nav__links">
+      <a href="publications.html" class="is-current">Papers</a>
+      <a href="writing/index.html">Writing</a>
+      <a href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <main>
+    <header class="wrap--wide hero" style="margin:0 auto">
+      <h1 class="hero__name" style="font-size:clamp(2rem,5vw,2.8rem)">Papers</h1>
+      <p class="page-intro">* denotes co-first author or equal contribution. Informal writing lives <a href="writing/index.html">here</a>.</p>
+    </header>
+
+    <section class="wrap--wide" style="margin:0 auto">
+      <div class="section" style="margin-top:2rem">
+        <div class="pub-tools">
+          <input class="pub-search" id="pub-search" type="search" placeholder="Search title, author, or venue…" aria-label="Search publications">
+          <div class="filters">
+            <button class="filter is-active" data-type="all">All</button>
+            <button class="filter" data-type="journal">Journal</button>
+            <button class="filter" data-type="conference">Conference</button>
+            <button class="filter" data-type="workshop">Workshop</button>
+            <button class="filter" data-type="preprint">Preprint</button>
+            <button class="filter" data-type="thesis">Thesis</button>
+            <button class="filter" data-type="blog">Blog</button>
+          </div>
+        </div>
+        <p class="pub-count" id="pub-count"></p>
+        <ul class="pub-list" id="full-pubs"></ul>
+        <noscript><p class="pub-fallback">This list requires JavaScript. See the <a href="/paper/index.html">static publication list</a>.</p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap--wide footer-inner">
+      <span>© A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="index.html">Home</a>
+        <a href="writing/index.html">Writing</a>
+        <a href="pasta/index.html" class="icon-link" aria-label="Pasta" title="Pasta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M18.5 12a6.5 6.5 0 0 1-13 0"/><path d="M9 8c-1-1 1-2 0-3.5"/><path d="M12 8c-1-1 1-2 0-3.5"/><path d="M15 8c-1-1 1-2 0-3.5"/></svg></a>
+        <button class="grouch" type="button" aria-label="Oscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </span>
+    </div>
+    <div class="grouch-pop"><img src="/Oscar-the-Grouch-is-grumpy.jpg" alt="Oscar the Grouch, looking grumpy"></div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

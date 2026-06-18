@@ -1,76 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pasta</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <!--link rel="icon" href="cse_logo.jpg" type="image/gif" sizes="16x16"-->
-  <link rel="shortcut icon" href="../machevuoi.jpg" type="image/jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lo Studio del Pastaio — A. Feder Cooper</title>
+  <meta name="description" content="Fresh pasta, made by hand.">
 
-  <style>
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    img {
-      margin: 5px;
-      transition: all 2s;
-    }
-    .thumbnail:hover {
-      transform: scale(1.1)
-  }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Open Graph / social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="A. Feder Cooper">
+  <meta property="og:title" content="Lo Studio del Pastaio — A. Feder Cooper">
+  <meta property="og:description" content="Fresh pasta, made by hand.">
+  <meta property="og:url" content="https://afedercooper.info/pasta/">
+  <meta property="og:image" content="https://afedercooper.info/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A. Feder Cooper — machine learning researcher">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lo Studio del Pastaio — A. Feder Cooper">
+  <meta name="twitter:description" content="Fresh pasta, made by hand.">
+  <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
 </head>
 <body>
 
-  <div class="header">
-    <br>
-  <div class="col-sm-12">
-    <a href="https://cacioepe.pe" class="btn btn-info" role="button">Home</a>
-  </div>
-  <br><br>
-    <div class="page-header text-center">
-      <div><h1>Lo Studio del Pastaio</h1></div>
+  <nav class="nav">
+    <a href="../index.html" class="nav__home">A. Feder Cooper</a>
+    <div class="nav__links">
+      <a href="../publications.html">Papers</a>
+      <a href="../writing/index.html">Writing</a>
+      <a href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
     </div>
-  </div>
-   <!-- class of 'container' holds other items (sub classes)-->
-  <div class='container'>
-    <video width="150" height="300" controls>
-        <source src="kneading.mov">
-    </video>
-    <div><img src='ravioli4.jpg'class="thumbnail"/></div>
-    <div><img src='green1.jpg'class="thumbnail"/></div>
-    <div><img src='bolognese.jpg'class="thumbnail"/></div>
-    <div><img src='lasagne1.jpg'class="thumbnail"/></div>
-    <div><img src='casunziei1.jpg'class="thumbnail"/></div>
-    <div><img src='farfalle1.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli1.jpg'class="thumbnail"/></div>
-    <div><img src='pesto2.jpg'class="thumbnail"/></div>
-    <div><img src='green2.jpg'class="thumbnail"/></div>
-    <div><img src='spaghetti.jpg'class="thumbnail"/></div>
-    <div><img src='tagliatelle_mushroom.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli2.jpg'class="thumbnail"/></div>
-    <div><img src='tagliatelle_zucchini.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli6.jpg'class="thumbnail"/></div>
-    <div><img src='green3.jpg'class="thumbnail"/></div>
-    <div><img src='gnudi.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli3.jpg'class="thumbnail"/></div>
-    <div><img src='tortellini.jpg'class="thumbnail"/></div>
-    <div><img src='casunziei2.jpg'class="thumbnail"/></div>
-    <div><img src='caramelle.jpg'class="thumbnail"/></div>
-    <div><img src='farfalle2.jpg'class="thumbnail"/></div>
-    <div><img src='cacioepepe.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli5.jpg'class="thumbnail"/></div>
-    <div><img src='lasagne2.jpg'class="thumbnail"/></div>
-    <div><img src='casunziei3.jpg'class="thumbnail"/></div>
-    <div><img src='pesto.jpg'class="thumbnail"/></div>
-    <div><img src='ravioli7.jpg'class="thumbnail"/></div>
-  </div>
+  </nav>
+
+  <main>
+    <section class="wrap--wide" style="margin-top:3rem">
+      <figure style="margin:0 0 1.5rem;display:flex;justify-content:center">
+        <video controls playsinline preload="metadata" style="width:220px;max-width:100%;border-radius:10px;border:1px solid var(--border)">
+          <source src="/pasta/kneading.mp4" type="video/mp4">
+          Kneading dough.
+        </video>
+      </figure>
+
+      <div class="gallery">
+        <a href="/pasta/ravioli4.jpg" data-full="/pasta/ravioli4.jpg"><img src="/pasta/ravioli4.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/green1.jpg" data-full="/pasta/green1.jpg"><img src="/pasta/green1.jpg" alt="Green pasta" loading="lazy"></a>
+        <a href="/pasta/bolognese.jpg" data-full="/pasta/bolognese.jpg"><img src="/pasta/bolognese.jpg" alt="Bolognese" loading="lazy"></a>
+        <a href="/pasta/lasagne1.jpg" data-full="/pasta/lasagne1.jpg"><img src="/pasta/lasagne1.jpg" alt="Lasagne" loading="lazy"></a>
+        <a href="/pasta/casunziei1.jpg" data-full="/pasta/casunziei1.jpg"><img src="/pasta/casunziei1.jpg" alt="Casunziei" loading="lazy"></a>
+        <a href="/pasta/farfalle1.jpg" data-full="/pasta/farfalle1.jpg"><img src="/pasta/farfalle1.jpg" alt="Farfalle" loading="lazy"></a>
+        <a href="/pasta/ravioli1.jpg" data-full="/pasta/ravioli1.jpg"><img src="/pasta/ravioli1.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/pesto2.jpg" data-full="/pasta/pesto2.jpg"><img src="/pasta/pesto2.jpg" alt="Pesto" loading="lazy"></a>
+        <a href="/pasta/green2.jpg" data-full="/pasta/green2.jpg"><img src="/pasta/green2.jpg" alt="Green pasta" loading="lazy"></a>
+        <a href="/pasta/spaghetti.jpg" data-full="/pasta/spaghetti.jpg"><img src="/pasta/spaghetti.jpg" alt="Spaghetti" loading="lazy"></a>
+        <a href="/pasta/tagliatelle_mushroom.jpg" data-full="/pasta/tagliatelle_mushroom.jpg"><img src="/pasta/tagliatelle_mushroom.jpg" alt="Tagliatelle with mushroom" loading="lazy"></a>
+        <a href="/pasta/ravioli2.jpg" data-full="/pasta/ravioli2.jpg"><img src="/pasta/ravioli2.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/tagliatelle_zucchini.jpg" data-full="/pasta/tagliatelle_zucchini.jpg"><img src="/pasta/tagliatelle_zucchini.jpg" alt="Tagliatelle with zucchini" loading="lazy"></a>
+        <a href="/pasta/ravioli6.jpg" data-full="/pasta/ravioli6.jpg"><img src="/pasta/ravioli6.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/green3.jpg" data-full="/pasta/green3.jpg"><img src="/pasta/green3.jpg" alt="Green pasta" loading="lazy"></a>
+        <a href="/pasta/gnudi.jpg" data-full="/pasta/gnudi.jpg"><img src="/pasta/gnudi.jpg" alt="Gnudi" loading="lazy"></a>
+        <a href="/pasta/ravioli3.jpg" data-full="/pasta/ravioli3.jpg"><img src="/pasta/ravioli3.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/tortellini.jpg" data-full="/pasta/tortellini.jpg"><img src="/pasta/tortellini.jpg" alt="Tortellini" loading="lazy"></a>
+        <a href="/pasta/casunziei2.jpg" data-full="/pasta/casunziei2.jpg"><img src="/pasta/casunziei2.jpg" alt="Casunziei" loading="lazy"></a>
+        <a href="/pasta/caramelle.jpg" data-full="/pasta/caramelle.jpg"><img src="/pasta/caramelle.jpg" alt="Caramelle" loading="lazy"></a>
+        <a href="/pasta/farfalle2.jpg" data-full="/pasta/farfalle2.jpg"><img src="/pasta/farfalle2.jpg" alt="Farfalle" loading="lazy"></a>
+        <a href="/pasta/cacioepepe.jpg" data-full="/pasta/cacioepepe.jpg"><img src="/pasta/cacioepepe.jpg" alt="Cacio e pepe" loading="lazy"></a>
+        <a href="/pasta/ravioli5.jpg" data-full="/pasta/ravioli5.jpg"><img src="/pasta/ravioli5.jpg" alt="Ravioli" loading="lazy"></a>
+        <a href="/pasta/lasagne2.jpg" data-full="/pasta/lasagne2.jpg"><img src="/pasta/lasagne2.jpg" alt="Lasagne" loading="lazy"></a>
+        <a href="/pasta/casunziei3.jpg" data-full="/pasta/casunziei3.jpg"><img src="/pasta/casunziei3.jpg" alt="Casunziei" loading="lazy"></a>
+        <a href="/pasta/pesto.jpg" data-full="/pasta/pesto.jpg"><img src="/pasta/pesto.jpg" alt="Pesto" loading="lazy"></a>
+        <a href="/pasta/ravioli7.jpg" data-full="/pasta/ravioli7.jpg"><img src="/pasta/ravioli7.jpg" alt="Ravioli" loading="lazy"></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap--wide footer-inner">
+      <span>© A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="../index.html">Home</a>
+        <button class="grouch" type="button" aria-label="Oscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </span>
+    </div>
+    <div class="grouch-pop"><img src="/Oscar-the-Grouch-is-grumpy.jpg" alt="Oscar the Grouch, looking grumpy"></div>
+  </footer>
+
+  <script src="../app.js"></script>
 </body>
 </html>

@@ -2,429 +2,133 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>A. Feder Cooper, Ph.D.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="academicons.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <title>A. Feder Cooper</title>
+  <meta name="description" content="A. Feder Cooper — machine learning researcher. Incoming Assistant Professor of Computer Science at Yale University; Research Scientist at AVERI; Postdoctoral Affiliate at Stanford.">
 
-  <style>
-    /* Body and Global Styling */
-    body {
-      font-family: 'Roboto Slab', serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9; /* Light grey background */
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-    /* Header Styling */
-    header {
-      background-color: #003366; /* Navy blue */
-      color: #fff;
-      padding: 40px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    header h2 {
-      font-size: 1.5rem;
-    }
-
-    /* Container */
-    .container {
-      width: 80%;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Navigation Bar Styling */
-    .navbar {
-      background-color: #003366; /* Navy blue */
-      overflow: hidden;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    .navbar a {
-      float: left;
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 18px;
-    }
-
-    .navbar a:hover {
-      background-color: #007bff; /* Blue hover effect */
-      color: white;
-    }
-
-    /* Content Section */
-    .content {
-      padding: 40px 20px;
-      background-color: #fff; /* White background for content */
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    .content p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      color: #333;
-    }
-
-    .content a {
-      color: #007bff; /* Blue links */
-      text-decoration: none;
-    }
-
-    .content a:hover {
-      text-decoration: underline;
-    }
-
-    /* Contact Section */
-
-    .contact-table {
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 40px 20px;
-      background-color: #fff;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    .contact-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .contact-info {
-      text-align: center;
-    }
-
-    .profile-image {
-      text-align: center;
-    }
-
-    .img-thumbnail {
-      border-radius: 10px;
-    }
-
-    /* Publications Section */
-    .publications {
-      background-color: white;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .publications ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .publications ul li {
-      margin-bottom: 15px;
-      font-size: 1.1em;
-    }
-
-    .publications .paper {
-      font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 12px;
-    }
-
-    .paper.journal {
-      background-color: #e74c3c; /* Red */
-      color: white;
-    }
-
-    .paper.proceedings {
-      background-color: #2980b9; /* Blue */
-      color: white;
-    }
-
-    .paper.preprint {
-      background-color: #16a085; /* Teal */
-      color: white;
-    }
-
-    .paper.award {
-      background-color: #f39c12; /* Yellow */
-      color: black;
-    }
-
-    .paper.blog {
-      background-color: #7f8c8d; /* Grey */
-      color: white;
-    }
-    .paper.workshop {
-      background-color: #8e44ad; /* Purple */
-      color: white;
-    }
-
-    /* Adjustments to make everything consistent */
-    .content, .publications {
-      width: 80%; /* Align with container width */
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .social-icons a {
-      margin-right: 15px;
-    }
-
-    .social-icons {
-      margin-top: 20px;
-    }
-
-    .cv-button {
-      margin-left: 10px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cv-button:hover {
-      background-color: #0056b3;
-    }
-
-    .cv-button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .cv-button-container a {
-      text-decoration: none;
-    }
-
-    .contact-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .cv-button, .writing-button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .cv-button:hover, .writing-button:hover {
-      background-color: #0056b3;
-    }
-
-    /* Make the CV and Writing buttons flush with the others */
-    .cv-button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cv-button-container a {
-      text-decoration: none;
-    }
-
-    /* Remove extra margin around selected work title */
-    .publications h3 {
-      margin-top: 0;
-      font-size: 2rem;
-    }
-
-    /* Add vertical space between sections */
-    #publications {
-      margin-top: 40px; /* Adjust the space as needed */
-    }
-
-    #contact {
-      margin-top: 40px; /* Adjust the space as needed */
-      margin-bottom: 40px;
-    }
-
-    /* Responsive adjustments */
-    @media (min-width: 768px) {
-      .contact-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-      
-      .contact-info {
-        flex: 1;
-        min-width: 300px;
-      }
-      
-      .profile-image {
-        flex: 0 0 auto;
-      }
-      
-      .cv-button-container {
-        flex: 1 0 100%;
-        margin-top: 20px;
-      }
-    }
-
-    /* For very small screens */
-    @media (max-width: 480px) {
-      .contact-table {
-        width: 95%;
-        padding: 20px 10px;
-      }
-      
-      .img-thumbnail {
-        max-width: 150px;
-      }
-      
-      .cv-button, .writing-button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-      }
-    }
-
-    /* Global responsive adjustments */
-    @media (max-width: 768px) {
-      .container, .content, .publications {
-        width: 95%;
-      }
-      
-      header {
-        padding: 20px;
-      }
-      
-      header h1 {
-        font-size: 2rem;
-      }
-      
-      header h2 {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+  <!-- Open Graph / social cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="A. Feder Cooper">
+  <meta property="og:title" content="A. Feder Cooper">
+  <meta property="og:description" content="Machine learning researcher. Incoming Assistant Professor of Computer Science at Yale; Research Scientist at AVERI; Postdoctoral Affiliate at Stanford.">
+  <meta property="og:url" content="https://afedercooper.info/">
+  <meta property="og:image" content="https://afedercooper.info/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A. Feder Cooper — machine learning researcher">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A. Feder Cooper">
+  <meta name="twitter:description" content="Machine learning researcher. Incoming Assistant Professor of Computer Science at Yale; Research Scientist at AVERI; Postdoctoral Affiliate at Stanford.">
+  <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
 </head>
-
 <body>
 
-  <header>
-    <h1>A. Feder Cooper, Ph.D.</h1>
-  </header>
-
-<div class="contact-table" id="contact">
-  <div class="contact-container">
-    <div class="contact-info">
-      <p>Incoming Assistant Professor, Department of Computer Science, Yale University</p>
-      <p>Research Scientist, AI Verification and Evaluation Research Institute (AVERI)</p>
-      <p>Postdoctoral Affiliate, Stanford University</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> a.feder.cooper [AT] yale [DOT] edu</p>
+  <nav class="nav">
+    <a href="index.html" class="nav__home">A. Feder Cooper</a>
+    <div class="nav__links">
+      <a href="publications.html">Papers</a>
+      <a href="writing/index.html">Writing</a>
+      <a href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
     </div>
-    
-    <div class="profile-image">
-      <img id="selfpic" src="hiking-2.jpg" class="img-thumbnail" alt="A. Feder Cooper" width="200px">
+  </nav>
+
+  <main>
+    <header class="wrap--wide hero" style="margin:0 auto">
+      <div class="hero__top">
+        <div>
+          <h1 class="hero__name">A. Feder Cooper</h1>
+          <p class="hero__roles">
+            Incoming Assistant Professor, Yale University
+            <span class="sep">·</span> Research Scientist, AVERI
+            <span class="sep">·</span> Postdoctoral Affiliate, Stanford University
+          </p>
+        </div>
+        <img class="hero__portrait" src="/cooper-cartoon.png" alt="A. Feder Cooper">
+      </div>
+
+      <p class="lead">
+        I research a variety of topics in reliable, scalable machine learning. My
+        contributions span privacy, security, and evaluation of generative-AI systems,
+        MLSys, and uncertainty estimation. I also do work in tech policy and law, and
+        spend a lot of time finding ways to effectively communicate the capabilities
+        and limits of AI/ML to interdisciplinary audiences and the public.
+      </p>
+
+      <p class="callout"><strong>I am recruiting Ph.D. students for Fall 2027</strong></p>
+
+      <div class="meta-links">
+        <a class="pill-link" href="mailto:a.feder.cooper@yale.edu">a.feder.cooper@yale.edu</a>
+        <a class="pill-link" href="https://arxiv.org/a/cooper_a_1.html" target="_blank" rel="noopener">arXiv</a>
+        <a class="pill-link" href="https://scholar.google.com/citations?hl=en&authuser=1&user=SCuVOk0AAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="pill-link" href="https://bsky.app/profile/afedercooper.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+        <a class="pill-link" href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      </div>
+    </header>
+
+    <section class="wrap--wide">
+      <div class="section">
+        <p>
+          I'm a research scientist on the founding team at the
+          <a href="https://www.averi.org/" target="_blank" rel="noopener">AI Verification and Evaluation Research Institute (AVERI)</a>.
+          I'm a postdoctoral affiliate at
+          <a href="https://hai.stanford.edu/" target="_blank" rel="noopener">Stanford HAI</a>,
+          <a href="https://reglab.stanford.edu/" target="_blank" rel="noopener">RegLab</a>, and
+          <a href="https://crfm.stanford.edu/" target="_blank" rel="noopener">CRFM</a> working with Percy Liang and Dan Ho.
+          I am also a Faculty Associate at the
+          <a href="https://cyber.harvard.edu/" target="_blank" rel="noopener">Berkman Klein Center for Internet &amp; Society</a> at Harvard University.
+          In 2026, I'll be appointed as an Assistant Professor of Computer Science at Yale University.
+          I'll also be affiliated with the
+          <a href="https://law.yale.edu/isp" target="_blank" rel="noopener">Information Society Project</a> at Yale Law School, the
+          <a href="https://cadmy.yale.edu/" target="_blank" rel="noopener">Center for Algorithms, Data, and Market Design</a>, and the
+          <a href="https://fds.yale.edu/" target="_blank" rel="noopener">Institute for Foundations of Data Science</a>.
+        </p>
+        <p>
+          My research has received spotlights, orals, and best-paper accolades at top AI/ML and
+          computing venues, including <em>NeurIPS</em>, <em>ICML</em>, <em>AAAI</em>, and <em>AIES</em>.
+          Work on copyright and Generative AI has been lauded as “landmark” work among
+          scholars and the popular press. My research has been covered in the media at
+          outlets such as <em>The Atlantic</em>, <em>The Washington Post</em>, <em>Bloomberg News</em>,
+          <em>404 Media</em>, and <em>Wired</em>.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section__head">
+          <h2 class="section__title">Selected work</h2>
+          <span class="section__aside"><a href="publications.html">Full list →</a></span>
+        </div>
+        <p class="pub-count" style="margin-top:-0.6rem">* denotes co-first author or equal contribution</p>
+        <ul class="pub-list" id="selected-pubs"></ul>
+        <noscript><p class="pub-fallback">Enable JavaScript to view the publication list, or see the <a href="publications.html">full list</a>.</p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap--wide footer-inner">
+      <span>© A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="publications.html">Papers</a>
+        <a href="writing/index.html">Writing</a>
+        <a href="pasta/index.html" class="icon-link" aria-label="Pasta" title="Pasta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M18.5 12a6.5 6.5 0 0 1-13 0"/><path d="M9 8c-1-1 1-2 0-3.5"/><path d="M12 8c-1-1 1-2 0-3.5"/><path d="M15 8c-1-1 1-2 0-3.5"/></svg></a>
+        <button class="grouch" type="button" aria-label="Oscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </span>
     </div>
-    
-    <div class="cv-button-container">
-      <a href="https://arxiv.org/a/cooper_a_1.html" target="_blank">
-        <img src="arxiv.png" width="35" height="35" alt="arxiv">
-      </a>
-      <a href="https://scholar.google.com/citations?hl=en&authuser=1&user=SCuVOk0AAAAJ" target="_blank">
-        <img src="scholar.png" width="35" height="35" alt="Google Scholar">
-      </a>
-      <a href="CV.pdf" class="cv-button">CV</a>
-      <a href="writing/index.html" class="writing-button">Writing</a>
-    </div>
-  </div>
-</div>
+    <div class="grouch-pop"><img src="/Oscar-the-Grouch-is-grumpy.jpg" alt="Oscar the Grouch, looking grumpy"></div>
+  </footer>
 
-
-  <div class="container content">
-    <p>I research a variety of topics in reliable, scalable machine learning. 
-    I'm a research scientist on the founding team at the <a href="https://www.averi.org/">AI Verification and Evaluation Research Institute (AVERI)</a>.
-    I'm a postdoctoral affiliate at <a href="https://hai.stanford.edu/">Stanford HAI</a>, <a href="https://reglab.stanford.edu/">RegLab</a>, and <a href="https://crfm.stanford.edu/">CRFM</a> working with Percy Liang and Dan Ho. 
-    I am also a Faculty Associate at the <a href="https://cyber.harvard.edu/">Berkman Klein Center for Internet & Society</a> at Harvard University. 
-    In 2026, I'll be appointed as an Assistant Professor of Computer Science at Yale University. 
-    I'll also be affiliated with the <a href="https://law.yale.edu/isp">Information Society Project</a> at Yale Law School, the <a href="https://cadmy.yale.edu/">Center for Algorithms, Data, and Market Design</a>, and the <a href="https://fds.yale.edu/">Institute for Foundations of Data Science</a>.</p>
-    
-    <p><strong>I am recruiting students for Fall 2026!</strong></p>
-    
-    <p>My contributions span privacy, security, and evaluation of generative-AI systems, MLSys, and uncertainty estimation. 
-    I also do work in tech policy and law, and spend a lot of time finding ways to effectively communicate the capabilities and limits of AI/ML to interdisciplinary audiences and the public. 
-    My research has received spotlights, orals, and best-paper accolades at top AI/ML and computing venues, including <i>NeurIPS</i>, <i>ICML</i>, <i>AAAI</i>, and <i>AIES</i>. 
-    Law collaborations on copyright and Generative AI have been lauded as "landmark" work among technology law scholars and the popular press.
-    My research has been covered in the media at outlets such as <i>The Atlantic</i>, <i>The Washington Post</i>, <i>Bloomberg News</i>, <i>404 Media</i>, and <i>Wired</i>. 
-    <!-- I occasionally write about machine learning and related topics <a href="writing/index.html">here</a>.</p> -->
-  </div>
-
-  <div id="publications">
-    <div class="publications content">
-      <h3>Selected work</h3>
-      <p>*Denotes co-first author or equal contribution; <a href="./paper/index.html">full list</a></p>
-      <ul>
-        <li> <strong>A. Feder Cooper</strong>,  Mark A. Lemley, Christopher De Sa, Lea Duesterwald, Allison Casasola, Jamie Hayes, Katherine Lee, Daniel E. Ho, and Percy Liang. "Estimating near-verbatim extraction risk in language models with decoding-constrained beam search." <i>ICML 2026 Workshop on The Impact of Memorization on Trustworthy Foundation Models</i>. [<a href="https://arxiv.org/abs/2603.24917">arxiv</a>] <span class="paper workshop">Workshop</span> <span class="paper award">Oral</span>
-        </li>
-        <br>  
-
-        <li> Ahmed Ahmed*, <strong>A. Feder Cooper</strong>*,  Sanmi Koyejo, and Percy Liang. "Extracting books from production language models." 2026. [<a href="https://arxiv.org/abs/2601.02671">arxiv</a> | <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6050534">ssrn</a>] <span class="paper preprint">arXiv</span>
-        </li>
-        <br>
-
-        
-        <li> <strong>A. Feder Cooper</strong>, Mark A. Lemley, Allison Casasola, Ahmed Ahmed, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Daniel E. Ho, and Percy Liang. "Extracting memorized pieces of (copyrighted) books from open-weight language models." <i>ICML 2025 Workshop on Reliable and Responsible Foundation Models</i>. [<a href="https://arxiv.org/abs/2505.12546">arxiv</a> | <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5262084">ssrn</a>] <span class="paper workshop">Workshop</span> <span class="paper award">Oral</span>
-        </li>
-        <br>
-
-
-        <li> Jamie Hayes*, Ilia Shumailov, Christopher A. Choquette-Choo, Matthew Jagielski, George Kaissis, Milad Nasr, Sahra Ghalebikesabi, Meenatchi Sundaram Mutu Selva Annamalai, Niloofar Mireshghallah, Igor Shilov, Matthieu Meeus, Yves-Alexandre de Montjoye, Katherine Lee, Franziska Boenisch, Adam Dziedzic, and <strong>A. Feder Cooper</strong>*. "Exploring the limits of strong membership inference attacks on large language models." <i>NeurIPS 2025</i>. [<a href="https://arxiv.org/abs/2505.18773">arxiv</a> | proceedings] <span class="paper proceedings">Proceedings</span> 
-        </li>
-        <br>
-
-        <li> <strong>A. Feder Cooper</strong>*, Christopher A. Choquette-Choo*, Miranda Bogen*, Kevin Klyman*, Matthew Jagielski*, Katja Filippova*, Ken Ziyu Liu*, Alexandra Chouldechova, Jamie Hayes, Yangsibo Huang, Eleni Triantafillou, Peter Kairouz, Nicole Mitchell, Niloofar Mireshghallah, Abigail Z. Jacobs, James Grimmelmann, Vitaly Shmatikov, Christopher De Sa, Ilia Shumailov, Andreas Terzis, Solon Barocas, Jennifer Wortman Vaughan, danah boyd, Yejin Choi, Sanmi Koyejo, Fernando Delgado, Percy Liang, Daniel E. Ho, Pamela Samuelson, Miles Brundage, David Bau, Seth Neel, Hanna Wallach, Amy B. Cyphert, Mark A. Lemley, Nicolas Papernot, and Katherine Lee*. "Machine Unlearning Doesn't Do What You Think: Lessons for Generative AI Policy and Research."  <i>NeurIPS 2025</i> (written 2024).  [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5060253">ssrn</a> | <a href="https://arxiv.org/abs/2412.06966">arxiv</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Oral</span>
-        </li>
-        <br>
-
-        <li> Jamie Hayes*, Marika Swanberg, Harsh Chaudhari, Itay Yona, Ilia Shumailov,  Milad Nasr, Christopher A. Choquette-Choo, Katherine Lee, and <strong>A. Feder Cooper</strong>*. "Measuring memorization in language models via probabilistic extraction." <i>NAACL 2025</i>. [<a href="https://arxiv.org/abs/2410.19482">arxiv</a> | <a href="https://aclanthology.org/2025.naacl-long.469/">proceedings</a>] <span class="paper proceedings">Proceedings</span> 
-        </li>
-        <br>
-
-        <li> <strong>A. Feder Cooper</strong>* and James Grimmelmann*. "The Files are in the Computer: On Copyright, Memorization, and Generative AI." <i>Chicago-Kent Law Review</i>, Vol. 100, 2025 (written in 2024). [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4803118">ssrn</a> | <a href="https://arxiv.org/abs/2404.12590">arxiv</a> | <a href="https://scholarship.kentlaw.iit.edu/cklawreview/vol100/iss1/9/">journal</a>] <span class="paper journal">Journal</span>
-        </li>
-        <br>
-
-        <li>Katherine Lee*, <strong>A. Feder Cooper</strong>*, and James Grimmelmann*. "Talkin’ ‘Bout AI Generation: Copyright and the Generative-AI Supply Chain." <i>Journal of the Copyright Society</i>, Vol. 72, 2025 (written in 2023). [<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4523551">ssrn</a> | <a href="https://arxiv.org/abs/2309.08133">arxiv</a> | <a href="https://copyrightsociety.org/journal-entries/talkin-bout-ai-generation-copyright-and-the-generative-ai-supply-chain/">journal</a>] <span class="paper journal">Journal</span>
-        </li>
-        <br>
-
-        <li> Nicholas Carlini, Daniel Paleka, Krishnamurthy Dj Dvijotham, Thomas Steinke, Jonathan Hayase, <strong>A. Feder Cooper</strong>, Katherine Lee, Matthew Jagielski, Milad Nasr, Arthur Conmy, Eric Wallace, David Rolnick, Florian Tramèr. "Stealing Part of a Production Language Model." <i>ICML 2024</i>. [<a href="https://arxiv.org/abs/2403.06634">arxiv</a> | <a href="https://openreview.net/forum?id=VE3yWXt3KB">proceedings</a>] <span class="paper proceedings">Proceedings</span> <span class="paper award">Best Paper Award</span>
-        </li>
-        <br>
-
-        <li> Milad Nasr*, Nicholas Carlini*, Jonathan Hayase, Matthew Jagielski, <strong>A. Feder Cooper</strong>, Daphne Ippolito, Christopher A. Choquette-Choo, Eric Wallace, Florian Tramèr, and Katherine Lee. "Scalable Extraction of Training Data from (Production) Language Models." 2023. [<a href="https://arxiv.org/abs/2311.17035">arxiv</a>] <span class="paper preprint">arXiv</span>
-        </li>
-        <br>
-      </ul>
-    </div>
-  </div>
-
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

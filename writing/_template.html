@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!--
+  ARTICLE TEMPLATE — not linked from anywhere. Copy this file to e.g.
+  np-memorization.html, fill in the content, then add a linked entry on
+  writing/index.html (replace the "Coming soon" placeholder).
+
+  Building blocks available (styled in styles.css under "article"):
+    - <h2>/<h3> section headings, <p>, <ol>/<ul>, <blockquote>
+    - footnote:  <sup><span class="footnote" data-footnote="Note text.">1</span></sup>
+    - citation:  <a href="#ref-key" class="citation-tooltip">phrase<span class="tooltip-text">Full cite.</span></a>
+    - figure:    <figure><img src="img/foo.png" alt=""><figcaption>Caption.</figcaption></figure>
+    - references: <ol> inside <div class="references">, each <li id="ref-key">
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POST TITLE — A. Feder Cooper</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="../index.html" class="nav__home">A. Feder Cooper</a>
+    <div class="nav__links">
+      <a href="../publications.html">Papers</a>
+      <a href="index.html" class="is-current">Writing</a>
+      <a href="/CV.pdf" target="_blank" rel="noopener">CV</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <main>
+    <article class="wrap article">
+      <a href="index.html" class="section-link">&#8592; Writing</a>
+      <h1 class="hero__name" style="font-size:clamp(2rem,5vw,2.8rem);margin-top:1rem">Post title goes here</h1>
+      <p class="post-meta">A. Feder Cooper · Month DD, YYYY</p>
+
+      <p>
+        Opening paragraph. Here is an example footnote<sup><span class="footnote"
+        data-footnote="Footnotes appear on hover.">1</span></sup> and an example inline
+        citation to <a href="#ref-example" class="citation-tooltip">prior work<span
+        class="tooltip-text">A. Feder Cooper et al. &ldquo;Example title.&rdquo; Venue, Year.</span></a>.
+      </p>
+
+      <h2>A section heading</h2>
+      <p>Body text.</p>
+
+      <blockquote>A pull quote or aside.</blockquote>
+
+      <figure>
+        <img src="img/example.png" alt="Describe the image">
+        <figcaption>Figure caption.</figcaption>
+      </figure>
+
+      <div class="references">
+        <h2>References</h2>
+        <ol>
+          <li id="ref-example">A. Feder Cooper et al. &ldquo;Example title.&rdquo; Venue, Year. [<a href="#">link</a>]</li>
+        </ol>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="../index.html">Home</a>
+        <a href="../publications.html">Papers</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+</body>
+</html>
