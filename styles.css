@@ -3,10 +3,17 @@
    Editorial-minimal, content-first. Serif display + clean sans body.
    ========================================================================= */
 
+/* --- Self-hosted fonts (no third-party request; zero-CLS metric-matched fallbacks) --- */
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 400 600; font-display: swap; src: url(fonts/inter-var.woff2) format("woff2"); }
+@font-face { font-family: "Newsreader"; font-style: normal; font-weight: 400 500; font-display: swap; src: url(fonts/newsreader-var.woff2) format("woff2"); }
+/* Metric-matched fallbacks (Capsize) so the real fonts swap in with no reflow */
+@font-face { font-family: "Inter Fallback"; src: local("Arial"), local("ArialMT"); ascent-override: 90.4365%; descent-override: 22.518%; line-gap-override: 0%; size-adjust: 107.1194%; }
+@font-face { font-family: "Newsreader Fallback"; src: local("Georgia"); ascent-override: 76.4676%; descent-override: 27.5699%; size-adjust: 96.1192%; }
+
 :root {
   /* Type */
-  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-display: "Newsreader", "Newsreader Fallback", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
   /* Light theme (default) */
   --bg: #fcfcfb;
@@ -402,8 +409,12 @@ noscript .pub-fallback { color: var(--text-muted); }
   z-index: 50; pointer-events: none;
   transform: translateY(105%); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.footer:has(.grouch:hover) .grouch-pop,
-.footer:has(.grouch:focus-visible) .grouch-pop { transform: translateY(0); }
+/* Desktop: reveal on hover. Touch is handled in app.js via the .show class. */
+@media (hover: hover) {
+  .footer:has(.grouch:hover) .grouch-pop,
+  .footer:has(.grouch:focus-visible) .grouch-pop { transform: translateY(0); }
+}
+.grouch-pop.show { transform: translateY(0); pointer-events: auto; }
 .grouch-pop img {
   width: 100%; display: block;
   border-radius: 10px 10px 0 0; border: 1px solid var(--border); border-bottom: none;

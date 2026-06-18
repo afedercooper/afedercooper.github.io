@@ -156,8 +156,21 @@ function initLightbox() {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
 }
 
+// Oscar easter egg on touch devices: tap the can to reveal, tap Oscar (or
+// anywhere) to dismiss. Desktop uses pure-CSS hover (see styles.css).
+function initGrouchTouch() {
+  if (!window.matchMedia("(hover: none)").matches) return;
+  const grouch = document.querySelector(".grouch");
+  const pop = document.querySelector(".grouch-pop");
+  if (!grouch || !pop) return;
+  grouch.addEventListener("click", (e) => { e.stopPropagation(); pop.classList.toggle("show"); });
+  pop.addEventListener("click", () => pop.classList.remove("show"));
+  document.addEventListener("click", () => pop.classList.remove("show"));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderSelected("selected-pubs");
   renderFull("full-pubs");
   initLightbox();
+  initGrouchTouch();
 });
