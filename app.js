@@ -119,7 +119,7 @@ function renderFull(elId) {
     });
     el.innerHTML = items.length
       ? items.map(pubHtml).join("")
-      : `<li class="empty">No publications match.</li>`;
+      : `<li class="empty">No papers match.</li>`;
     if (countEl) countEl.textContent = `${items.length} of ${PUBLICATIONS.length} papers`;
   }
 
