@@ -21,10 +21,33 @@
 
 const PUBLICATIONS = [
   {
+    authors: "A. Feder Cooper, Marika Swanberg, Jamie Hayes, Lea Duesterwald, Christopher De Sa, Daniel E. Ho, Mark A. Lemley, and Percy Liang",
+    title: "Extractable Memorization From First Principles",
+    venue: "", 
+    year: 2026, type: "preprint", 
+    honors: [], selected: true,
+    links: []
+  },
+  {
+    authors: "A. Feder Cooper, Mark A. Lemley, Allison Casasola, Ahmed Ahmed, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Daniel E. Ho, and Percy Liang",
+    title: "Extracting memorized pieces of (copyrighted) books from open-weight language models",
+    // venue: "ICML 2025 Workshop on Reliable and Responsible Foundation Models",
+    venue: "COLM 2026", written: 2025,
+    year: 2026, type: "conference", // honors: ["Oral"], 
+    honors: [], selected: true,
+    links: [
+      { label: "pdf", url: "/paper/cooper2025books.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2505.12546" },
+      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5262084" },
+      { label: "bibtex", url: "/paper/cooper2025books.txt" },
+    ],
+  },
+  {
     authors: "A. Feder Cooper, Mark A. Lemley, Christopher De Sa, Lea Duesterwald, Allison Casasola, Jamie Hayes, Katherine Lee, Daniel E. Ho, and Percy Liang",
     title: "Estimating near-verbatim extraction risk in language models with decoding-constrained beam search",
-    venue: "ICML 2026 Workshop on The Impact of Memorization on Trustworthy Foundation Models",
-    year: 2026, type: "workshop", honors: ["Oral"], selected: true,
+    // venue: "ICML 2026 Workshop on The Impact of Memorization on Trustworthy Foundation Models",
+    venue: "COLM 2026",
+    year: 2026, type: "conference", honors: [], selected: true,
     links: [
       { label: "pdf", url: "/paper/cooper2026nv.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2603.24917" },
@@ -32,10 +55,24 @@ const PUBLICATIONS = [
     ],
   },
   {
+    authors: "Mark A. Lemley* and A. Feder Cooper*",
+    title: "Probabilistic \"Copies\" in Generative AI Models",
+    // venue: "ICML 2026 Workshop on The Impact of Memorization on Trustworthy Foundation Models",
+    venue: "Berkeley Technology Law Journal",
+    year: 2026, type: "journal", honors: [], selected: true,
+    links: [
+      { label: "pdf", url: "/paper/lemley2026copies.pdf" },
+      // { label: "arxiv", url: "https://arxiv.org/abs/2603.24917" },
+      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7067878" },
+      { label: "bibtex", url: "/paper/lemley2026copies.txt" },
+    ],
+  },
+  {
     authors: "Miles Brundage, Noemi Dreksler, Aidan Homewood, Sean McGregor, Patricia Paskov, Conrad Stosz, Girish Sastry, A. Feder Cooper, George Balston, Steven Adler, Stephen Casper, Markus Anderljung, Grace Werner, Soren Mindermann, Vasilios Mavroudis, Ben Bucknall, Charlotte Stix, Jonas Freund, Lorenzo Pacchiardi, Jose Hernandez-Orallo, Matteo Pistillo, Michael Chen, Chris Painter, Dean W. Ball, Cullen O'Keefe, Gabriel Weil, Ben Harack, Graeme Finley, Ryan Hassan, Scott Emmons, Charles Foster, Anka Reuel, Bri Treece, Yoshua Bengio, Daniel Reti, Rishi Bommasani, Cristian Trout, Ali Shahin Shamsabadi, Rajiv Dattani, Adrian Weller, Robert Trager, Jaime Sevilla, Lauren Wagner, Lisa Soder, Ketan Ramakrishnan, Henry Papadatos, Malcolm Murray, and Ryan Tovcimak",
     title: "Frontier AI Auditing: Toward Rigorous Third-Party Assessment of Safety and Security Practices at Leading AI Companies",
     venue: "", year: 2026, type: "preprint", honors: [], selected: false,
     links: [
+      { label: "pdf", url: "/paper/brundage2026audits.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2601.11699" },
       { label: "bibtex", url: "/paper/brundage2026audits.txt" },
     ],
@@ -49,18 +86,6 @@ const PUBLICATIONS = [
       { label: "arxiv", url: "https://arxiv.org/abs/2601.02671" },
       { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6050534" },
       { label: "bibtex", url: "/paper/cooper2026productionbooks.txt" },
-    ],
-  },
-  {
-    authors: "A. Feder Cooper, Mark A. Lemley, Allison Casasola, Ahmed Ahmed, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Daniel E. Ho, and Percy Liang",
-    title: "Extracting memorized pieces of (copyrighted) books from open-weight language models",
-    venue: "ICML 2025 Workshop on Reliable and Responsible Foundation Models",
-    year: 2025, type: "workshop", honors: ["Oral"], selected: true,
-    links: [
-      { label: "pdf", url: "/paper/cooper2025books.pdf" },
-      { label: "arxiv", url: "https://arxiv.org/abs/2505.12546" },
-      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5262084" },
-      { label: "bibtex", url: "/paper/cooper2025books.txt" },
     ],
   },
   {
@@ -173,7 +198,11 @@ const PUBLICATIONS = [
     authors: "Alexandra Chouldechova, Chad Atalla, Solon Barocas, A. Feder Cooper, Emily Corvi, P. Alex Dow, Jean Garcia-Gathright, Nicholas J. Pangakis, Stefanie Reed, Emily Sheng, Dan Vann, Matthew Vogel, Hannah Washington, and Hanna Wallach",
     title: "A Shared Standard for Valid Measurement of Generative AI Systems' Capabilities, Risks, and Impacts",
     venue: "Statistical Frontiers in LLMs and Foundation Models at NeurIPS 2024", year: 2024, type: "workshop", honors: [], selected: false,
-    links: [],
+    links: [
+      { label: "pdf", url: "/paper/chouldechova2024measurement.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2412.01934" },
+      { label: "bibtex", url: "/paper/chouldechova2024measurement.txt" },
+    ],
   },
   {
     authors: "A. Feder Cooper",
@@ -227,7 +256,7 @@ const PUBLICATIONS = [
       { label: "pdf", url: "/paper/gokaslan2024commoncanvas.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2310.16825" },
       { label: "proceedings", url: "https://openaccess.thecvf.com/content/CVPR2024/html/Gokaslan_CommonCanvas_Open_Diffusion_Models_Trained_on_Creative-Commons_Images_CVPR_2024_paper.html" },
-      { label: "bibtex", url: "/paper/gokaslan2023commoncanvas.txt" },
+      { label: "bibtex", url: "/paper/gokaslan2024commoncanvas.txt" },
     ],
   },
   {

@@ -1,0 +1,6 @@
+@article{chouldechova2024measurement,
+	title={{A Shared Standard for Valid Measurement of Generative AI Systems' Capabilities, Risks, and Impacts}},
+	author={Alexandra Chouldechova and Chad Atalla and Solon Barocas and A. Feder Cooper and Emily Corvi and P. Alex Dow and Jean Garcia-Gathright and Nicholas J. Pangakis and Stefanie Reed and Emily Sheng and Dan Vann and Matthew Vogel and Hannah Washington and Hanna Wallach},
+	year={2024},
+	journal={arXiv preprint arXiv:2412.01934}
+}

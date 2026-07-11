@@ -1,0 +1,6 @@
+@article{lemley2026copies,
+      title={{Probabilistic "Copies" in Generative AI Models}}, 
+      author={Mark A. Lemley and A. Feder Cooper},
+      year={2026},
+      journal={Berkeley Technology Law Journal},
+}
