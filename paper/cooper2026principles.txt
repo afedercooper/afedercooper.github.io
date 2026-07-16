@@ -1,0 +1,6 @@
+@article{cooper2026principles,
+      title={{Extractable Memorization From First Principles}},
+      author={A. Feder Cooper and Marika Swanberg and Jamie Hayes and Lea Duesterwald and Christopher De Sa and Daniel E. Ho and Mark A. Lemley and Percy Liang},
+      year={2026},
+      journal={arXiv preprint arXiv:2607.12649},
+}

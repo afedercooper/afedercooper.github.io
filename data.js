@@ -24,9 +24,13 @@ const PUBLICATIONS = [
     authors: "A. Feder Cooper, Marika Swanberg, Jamie Hayes, Lea Duesterwald, Christopher De Sa, Daniel E. Ho, Mark A. Lemley, and Percy Liang",
     title: "Extractable Memorization From First Principles",
     venue: "", 
-    year: 2026, type: "preprint", 
+    year: 2026, type: "preprint",
     honors: [], selected: true,
-    links: []
+    links: [
+      { label: "pdf", url: "/paper/cooper2026principles.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2607.12649" },
+      { label: "bibtex", url: "/paper/cooper2026principles.txt" },
+    ],
   },
   {
     authors: "A. Feder Cooper, Mark A. Lemley, Allison Casasola, Ahmed Ahmed, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Daniel E. Ho, and Percy Liang",
