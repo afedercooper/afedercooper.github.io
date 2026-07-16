@@ -107,6 +107,7 @@ function renderFull(elId) {
 
   const countEl = document.getElementById("pub-count");
   const searchEl = document.getElementById("pub-search");
+  const clearEl = document.getElementById("pub-search-clear");
   const filterEls = Array.from(document.querySelectorAll(".filter"));
   let activeType = "all";
 
@@ -121,9 +122,17 @@ function renderFull(elId) {
       ? items.map(pubHtml).join("")
       : `<li class="empty">No papers match.</li>`;
     if (countEl) countEl.textContent = `${items.length} of ${PUBLICATIONS.length} papers`;
+    if (clearEl) clearEl.hidden = !(searchEl && searchEl.value.length);
   }
 
   if (searchEl) searchEl.addEventListener("input", apply);
+  if (clearEl) {
+    clearEl.addEventListener("click", () => {
+      searchEl.value = "";
+      searchEl.focus();
+      apply();
+    });
+  }
   filterEls.forEach((f) =>
     f.addEventListener("click", () => {
       filterEls.forEach((x) => x.classList.remove("is-active"));
