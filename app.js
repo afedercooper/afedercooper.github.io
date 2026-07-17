@@ -144,6 +144,40 @@ function renderFull(elId) {
   apply();
 }
 
+/* ------------------------------------------------------------- projects -- */
+
+function projectHtml(p) {
+  const alt = escapeHtml(p.imgAlt || p.title);
+  let media = "";
+  if (p.imgLight && p.imgDark) {
+    media = `<div class="project__media">
+        <img class="project__img project__img--light" src="${p.imgLight}" alt="${alt}" loading="lazy">
+        <img class="project__img project__img--dark" src="${p.imgDark}" alt="${alt}" loading="lazy">
+      </div>`;
+  } else if (p.img) {
+    media = `<div class="project__media">
+        <img class="project__img" src="${p.img}" alt="${alt}" loading="lazy">
+      </div>`;
+  }
+  return `<li class="project">
+    <a class="project__link" href="${p.url}" target="_blank" rel="noopener">
+      ${media}
+      <h3 class="project__title">${escapeHtml(p.title)}</h3>
+      <p class="project__desc">${escapeHtml(p.desc)}</p>
+      <div class="project__foot">
+        <span class="project__paper">${escapeHtml(p.paper)}</span>
+        <span class="project__cta">Visit site &rarr;</span>
+      </div>
+    </a>
+  </li>`;
+}
+
+function renderProjects(elId) {
+  const el = document.getElementById(elId);
+  if (!el || typeof PROJECTS === "undefined") return;
+  el.innerHTML = PROJECTS.map(projectHtml).join("");
+}
+
 /* ---------------------------------------------------------------- lightbox -- */
 function initLightbox() {
   const imgs = document.querySelectorAll(".gallery a[data-full]");
@@ -179,6 +213,7 @@ function initGrouchTouch() {
 
 document.addEventListener("DOMContentLoaded", () => {
   renderSelected("selected-pubs");
+  renderProjects("projects");
   renderFull("full-pubs");
   initLightbox();
   initGrouchTouch();

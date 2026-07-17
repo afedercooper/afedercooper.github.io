@@ -28,6 +28,7 @@ const PUBLICATIONS = [
     honors: [], selected: true,
     links: [
       { label: "pdf", url: "/paper/cooper2026principles.pdf" },
+      { label: "website", url: "https://monkey-emeritus.github.io/" },
       { label: "arxiv", url: "https://arxiv.org/abs/2607.12649" },
       { label: "bibtex", url: "/paper/cooper2026principles.txt" },
     ],
@@ -41,6 +42,7 @@ const PUBLICATIONS = [
     honors: [], selected: true,
     links: [
       { label: "pdf", url: "/paper/cooper2025books.pdf" },
+      { label: "website", url: "https://books-memorization.github.io/" },
       { label: "arxiv", url: "https://arxiv.org/abs/2505.12546" },
       { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5262084" },
       { label: "bibtex", url: "/paper/cooper2025books.txt" },
@@ -482,5 +484,39 @@ const PUBLICATIONS = [
     title: "Imperfection is the Norm: A Computer Systems Perspective on IoT and Enforcement",
     venue: "(Im)Perfect Enforcement Conference (ISP at Yale Law School)", year: 2019, type: "workshop", honors: ["Plenary Session"], selected: false,
     links: [],
+  },
+];
+
+/* =========================================================================
+   Project pages — interactive companion sites I've built for some papers.
+   Single source of truth for the "Project pages" section on the homepage.
+   Fields:
+     title : string. The project / site name.
+     desc  : string. One-line description of what the site offers.
+     paper : string. The associated paper / venue (shown as a caption).
+     url   : string. External site URL.
+     img   : optional. A single thumbnail image (theme-agnostic).
+     imgLight / imgDark : optional. A theme-swapped thumbnail pair; the one
+             matching the active theme is shown. Use instead of `img`.
+     imgAlt : optional. Alt text for the thumbnail.
+   ========================================================================= */
+
+const PROJECTS = [
+  {
+    title: "Extracting memorized pieces of (copyrighted) books from open-weight language models",
+    desc: "",
+    paper: "COLM 2026",
+    url: "https://books-memorization.github.io/",
+    imgLight: "/img/projects/books-llama-light.png",
+    imgDark: "/img/projects/books-llama-dark.png",
+    imgAlt: "Book-memorization project mascot",
+  },
+  {
+    title: "Extractable Memorization From First Principles",
+    desc: "An intuitive explanation for the paper's use of \"matched comparisons\" to rigorously measure when generation can be claimed to be extraction.",
+    paper: "Preprint · 2026",
+    url: "https://monkey-emeritus.github.io/",
+    img: "/img/projects/first-principles-glyph.png",
+    imgAlt: "Extractable Memorization From First Principles glyph",
   },
 ];

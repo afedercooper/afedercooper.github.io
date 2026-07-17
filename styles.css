@@ -383,6 +383,84 @@ main { padding-bottom: 5rem; }
 
 noscript .pub-fallback { color: var(--text-muted); }
 
+/* -------------------------------------------------------------- projects -- */
+
+.project-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.project { display: flex; }
+.project__link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.project__link:hover {
+  text-decoration: none;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.project__media {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin: 0 0 0.95rem;
+}
+.project__img {
+  height: 100px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Theme-swapped thumbnails: mirror the site's theme logic. Default follows the
+   system preference; the manual toggle's data-theme attribute overrides it. */
+.project__img--dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .project__img--light { display: none; }
+  :root:not([data-theme]) .project__img--dark { display: block; }
+}
+:root[data-theme="dark"] .project__img--light { display: none; }
+:root[data-theme="dark"] .project__img--dark { display: block; }
+:root[data-theme="light"] .project__img--light { display: block; }
+:root[data-theme="light"] .project__img--dark { display: none; }
+
+.project__title {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 0.4rem;
+}
+.project__desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+}
+.project__foot {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 0.8rem;
+}
+.project__paper { font-size: 0.82rem; color: var(--text-muted); font-style: italic; }
+.project__cta { font-size: 0.88rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+.project__link:hover .project__cta { color: var(--accent-hover); }
+
 /* --------------------------------------------------------------- writing -- */
 
 .entry-year { margin-top: 2.6rem; }
