@@ -41,6 +41,8 @@ const TYPE_LABEL = {
   conference: "Conference",
   workshop: "Workshop",
   preprint: "Preprint",
+  whitepaper: "Whitepaper",
+  techreport: "Technical report",
   thesis: "Thesis",
   blog: "Blog",
 };

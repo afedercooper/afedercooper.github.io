@@ -1,0 +1,6 @@
+@article{trout2026insurance,
+      title={{Underwriting the Agent Economy: The Blueprint for an AI Insurance Stack}},
+      author={Cristian Trout and Sanmi Koyejo and Sasha Romanosky and Giorgio Ripamonti and Lynn Thompson and Desiree Spain and Alex Taylor and Kevin Casey and Stephen Casper and Matthew Botvinick and Sean McGregor and Miles Brundage and A. Feder Cooper and Patricia Paskov and Adrien Ecoffet and Ben Bucknall and Kevin Wei and Markus Anderljung and Lukasz Szpruch and Bri Treece and Tom Zick and Gabriel Weil and Ugur Ozer and Kevin Kalinich and Jesus Gonzalez and Vitaly Baranov and Moran Koren and Guy Laban and Gil Arazi and Henri Winand and Derek Blum and Toby Clowes and Adam Kleinman and Anita Srinivasan and Tom Fehring and Rune Kvist and Rajiv Dattani},
+      year={2026},
+      journal={arXiv preprint arXiv:2607.11999},
+}

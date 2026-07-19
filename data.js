@@ -12,7 +12,7 @@
      year     : number (publication year; also used for filtering)
      written  : optional year the work was written. When set, it is shown as the
                 parenthetical year instead of `year` (e.g. "NeurIPS 2025 (2024)").
-     type     : one of  journal | conference | workshop | preprint | thesis | blog
+     type     : one of  journal | conference | workshop | preprint | whitepaper | techreport | thesis | blog
      honors   : array of strings, e.g. ["Oral"], ["Best Paper Award"]
      selected : true to feature it on the homepage
      links    : array of { label, url }. Order is preserved.
@@ -20,6 +20,16 @@
    ========================================================================= */
 
 const PUBLICATIONS = [
+  {
+    authors: "Cristian Trout, Sanmi Koyejo, Sasha Romanosky, Giorgio Ripamonti, Lynn Thompson, Desiree Spain, Alex Taylor, Kevin Casey, Stephen Casper, Matthew Botvinick, Sean McGregor, Miles Brundage, A. Feder Cooper, Patricia Paskov, Adrien Ecoffet, Ben Bucknall, Kevin Wei, Markus Anderljung, Lukasz Szpruch, Bri Treece, Tom Zick, Gabriel Weil, Ugur Ozer, Kevin Kalinich, Jesus Gonzalez, Vitaly Baranov, Moran Koren, Guy Laban, Gil Arazi, Henri Winand, Derek Blum, Toby Clowes, Adam Kleinman, Anita Srinivasan, Tom Fehring, Rune Kvist, and Rajiv Dattani",
+    title: "Underwriting the Agent Economy: The Blueprint for an AI Insurance Stack",
+    venue: "", year: 2026, type: "whitepaper", honors: [], selected: false,
+    links: [
+      { label: "pdf", url: "/paper/trout2026insurance.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2607.11999" },
+      { label: "bibtex", url: "/paper/trout2026insurance.txt" },
+    ],
+  },
   {
     authors: "A. Feder Cooper, Marika Swanberg, Jamie Hayes, Lea Duesterwald, Christopher De Sa, Daniel E. Ho, Mark A. Lemley, and Percy Liang",
     title: "Extractable Memorization From First Principles",
@@ -68,7 +78,7 @@ const PUBLICATIONS = [
     year: 2026, type: "journal", honors: [], selected: true,
     links: [
       { label: "pdf", url: "/paper/lemley2026copies.pdf" },
-      // { label: "arxiv", url: "https://arxiv.org/abs/2603.24917" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2607.14532" },
       { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7067878" },
       { label: "bibtex", url: "/paper/lemley2026copies.txt" },
     ],
@@ -76,7 +86,7 @@ const PUBLICATIONS = [
   {
     authors: "Miles Brundage, Noemi Dreksler, Aidan Homewood, Sean McGregor, Patricia Paskov, Conrad Stosz, Girish Sastry, A. Feder Cooper, George Balston, Steven Adler, Stephen Casper, Markus Anderljung, Grace Werner, Soren Mindermann, Vasilios Mavroudis, Ben Bucknall, Charlotte Stix, Jonas Freund, Lorenzo Pacchiardi, Jose Hernandez-Orallo, Matteo Pistillo, Michael Chen, Chris Painter, Dean W. Ball, Cullen O'Keefe, Gabriel Weil, Ben Harack, Graeme Finley, Ryan Hassan, Scott Emmons, Charles Foster, Anka Reuel, Bri Treece, Yoshua Bengio, Daniel Reti, Rishi Bommasani, Cristian Trout, Ali Shahin Shamsabadi, Rajiv Dattani, Adrian Weller, Robert Trager, Jaime Sevilla, Lauren Wagner, Lisa Soder, Ketan Ramakrishnan, Henry Papadatos, Malcolm Murray, and Ryan Tovcimak",
     title: "Frontier AI Auditing: Toward Rigorous Third-Party Assessment of Safety and Security Practices at Leading AI Companies",
-    venue: "", year: 2026, type: "preprint", honors: [], selected: false,
+    venue: "", year: 2026, type: "whitepaper", honors: [], selected: false,
     links: [
       { label: "pdf", url: "/paper/brundage2026audits.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2601.11699" },
@@ -290,7 +300,7 @@ const PUBLICATIONS = [
   {
     authors: "Milad Nasr*, Nicholas Carlini*, Jonathan Hayase, Matthew Jagielski, A. Feder Cooper, Daphne Ippolito, Christopher A. Choquette-Choo, Eric Wallace, Florian Tramèr, and Katherine Lee",
     title: "Scalable Extraction of Training Data from (Production) Language Models",
-    venue: "", year: 2023, type: "preprint", honors: [], selected: true,
+    venue: "", year: 2023, type: "techreport", honors: [], selected: true,
     links: [
       { label: "pdf", url: "/paper/nasr2023extracting.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2311.17035" },
@@ -320,7 +330,7 @@ const PUBLICATIONS = [
   {
     authors: "A. Feder Cooper*, Katherine Lee*, James Grimmelmann*, Daphne Ippolito*, Christopher Callison-Burch, Christopher A. Choquette-Choo, Niloofar Mireshghallah, Miles Brundage, David Mimno, Madiha Zahrah Choksi, Jack M. Balkin, Nicholas Carlini, Christopher De Sa, Jonathan Frankle, Deep Ganguli, Bryant Gipson, Andres Guadamuz, Swee Leng Harris, Abigail Z. Jacobs, Elizabeth Joh, Gautam Kamath, Mark Lemley, Cass Matthews, Christine McLeavey, Corynne McSherry, Milad Nasr, Paul Ohm, Adam Roberts, Tom Rubin, Pamela Samuelson, Ludwig Schubert, Kristen Vaccaro, Luis Villa, Felix Wu, and Elana Zeide",
     title: "Report of the 1st Workshop on Generative AI and Law",
-    venue: "", year: 2023, type: "preprint", honors: [], selected: false,
+    venue: "", year: 2023, type: "techreport", honors: [], selected: false,
     links: [
       { label: "pdf", url: "/paper/cooper2023report.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2311.06477" },
