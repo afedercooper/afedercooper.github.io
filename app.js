@@ -34,6 +34,24 @@
   });
 })();
 
+/* ------------------------------------------------------------ copy cite -- */
+/* Copy-to-clipboard for bibtex blocks: <button class="copybtn" data-copy="ID"> */
+(function copyCite() {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".copybtn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const el = document.getElementById(btn.getAttribute("data-copy"));
+        if (!el || !navigator.clipboard) return;
+        navigator.clipboard.writeText(el.textContent).then(() => {
+          const prev = btn.textContent;
+          btn.textContent = "Copied";
+          window.setTimeout(() => { btn.textContent = prev; }, 1400);
+        });
+      });
+    });
+  });
+})();
+
 /* --------------------------------------------------------- publications -- */
 
 const TYPE_LABEL = {

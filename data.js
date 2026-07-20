@@ -65,6 +65,7 @@ const PUBLICATIONS = [
     venue: "COLM 2026",
     year: 2026, type: "conference", honors: [], selected: true,
     links: [
+      { label: "website", url: "/near-verbatim/" },
       { label: "pdf", url: "/paper/cooper2026nv.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2603.24917" },
       { label: "bibtex", url: "/paper/cooper2026nv.txt" },

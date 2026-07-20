@@ -608,9 +608,99 @@ noscript .pub-fallback { color: var(--text-muted); }
 .references li { margin-bottom: 0.9rem; }
 .references li a { word-break: break-word; }
 
+/* --------------------------------------------------- project-page topbar -- */
+/* Sticky paper/project header, used by self-hosted project pages (e.g.
+   /near-verbatim/). Adapted from books-memorization.github.io, restyled
+   against this site's tokens. Replaces .nav on those pages. */
+
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+}
+.topbar__inner {
+  width: min(88%, 1500px);
+  margin: 0 auto;
+  height: 56px;
+  display: flex; align-items: center; gap: 1rem;
+}
+.topbar__brand { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 0.7rem; }
+.topbar__title {
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem; font-weight: 500; letter-spacing: 0.005em;
+  color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding-right: 0.7rem; border-right: 1px solid var(--border-strong);
+}
+.topbar__title:hover { color: var(--accent); text-decoration: none; }
+.topbar__venue {
+  flex: none;
+  font-size: 0.7rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--accent);
+}
+.topbar__links {
+  flex-shrink: 0; display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.88rem;
+}
+.topbar__links a { color: var(--text-muted); }
+.topbar__links a:hover { color: var(--accent); text-decoration: none; }
+/* Buttons sit in a 56px bar, so run them a touch tighter than in the hero. */
+.topbar__links .btn { padding: 0.3rem 0.8rem; font-size: 0.82rem; white-space: nowrap; }
+
+/* Hero for project pages */
+.project-hero { padding: 2.6rem 0 0.5rem; }
+.project-hero h1 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  margin: 0 0 0.6rem; letter-spacing: -0.015em; text-wrap: balance;
+}
+.project-hero .byline { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 1.2rem; }
+.project-hero .lede { font-size: 1.05rem; color: var(--text-muted); margin: 0 0 1.6rem; }
+
+.herolinks { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0 0 1.5rem; }
+.btn {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  font-size: 0.88rem; color: var(--text-muted); background: none;
+}
+.btn:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+.btn--primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+/* citation box (bibtex + copy button) */
+.citebox {
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--bg-subtle);
+}
+.citebox pre {
+  margin: 0; padding: 1rem; overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem; line-height: 1.55; color: var(--text-muted);
+}
+.copybtn {
+  position: absolute; top: 0.6rem; right: 0.6rem;
+  border: 1px solid var(--border-strong); border-radius: 6px;
+  background: var(--bg); color: var(--text-muted);
+  padding: 0.3rem 0.7rem; font-size: 0.75rem; cursor: pointer;
+}
+.copybtn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* "coming soon" placeholder body */
+.coming-soon {
+  margin: 2rem 0 3rem; padding: 2.5rem 1.5rem;
+  border: 1px dashed var(--border-strong); border-radius: 6px;
+  text-align: center; color: var(--text-muted);
+}
+.coming-soon p { margin: 0; }
+.coming-soon strong { color: var(--text); font-weight: 500; font-family: var(--font-display); font-size: 1.2rem; }
+
 /* ------------------------------------------------------------ responsive -- */
 
 @media (max-width: 600px) {
+  .topbar__venue { display: none; }
+  .topbar__title { border-right: none; padding-right: 0; }
   body { font-size: 16px; }
   .hero__top { flex-direction: column-reverse; align-items: flex-start; gap: 1.2rem; }
   .hero__portrait { width: 88px; height: 88px; }
@@ -619,6 +709,6 @@ noscript .pub-fallback { color: var(--text-muted); }
 }
 
 @media print {
-  .nav, .theme-toggle, .pub-tools, .footer { display: none; }
+  .nav, .topbar, .theme-toggle, .pub-tools, .footer { display: none; }
   a { color: var(--text); }
 }

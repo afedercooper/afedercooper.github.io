@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+  PROJECT PAGE — near-verbatim probabilistic extraction (COLM 2026).
+  Scaffold only: the sticky topbar, hero, and section skeleton are in place;
+  the prose is still to be written. Uses the site's shared styles.css /
+  app.js (theme toggle), plus the .topbar / .project-hero blocks in styles.css.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>html,body{margin:0;padding:0}</style>
+  <title>How much more memorization do we find when we count near-verbatim cases?</title>
+  <meta name="description" content="Measuring memorization by exact matches alone undercounts it. We estimate near-verbatim extraction risk in language models with decoding-constrained beam search.">
+
+  <link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Open Graph / social cards -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search">
+  <meta property="og:title" content="How much more memorization do we find when we count near-verbatim cases?">
+  <meta property="og:description" content="Measuring memorization by exact matches alone undercounts it. Sequences that look safe under exact-match measurement can be reproducible near-verbatim more than 85% of the time.">
+  <meta property="og:url" content="https://afedercooper.info/near-verbatim/">
+  <meta property="og:image" content="https://afedercooper.info/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How much more memorization do we find when we count near-verbatim cases?">
+  <meta name="twitter:description" content="Measuring memorization by exact matches alone undercounts it. Sequences that look safe under exact-match measurement can be reproducible near-verbatim more than 85% of the time.">
+  <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
+
+  <!-- Cloudflare Web Analytics -->
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e0d76ad15bb64aaf95e16e34749de466"}'></script>
+  <!-- Google Analytics 4 (privacy-tuned: Google Signals & ad personalization off) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-32N3S4NPP6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-32N3S4NPP6', { 'allow_google_signals': false, 'allow_ad_personalization_signals': false });
+  </script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="topbar__brand">
+        <a href="#top" class="topbar__title">Estimating near-verbatim extraction risk in language models with decoding-constrained beam search</a>
+        <span class="topbar__venue">COLM&nbsp;2026</span>
+      </div>
+      <nav class="topbar__links">
+        <a class="btn" href="https://arxiv.org/abs/2603.24917" target="_blank" rel="noopener">Read the paper</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle theme">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap--wide project-hero" id="top">
+      <h1>How much more memorization do we find when we count near-verbatim cases?</h1>
+      <p class="byline">
+        <a href="/index.html">A.&nbsp;Feder&nbsp;Cooper</a>,
+        <a href="https://law.stanford.edu/mark-a-lemley/" target="_blank" rel="noopener">Mark&nbsp;A.&nbsp;Lemley</a>,
+        <a href="https://www.cs.cornell.edu/~cdesa/" target="_blank" rel="noopener">Christopher&nbsp;De&nbsp;Sa</a>,
+        Lea&nbsp;Duesterwald,
+        <a href="https://reglab.stanford.edu/team-members/allison-casasola/" target="_blank" rel="noopener">Allison&nbsp;Casasola</a>,
+        <a href="https://jamiehay.es/" target="_blank" rel="noopener">Jamie&nbsp;Hayes</a>,
+        <a href="https://katelee168.github.io/" target="_blank" rel="noopener">Katherine&nbsp;Lee</a>,
+        <a href="https://law.stanford.edu/daniel-e-ho/" target="_blank" rel="noopener">Daniel&nbsp;E.&nbsp;Ho</a>,
+        <a href="https://cs.stanford.edu/~pliang/" target="_blank" rel="noopener">Percy&nbsp;Liang</a>
+      </p>
+      <div class="herolinks">
+        <a class="btn btn--primary" href="https://arxiv.org/abs/2603.24917" target="_blank" rel="noopener">Read the paper</a>
+        <a class="btn" href="/paper/cooper2026nv.pdf">PDF</a>
+        <a class="btn" href="#cite">Cite</a>
+      </div>
+    </div>
+
+    <article class="wrap article">
+      <div class="coming-soon">
+        <p><strong>Coming soon.</strong></p>
+      </div>
+
+      <h2 id="cite">How to cite our work</h2>
+      <div class="citebox">
+        <button class="copybtn" type="button" data-copy="bibtex">Copy</button>
+        <pre id="bibtex">@article{cooper2026nv,
+  title   = {Estimating near-verbatim extraction risk in language models with
+             decoding-constrained beam search},
+  author  = {Cooper, A. Feder and Lemley, Mark A. and De Sa, Christopher and
+             Duesterwald, Lea and Casasola, Allison and Hayes, Jamie and
+             Lee, Katherine and Ho, Daniel E. and Liang, Percy},
+  journal = {arXiv preprint arXiv:2603.24917},
+  year    = {2026}
+}</pre>
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap--wide footer-inner">
+      <span>&copy; A. Feder Cooper</span>
+      <span class="footer__personal">
+        <a href="/index.html">Home</a>
+        <a href="/publications.html">Papers</a>
+        <a href="/writing/index.html">Writing</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+</body>
+</html>
