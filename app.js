@@ -77,7 +77,17 @@ function renderAuthors(authors) {
 }
 
 function pubHtml(p) {
-  const titleLink = p.links.find((l) => l.label === "pdf") || p.links.find((l) => l.label === "arxiv");
+  // Title links to the canonical, maintained source, in order of preference:
+  // arXiv, then SSRN, then the published version (journal / proceedings /
+  // OpenReview), and only the local PDF as a last resort. (Local PDFs can go
+  // stale; the hosted sources don't.)
+  const titleLink =
+    p.links.find((l) => l.label === "arxiv") ||
+    p.links.find((l) => l.label === "ssrn") ||
+    p.links.find((l) => l.label === "journal") ||
+    p.links.find((l) => l.label === "proceedings") ||
+    p.links.find((l) => l.label === "openreview") ||
+    p.links.find((l) => l.label === "pdf");
   const titleHtml = titleLink
     ? `<a href="${titleLink.url}"${titleLink.url.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${escapeHtml(p.title)}</a>`
     : escapeHtml(p.title);

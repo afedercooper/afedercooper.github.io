@@ -142,6 +142,7 @@ const PUBLICATIONS = [
     venue: "NeurIPS 2025", year: 2025, type: "conference", honors: [], selected: false,
     links: [
       { label: "pdf", url: "/paper/chouldechova2025asr.pdf" },
+      { label: "proceedings", url: "https://openreview.net/forum?id=d7hqAhLvWG" },
       { label: "bibtex", url: "/paper/chouldechova2025asr.txt" },
     ],
   },
@@ -248,10 +249,10 @@ const PUBLICATIONS = [
     title: "Stealing Part of a Production Language Model",
     venue: "ICML 2024", year: 2024, type: "conference", honors: ["Best Paper Award"], selected: true,
     links: [
-      { label: "pdf", url: "/paper/carlini2024extracting.pdf" },
+      { label: "pdf", url: "/paper/carlini2024stealing.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2403.06634" },
       { label: "proceedings", url: "https://openreview.net/forum?id=VE3yWXt3KB" },
-      { label: "bibtex", url: "/paper/carlini2024extracting.txt" },
+      { label: "bibtex", url: "/paper/carlini2024stealing.txt" },
     ],
   },
   {
@@ -325,6 +326,7 @@ const PUBLICATIONS = [
     venue: "Algorithmic Fairness through the Lens of Time Workshop at NeurIPS 2023", year: 2023, type: "workshop", honors: ["Oral"], selected: false,
     links: [
       { label: "pdf", url: "/paper/aggrey2023repair.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2203.07490" },
       { label: "bibtex", url: "/paper/aggrey2023repair.txt" },
     ],
   },
