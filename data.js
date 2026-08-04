@@ -44,6 +44,17 @@ const PUBLICATIONS = [
     ],
   },
   {
+    authors: "Ahmed Ahmed*, A. Feder Cooper*, Sanmi Koyejo, and Percy Liang",
+    title: "Extracting books from production language models",
+    venue: "", year: 2026, type: "preprint", honors: [], selected: true,
+    links: [
+      { label: "pdf", url: "/paper/cooper2026productionbooks.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2601.02671" },
+      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6050534" },
+      { label: "bibtex", url: "/paper/cooper2026productionbooks.txt" },
+    ],
+  },
+  {
     authors: "A. Feder Cooper, Mark A. Lemley, Allison Casasola, Ahmed Ahmed, Aaron Gokaslan, Amy B. Cyphert, Christopher De Sa, Daniel E. Ho, and Percy Liang",
     title: "Extracting memorized pieces of (copyrighted) books from open-weight language models",
     // venue: "ICML 2025 Workshop on Reliable and Responsible Foundation Models",
@@ -92,17 +103,6 @@ const PUBLICATIONS = [
       { label: "pdf", url: "/paper/brundage2026audits.pdf" },
       { label: "arxiv", url: "https://arxiv.org/abs/2601.11699" },
       { label: "bibtex", url: "/paper/brundage2026audits.txt" },
-    ],
-  },
-  {
-    authors: "Ahmed Ahmed*, A. Feder Cooper*, Sanmi Koyejo, and Percy Liang",
-    title: "Extracting books from production language models",
-    venue: "", year: 2026, type: "preprint", honors: [], selected: true,
-    links: [
-      { label: "pdf", url: "/paper/cooper2026productionbooks.pdf" },
-      { label: "arxiv", url: "https://arxiv.org/abs/2601.02671" },
-      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6050534" },
-      { label: "bibtex", url: "/paper/cooper2026productionbooks.txt" },
     ],
   },
   {
