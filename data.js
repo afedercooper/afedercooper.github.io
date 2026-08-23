@@ -517,7 +517,7 @@ const PUBLICATIONS = [
 const PROJECTS = [
   {
     title: "Extracting memorized pieces of (copyrighted) books from open-weight language models",
-    desc: "",
+    desc: "A searchable, explorable view of the ~3,000 experiments we ran in the paper.",
     paper: "COLM 2026",
     url: "https://books-memorization.github.io/",
     imgLight: "/img/projects/books-llama-light.png",
@@ -527,7 +527,9 @@ const PROJECTS = [
   {
     title: "Extractable Memorization From First Principles",
     desc: "An intuitive explanation for the paper's use of \"matched comparisons\" to rigorously measure when generation can be claimed to be extraction.",
-    paper: "Preprint · 2026",
+    paper: "Preprint 2026",
+    plain: true,   // a type, not a venue -- rendered upright
+
     url: "https://monkey-emeritus.github.io/",
     img: "/img/projects/first-principles-glyph.png",
     imgAlt: "Extractable Memorization From First Principles glyph",

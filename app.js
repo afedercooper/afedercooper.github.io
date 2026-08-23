@@ -76,7 +76,7 @@ function renderAuthors(authors) {
   );
 }
 
-function pubHtml(p) {
+function pubHtml(p, opts) {
   // Title links to the canonical, maintained source, in order of preference:
   // arXiv, then SSRN, then the published version (journal / proceedings /
   // OpenReview), and only the local PDF as a last resort. (Local PDFs can go
@@ -92,6 +92,7 @@ function pubHtml(p) {
     ? `<a href="${titleLink.url}"${titleLink.url.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${escapeHtml(p.title)}</a>`
     : escapeHtml(p.title);
 
+  const summary = !!(opts && opts.summary);
   const displayYear = p.written || p.year;
   // Show the parenthetical year only when the venue doesn't already carry it
   // (e.g. "NeurIPS 2025" → no "(2025)"; but "NeurIPS 2025" + written 2024 → "(2024)").
@@ -102,25 +103,30 @@ function pubHtml(p) {
     if (p.volume) v += `, ${escapeHtml(p.volume)}`;
     if (showYear) v += ` (${displayYear})`;
   } else {
-    v = `${displayYear}`;
+    // No venue: the type carries the information, so it moves into the venue
+    // slot ("Preprint 2026"). The type is never a right-side tag on either page
+    // -- filtering keys off the li's data-type attribute, not the tag.
+    v = `${TYPE_LABEL[p.type] || p.type} ${displayYear}`;
   }
-  const venue = `<div class="pub__venue">${v}</div>`;
 
-  const links = p.links.length
+  // The homepage is a summary: the title already links to the canonical source,
+  // so the per-paper link row is only rendered on the full papers page.
+  const links = p.links.length && !summary
     ? `<span class="pub__links">${p.links
         .map((l) => `<a href="${l.url}"${l.url.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${escapeHtml(l.label)}</a>`)
         .join("")}</span>`
     : "";
 
-  const tags =
-    `<span class="tag tag--type">${TYPE_LABEL[p.type] || p.type}</span>` +
-    (p.honors || []).map((h) => `<span class="tag tag--honor">${escapeHtml(h)}</span>`).join("");
+  const honors = (p.honors || [])
+    .map((h) => `<span class="tag tag--honor">${escapeHtml(h)}</span>`)
+    .join("");
+  const tags = honors;
 
   return `<li class="pub" data-type="${p.type}" data-search="${escapeHtml((p.authors + " " + p.title + " " + (p.venue || "")).toLowerCase())}">
     <p class="pub__title">${titleHtml}</p>
     <div class="pub__authors">${renderAuthors(p.authors)}</div>
-    ${venue}
-    <div class="pub__foot">${links}<span class="spacer"></span>${tags}</div>
+    <div class="pub__foot pub__foot--meta"><span class="pub__venue pub__venue--inline">${v}</span><span class="spacer"></span>${tags}</div>
+    ${links ? `<div class="pub__foot">${links}</div>` : ""}
   </li>`;
 }
 
@@ -128,7 +134,7 @@ function renderSelected(elId) {
   const el = document.getElementById(elId);
   if (!el) return;
   const items = PUBLICATIONS.filter((p) => p.selected);
-  el.innerHTML = items.map(pubHtml).join("");
+  el.innerHTML = items.map((p) => pubHtml(p, { summary: true })).join("");
 }
 
 function renderFull(elId) {
@@ -151,7 +157,7 @@ function renderFull(elId) {
     el.innerHTML = items.length
       ? items.map(pubHtml).join("")
       : `<li class="empty">No papers match.</li>`;
-    if (countEl) countEl.textContent = `${items.length} of ${PUBLICATIONS.length} papers`;
+    if (countEl) countEl.textContent = `${items.length} of ${PUBLICATIONS.length}`;
     if (clearEl) clearEl.hidden = !(searchEl && searchEl.value.length);
   }
 
@@ -195,8 +201,7 @@ function projectHtml(p) {
       <h3 class="project__title">${escapeHtml(p.title)}</h3>
       <p class="project__desc">${escapeHtml(p.desc)}</p>
       <div class="project__foot">
-        <span class="project__paper">${escapeHtml(p.paper)}</span>
-        <span class="project__cta">Visit site &rarr;</span>
+        <span class="project__paper${p.plain ? " project__paper--plain" : ""}">${escapeHtml(p.paper)}</span>
       </div>
     </a>
   </li>`;
