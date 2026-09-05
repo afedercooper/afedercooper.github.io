@@ -1,0 +1,6 @@
+@article{cooper2026whack,
+	title={{Playing Whack-a-Mole with misconceptions about memorization, extraction, and copyright}},
+	author={A. Feder Cooper},
+	year={2026},
+	journal={arXiv preprint arXiv:2609.09320}
+}
