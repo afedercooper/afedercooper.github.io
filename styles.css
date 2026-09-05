@@ -585,6 +585,12 @@ noscript .pub-fallback { color: var(--text-muted); }
 
 /* ---------------------------------------------------------------- article -- */
 .article { max-width: 44rem; }
+/* Action row under the byline (e.g. a PDF version of the post). When it is
+   present the byline gives up its trailing gap and the row carries it, so a
+   post with no actions spaces exactly as before. */
+.article .post-meta:has(+ .post-actions) { margin-bottom: 1rem; }
+.article .post-actions { margin: 0 0 2.4rem; }
+.article .post-lede { font-size: 1.1rem; color: var(--text-muted); margin: 0.9rem 0 0; }
 .article .post-meta { color: var(--text-muted); font-size: 0.95rem; margin: 0.4rem 0 2.4rem; }
 .article h2 { font-size: 1.6rem; margin: 2.6rem 0 0.8rem; }
 .article h3 { font-size: 1.2rem; margin: 2rem 0 0.6rem; font-weight: 500; }
@@ -597,26 +603,110 @@ noscript .pub-fallback { color: var(--text-muted); }
 }
 .article figure { margin: 2rem 0; }
 .article figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
-.article figcaption { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center; }
+.article figcaption { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem; }
+/* Closing "All writing" link; the nav carries it at the top. */
+.article .article-end { margin: 3rem 0 0; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 
-/* Footnote (hover tooltip) and inline citation */
-.footnote, .citation-tooltip {
-  position: relative; cursor: help; color: var(--accent);
-  text-decoration: none; border-bottom: 1px dotted var(--text-muted);
+/* ------------------------------------------------------------- footnotes -- */
+/* Inline footnotes: a superscript ref opens a popover holding the note. The
+   note bodies live in an <ol class="footnotes"> at the end of the article --
+   that list is the no-JS path (plain endnotes the refs link to) and is hidden
+   the moment JS is available. Wired up by initFootnotes() in app.js.
+
+   Popover content is real DOM, not a CSS attr() string, so notes can carry
+   links, emphasis and multiple paragraphs. */
+
+.js .footnotes-fallback { display: none; }
+
+.footnotes-fallback { margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.footnotes-fallback h2 { font-size: 1.3rem; }
+.footnotes-fallback ol { padding-left: 1.4rem; font-size: 0.95rem; color: var(--text-muted); }
+.footnotes-fallback li { margin-bottom: 0.9rem; }
+
+/* The superscript ref */
+.fn-ref { font-size: 0.7em; vertical-align: super; line-height: 0; }
+.fn-ref > a {
+  position: relative;
+  color: var(--accent); text-decoration: none;
+  font-variant-numeric: tabular-nums;
+  border-radius: 2px;
 }
-.footnote::after, .citation-tooltip .tooltip-text {
-  content: attr(data-footnote);
-  position: absolute; bottom: 135%; left: 50%; transform: translateX(-50%);
-  width: max-content; max-width: 270px;
+/* Invisible padding so the number is a comfortable tap target on touch,
+   without disturbing the line it sits on. */
+.fn-ref > a::after { content: ""; position: absolute; inset: -0.75em -0.5em; }
+.fn-ref > a:hover { color: var(--accent-hover); }
+.fn-ref > a.is-open { background: var(--selection); box-shadow: 0 0 0 2px var(--selection); }
+
+/* The popover itself (one reusable node, appended to <body> by app.js) */
+.fn-pop {
+  position: absolute; top: 0; left: 0; z-index: 60;
+  width: min(32rem, calc(100vw - 1.5rem));
   background: var(--bg); color: var(--text);
   border: 1px solid var(--border-strong); border-radius: var(--radius);
-  padding: 8px 10px; font-size: 0.85rem; font-style: normal; line-height: 1.45;
-  text-align: left; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-  opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 20;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  padding: 0.8rem 0.95rem;
+  font-family: var(--font-body); font-size: 0.86rem; font-style: normal;
+  font-weight: 400; line-height: 1.55; text-align: left;
+  display: flex; flex-direction: column;   /* so a capped popover shrinks the body */
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.15s ease;
 }
-.citation-tooltip .tooltip-text { content: none; }
-.footnote:hover::after,
-.citation-tooltip:hover .tooltip-text { opacity: 1; }
+.fn-pop.show { opacity: 1; visibility: visible; pointer-events: auto; }
+/* Overflow lives on the body, not the popover, so the arrow isn't clipped.
+   app.js may also cap .fn-pop's height when a long note won't fit beside its
+   ref; min-height:0 lets the body give way and scroll when that happens. */
+.fn-pop__body {
+  min-height: 0; max-height: min(58vh, 22rem);
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.fn-pop__body p { margin: 0 0 0.6rem; }
+.fn-pop__body > :last-child { margin-bottom: 0; }
+.fn-pop__num { color: var(--text-muted); font-weight: 600; margin-right: 0.35em; }
+
+.fn-pop__arrow {
+  position: absolute; width: 9px; height: 9px; margin-left: -5px;
+  background: var(--bg); border: 1px solid var(--border-strong);
+  transform: rotate(45deg);
+}
+.fn-pop--above .fn-pop__arrow { bottom: -5px; border-top: 0; border-left: 0; }
+.fn-pop--below .fn-pop__arrow { top: -5px; border-bottom: 0; border-right: 0; }
+
+@media (prefers-reduced-motion: reduce) { .fn-pop { transition: none; } }
+
+/* ------------------------------------------------------ post section rail -- */
+/* Opt-in per post: include a <nav class="post-toc"> in the page and app.js
+   (initPostToc) highlights the section you're reading. Short posts just omit
+   the markup. Desktop only -- the 720px prose column already fills a phone
+   screen, so there is no margin to sit in and it stays hidden below 1200px
+   rather than degrading into something narrower. */
+.post-toc { display: none; }
+
+@media (min-width: 1200px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    top: 50%; transform: translateY(-50%);
+    /* the prose column caps at 720px and is centred, so its left edge is at
+       50% - 360px; sit clear of that, but never off the left of the screen */
+    left: max(1.5rem, calc(50% - 600px));
+    width: 12.5rem; max-height: 74vh; overflow-y: auto;
+    font-size: 0.78rem; line-height: 1.35;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .post-toc.is-visible { opacity: 1; pointer-events: auto; }
+  .post-toc ol { list-style: none; margin: 0; padding: 0; }
+  .post-toc li { margin: 0; }
+  .post-toc a {
+    display: block; padding: 0.3rem 0 0.3rem 0.7rem;
+    border-left: 2px solid var(--border);
+    color: var(--text-muted); text-decoration: none;
+  }
+  .post-toc a:hover { color: var(--text); border-left-color: var(--border-strong); }
+  /* "you are here" is a margin marker, not an enclosure -- no pill, no box */
+  .post-toc a.is-current { color: var(--text); border-left-color: var(--accent); }
+  .post-toc ol ol a { padding-left: 1.5rem; font-size: 0.95em; }
+}
+@media (prefers-reduced-motion: reduce) { .post-toc { transition: none; } }
 
 .section-link { color: var(--accent); }
 

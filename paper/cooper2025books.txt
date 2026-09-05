@@ -1,6 +1,8 @@
-@article{cooper2025books,
-      title={Extracting memorized pieces of (copyrighted) books from open-weight language models}, 
-      author={A. Feder Cooper and Aaron Gokaslan and Ahmed Ahmed and and Amy B. Cyphert and Christopher De Sa and Mark A. Lemley and Daniel E. Ho and Percy Liang},
-      year={2025},
-      journal={arXiv preprint arXiv:2505.12546},
+@inproceedings{
+cooper2025books,
+title={Extracting memorized pieces of (copyrighted) books from open-weight language models},
+author={A. Feder Cooper and Mark A. Lemley and Allison Casasola and Ahmed Ahmed and Aaron Gokaslan and Amy B. Cyphert and Christopher De Sa and Daniel E. Ho and Percy Liang},
+booktitle={Third Conference on Language Modeling},
+year={2026},
+url={https://openreview.net/forum?id=VE3f9mjaCd}
 }
