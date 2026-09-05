@@ -5,18 +5,31 @@
   content, then add a linked entry on writing/index.html. (Entries whose post
   lives on its own external site just link out directly — no local file needed.)
 
+  A post whose figures need their own folder can instead live in a top-level
+  directory of its own (e.g. /whack-a-mole/index.html + /whack-a-mole/img/),
+  the way /near-verbatim/ does — same layout, just adjust the ../ paths.
+
   Building blocks available (styled in styles.css under "article"):
     - <h2>/<h3> section headings, <p>, <ol>/<ul>, <blockquote>
-    - footnote:  <sup><span class="footnote" data-footnote="Note text.">1</span></sup>
-    - citation:  <a href="#ref-key" class="citation-tooltip">phrase<span class="tooltip-text">Full cite.</span></a>
     - figure:    <figure><img src="img/foo.png" alt=""><figcaption>Caption.</figcaption></figure>
     - references: <ol> inside <div class="references">, each <li id="ref-key">
+    - footnote:  a superscript ref in the prose,
+                   <sup class="fn-ref"><a href="#fn-1" id="fnref-1">1</a></sup>
+                 with the note body in the list at the end of the article,
+                   <li id="fn-1">Note text, which may contain <a>links</a>,
+                   emphasis and several <p> paragraphs.</li>
+                 app.js turns each ref into a popover that opens on hover,
+                 tap or keyboard focus and closes on click-outside / Escape.
+                 The <section class="footnotes-fallback"> list is the no-JS
+                 path (plain endnotes) and is hidden whenever JS runs, so keep
+                 refs numbered 1..N in document order to match it.
 -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>html,body{margin:0;padding:0}</style>
+  <script>document.documentElement.className += " js";</script>
   <title>POST TITLE — A. Feder Cooper</title>
 
   <link rel="preload" href="/fonts/spectral-medium.woff2" as="font" type="font/woff2" crossorigin>
@@ -50,15 +63,12 @@
 
   <main>
     <article class="wrap article">
-      <a href="index.html" class="section-link">All writing</a>
       <h1 class="hero__name" style="font-size:clamp(2rem,5vw,2.8rem);margin-top:1rem">Post title goes here</h1>
       <p class="post-meta">A. Feder Cooper · Month DD, YYYY</p>
 
       <p>
-        Opening paragraph. Here is an example footnote<sup><span class="footnote"
-        data-footnote="Footnotes appear on hover.">1</span></sup> and an example inline
-        citation to <a href="#ref-example" class="citation-tooltip">prior work<span
-        class="tooltip-text">A. Feder Cooper et al. "Example title." Venue, Year.</span></a>.
+        Opening paragraph. Here is an example footnote<sup class="fn-ref"><a href="#fn-1"
+        id="fnref-1">1</a></sup>, whose text pops up on hover or tap.
       </p>
 
       <h2>A section heading</h2>
@@ -71,12 +81,21 @@
         <figcaption>Figure caption.</figcaption>
       </figure>
 
+      <section class="footnotes-fallback">
+        <h2>Notes</h2>
+        <ol>
+          <li id="fn-1">The note body. Links and <em>emphasis</em> work in here.</li>
+        </ol>
+      </section>
+
       <div class="references">
         <h2>References</h2>
         <ol>
           <li id="ref-example">A. Feder Cooper et al. "Example title." Venue, Year. [<a href="#">link</a>]</li>
         </ol>
       </div>
+
+      <p class="article-end"><a href="index.html" class="section-link">All writing</a></p>
     </article>
   </main>
 

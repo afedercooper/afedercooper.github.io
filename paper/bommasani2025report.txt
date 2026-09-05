@@ -1,0 +1,6 @@
+@article{bommasani2025report,
+      title={{The California Report on Frontier AI Policy}}, 
+      author={Rishi Bommasani and Scott R. Singer and Ruth E. Appel and Sarah Cen and A. Feder Cooper and Elena Cryst and Lindsey A. Gailmard and Ian Klaus and Meredith M. Lee and Inioluwa Deborah Raji and Anka Reuel and Drew Spence and Alexander Wan and Angelina Wang and Daniel Zhang and Daniel E. Ho and Percy Liang and Dawn Song and Joseph E. Gonzalez and Jonathan Zittrain and Jennifer Tour Chayes and Mariano-Florentino Cuellar and Li Fei-Fei},
+      year={2025},
+      journal={arXiv preprint arXiv:2506.17303},
+}
