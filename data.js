@@ -21,6 +21,28 @@
 
 const PUBLICATIONS = [
   {
+    authors: "A. Feder Cooper",
+    title: "Playing Whack-a-Mole with misconceptions about memorization, extraction, and copyright",
+    venue: "", year: 2026, type: "blog", honors: [], selected: false,
+    links: [
+      { label: "website", url: "/whack-a-mole/" },
+      { label: "pdf", url: "/paper/cooper2026whack.pdf" },
+      { label: "arxiv", url: "https://arxiv.org/abs/2609.09320" },
+      { label: "ssrn", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7436200" },
+      { label: "bibtex", url: "/paper/cooper2026whack.txt" },
+    ],
+  },
+  {
+    authors: "Meera Desai, Sang T. Truong, Hanna Wallach, Alex Chouldechova, A. Feder Cooper, Jean Garcia-Gathright, Daniel E. Ho, Abigail Z. Jacobs, Sanmi Koyejo, Nicholas Pangakis, and Angelina Wang",
+    title: "What AI Benchmarks Actually Measure: Adapting Convergent and Discriminant Validity to Interrogate Fifty-Six AI Benchmarks",
+    venue: "COLM 2026", year: 2026, type: "conference", honors: [], selected: false,
+    links: [
+      { label: "pdf", url: "/paper/desai2026validity.pdf" },
+      { label: "openreview", url: "https://openreview.net/forum?id=889XnQKyhM" },
+      { label: "bibtex", url: "/paper/desai2026validity.txt" },
+    ],
+  },
+  {
     authors: "Cristian Trout, Sanmi Koyejo, Sasha Romanosky, Giorgio Ripamonti, Lynn Thompson, Desiree Spain, Alex Taylor, Kevin Casey, Stephen Casper, Matthew Botvinick, Sean McGregor, Miles Brundage, A. Feder Cooper, Patricia Paskov, Adrien Ecoffet, Ben Bucknall, Kevin Wei, Markus Anderljung, Lukasz Szpruch, Bri Treece, Tom Zick, Gabriel Weil, Ugur Ozer, Kevin Kalinich, Jesus Gonzalez, Vitaly Baranov, Moran Koren, Guy Laban, Gil Arazi, Henri Winand, Derek Blum, Toby Clowes, Adam Kleinman, Anita Srinivasan, Tom Fehring, Rune Kvist, and Rajiv Dattani",
     title: "Underwriting the Agent Economy: The Blueprint for an AI Insurance Stack",
     venue: "", year: 2026, type: "whitepaper", honors: [], selected: false,

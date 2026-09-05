@@ -246,10 +246,188 @@ function initGrouchTouch() {
   document.addEventListener("click", () => pop.classList.remove("show"));
 }
 
+/* ------------------------------------------------------------- footnotes -- */
+/* Inline footnote popovers.
+     ref:  <sup class="fn-ref"><a href="#fn-1" id="fnref-1">1</a></sup>
+     note: <li id="fn-1"> inside <ol> in <section class="footnotes-fallback">
+   Opens on hover (pointer devices), tap (touch), or keyboard focus. Dismisses
+   on click anywhere outside, on Escape, or on hovering away -- with a short
+   grace period so the pointer can travel into the popover to use its links.
+   Without JS the fallback list stays visible and the refs behave as ordinary
+   endnote links. */
+function initFootnotes() {
+  const refs = Array.from(document.querySelectorAll(".fn-ref > a"));
+  if (!refs.length) return;
+
+  const pop = document.createElement("div");
+  pop.className = "fn-pop";
+  pop.id = "fn-pop";
+  pop.setAttribute("role", "tooltip");
+  pop.innerHTML = '<div class="fn-pop__body"></div><span class="fn-pop__arrow"></span>';
+  const body = pop.querySelector(".fn-pop__body");
+  const arrow = pop.querySelector(".fn-pop__arrow");
+  document.body.appendChild(pop);
+
+  const canHover = window.matchMedia("(hover: hover)").matches;
+  let openRef = null;
+  let hideTimer = null;
+
+  const cancelHide = () => { window.clearTimeout(hideTimer); hideTimer = null; };
+
+  function hide() {
+    cancelHide();
+    if (!openRef) return;
+    openRef.classList.remove("is-open");
+    openRef.removeAttribute("aria-describedby");
+    openRef = null;
+    pop.classList.remove("show");
+  }
+  const hideSoon = () => { cancelHide(); hideTimer = window.setTimeout(hide, 220); };
+
+  // Absolute document coordinates, so the popover tracks the ref on scroll
+  // without any scroll handler. Clamped to the viewport horizontally; sits
+  // above the ref when it fits there, otherwise below.
+  function place(ref) {
+    const gap = 10;
+    const edge = 8;
+    const vw = document.documentElement.clientWidth;
+    const vh = window.innerHeight;
+
+    pop.style.maxHeight = "";            // measure the note's natural height
+    const r = ref.getBoundingClientRect();
+    const w = pop.offsetWidth;
+    let h = pop.offsetHeight;
+
+    let left = r.left + r.width / 2 - w / 2;
+    left = Math.max(edge, Math.min(left, vw - w - edge));
+
+    // A long note on a short viewport may fit on neither side. Take the
+    // roomier one and cap the popover to it -- .fn-pop__body then scrolls
+    // rather than the note running off the screen.
+    const roomAbove = r.top - gap - edge;
+    const roomBelow = vh - r.bottom - gap - edge;
+    let above;
+    if (h <= roomAbove) above = true;
+    else if (h <= roomBelow) above = false;
+    else {
+      above = roomAbove >= roomBelow;
+      pop.style.maxHeight = Math.max(120, above ? roomAbove : roomBelow) + "px";
+      h = pop.offsetHeight;
+    }
+
+    let top = above ? r.top - gap - h : r.bottom + gap;
+    top = Math.max(edge, Math.min(top, vh - h - edge));   // last-resort clamp
+
+    pop.classList.toggle("fn-pop--above", above);
+    pop.classList.toggle("fn-pop--below", !above);
+    pop.style.left = left + window.scrollX + "px";
+    pop.style.top = top + window.scrollY + "px";
+
+    // Point the arrow at the ref, kept clear of the rounded corners.
+    arrow.style.left = Math.max(14, Math.min(r.left + r.width / 2 - left, w - 14)) + "px";
+  }
+
+  function show(ref) {
+    cancelHide();
+    const note = document.getElementById(ref.getAttribute("href").slice(1));
+    if (!note) return;
+    if (openRef && openRef !== ref) {
+      openRef.classList.remove("is-open");
+      openRef.removeAttribute("aria-describedby");
+    }
+    body.innerHTML = `<span class="fn-pop__num">${ref.textContent}</span>${note.innerHTML}`;
+    body.scrollTop = 0;
+    openRef = ref;
+    ref.classList.add("is-open");
+    ref.setAttribute("aria-describedby", "fn-pop");
+    pop.classList.add("show");
+    place(ref);
+  }
+
+  refs.forEach((ref) => {
+    ref.addEventListener("click", (e) => {
+      e.preventDefault();      // never jump to the fallback list
+      e.stopPropagation();     // ...and don't trip the outside-click dismiss
+      if (openRef === ref) hide(); else show(ref);
+    });
+    if (canHover) {
+      ref.addEventListener("mouseenter", () => show(ref));
+      ref.addEventListener("mouseleave", hideSoon);
+    }
+    ref.addEventListener("focus", () => show(ref));
+    ref.addEventListener("blur", hideSoon);
+  });
+
+  // mousedown fires before the ref's blur, so this keeps the popover alive
+  // long enough for a click on one of its links to land.
+  pop.addEventListener("mousedown", cancelHide);
+  pop.addEventListener("mouseenter", cancelHide);
+  pop.addEventListener("mouseleave", hideSoon);
+  pop.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (e.target.closest("a")) hide();  // followed a link out of the note
+  });
+
+  document.addEventListener("click", hide);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
+  window.addEventListener("resize", hide);
+}
+
+/* ------------------------------------------------------ post section rail -- */
+/* Highlights the section currently being read in a post's <nav class="post-toc">
+   and reveals the rail once the reader is past the opening. Opt-in: a post
+   without that markup gets nothing. Styling/breakpoint live in styles.css. */
+function initPostToc() {
+  const toc = document.querySelector(".post-toc");
+  if (!toc) return;
+  const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+  const items = links
+    .map((a) => ({ a: a, el: document.getElementById(a.getAttribute("href").slice(1)) }))
+    .filter((t) => t.el);                      // in document order
+  if (!items.length) return;
+
+  const LINE = 140;      // a heading counts as "current" once it passes this
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+    const doc = document.documentElement;
+    toc.classList.toggle(
+      "is-visible",
+      y > items[0].el.getBoundingClientRect().top + y - 200
+    );
+
+    let current = null;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].el.getBoundingClientRect().top <= LINE) current = items[i];
+      else break;
+    }
+    // The last section can be too short to ever cross the line -- claim it once
+    // the page is scrolled to the bottom.
+    if (y + window.innerHeight >= doc.scrollHeight - 4) current = items[items.length - 1];
+
+    links.forEach((a) => a.classList.remove("is-current"));
+    if (current) current.a.classList.add("is-current");
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  // Figures finish loading after DOMContentLoaded and shift every heading, so
+  // re-measure once they have: matters when the page opens already scrolled
+  // (a refresh part-way down, or an #anchor link straight into a section).
+  window.addEventListener("load", update);
+  update();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderSelected("selected-pubs");
   renderProjects("projects");
   renderFull("full-pubs");
   initLightbox();
   initGrouchTouch();
+  initFootnotes();
+  initPostToc();
 });

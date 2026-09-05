@@ -1,6 +1,8 @@
-@article{cooper2026nv,
-      title={Estimating near-verbatim extraction risk in language models with decoding-constrained beam search}, 
-      author={A. Feder Cooper and Mark A. Lemley and Christopher De Sa and Lea Duesterwald and Allison Casasola and Jamie Hayes and Katherine Lee and Daniel E. Ho and Percy Liang},
-      year={2026},
-      journal={arXiv preprint arXiv:2603.24917},
+@inproceedings{
+cooper2026nv,
+title={Estimating near-verbatim extraction risk in language models with decoding-constrained beam search},
+author={A. Feder Cooper and Mark A. Lemley and Christopher De Sa and Lea Duesterwald and Allison Casasola and Jamie Hayes and Katherine Lee and Daniel E. Ho and Percy Liang},
+booktitle={Third Conference on Language Modeling},
+year={2026},
+url={https://openreview.net/forum?id=05XN0gq1Z7}
 }
