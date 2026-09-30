@@ -1,5 +1,5 @@
 /* =========================================================================
-   Publications — single source of truth.
+   Publications.
 
    To add a paper, copy a block and edit. Fields:
      authors  : string. Your name "A. Feder Cooper" is auto-bolded.
@@ -534,8 +534,8 @@ const PUBLICATIONS = [
 ];
 
 /* =========================================================================
-   Project pages — interactive companion sites I've built for some papers.
-   Single source of truth for the "Project pages" section on the homepage.
+   Project pages: interactive companion sites I've built for some papers.
+   Feeds the "Project pages" section on the homepage.
    Fields:
      title : string. The project / site name.
      desc  : string. One-line description of what the site offers.

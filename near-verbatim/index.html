@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<!--
-  PROJECT PAGE — near-verbatim probabilistic extraction (COLM 2026).
-  Scaffold only: the sticky topbar, hero, and section skeleton are in place;
-  the prose is still to be written. Uses the site's shared styles.css /
-  app.js (theme toggle), plus the .topbar / .project-hero blocks in styles.css.
--->
+<!-- Project page for the COLM 2026 near-verbatim extraction paper. Uses the site's shared
+     styles.css and app.js. -->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.className += " js";</script>
   <style>html,body{margin:0;padding:0}</style>
-  <title>How much more memorization do we find when we count near-verbatim cases?</title>
-  <meta name="description" content="Measuring memorization by exact matches alone undercounts it. We estimate near-verbatim extraction risk in language models with decoding-constrained beam search.">
-  <meta name="robots" content="noindex">
+  <title>How much more extraction risk do we find when we count near-verbatim cases?</title>
+  <meta name="description" content="Measuring near-verbatim probabilistic extraction reveals significantly more extraction risk than its verbatim counterpart.">
 
   <link rel="preload" href="/fonts/spectral-medium.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/plex-sans-roman-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -26,16 +22,16 @@
   <!-- Open Graph / social cards -->
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="A. Feder Cooper">
-  <meta property="og:title" content="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search">
-  <meta property="og:description" content="COLM 2026 · Coming soon.">
+  <meta property="og:title" content="How much more extraction risk do we find when we count near-verbatim cases?">
+  <meta property="og:description" content="Measuring near-verbatim probabilistic extraction reveals significantly more extraction risk than its verbatim counterpart.">
   <meta property="og:url" content="https://afedercooper.info/near-verbatim/">
   <meta property="og:image" content="https://afedercooper.info/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="COLM 2026 · Coming soon.">
+  <meta property="og:image:alt" content="Measuring near-verbatim probabilistic extraction reveals significantly more extraction risk than its verbatim counterpart.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search">
-  <meta name="twitter:description" content="COLM 2026 · Coming soon.">
+  <meta name="twitter:title" content="How much more extraction risk do we find when we count near-verbatim cases?">
+  <meta name="twitter:description" content="Measuring near-verbatim probabilistic extraction reveals significantly more extraction risk than its verbatim counterpart.">
   <meta name="twitter:image" content="https://afedercooper.info/og-image.png">
 
   <!-- Cloudflare Web Analytics -->
@@ -64,9 +60,30 @@
     </div>
   </header>
 
+  <!-- Section rail: desktop only, driven by app.js (initPostToc). Sits outside <main> so no
+       ancestor transform can break its fixed positioning. -->
+  <nav class="post-toc post-toc--wide" aria-label="Sections on this page">
+    <ol>
+      <li><a href="#measuring">Different ways of measuring extraction</a></li>
+      <li><a href="#expensive">The obvious methods are expensive</a>
+        <ol>
+          <li><a href="#exact">Exact computation is intractable</a></li>
+          <li><a href="#monte-carlo">Monte Carlo sampling is infeasible</a></li>
+        </ol>
+      </li>
+      <li><a href="#kcbs-walkthrough"><i>k</i>-CBS, step by step</a>
+        <ol>
+          <li><a href="#lev-table">Pruning with Levenshtein</a></li>
+        </ol>
+      </li>
+      <li><a href="#more-extraction">Near-verbatim reveals more extraction</a></li>
+      <li><a href="#cite">How to cite</a></li>
+    </ol>
+  </nav>
+
   <main>
     <div class="wrap--wide project-hero" id="top">
-      <h1>How much more memorization do we find when we count near-verbatim cases?</h1>
+      <h1>How much more extraction risk do we find when we count near-verbatim cases?</h1>
       <p class="byline">
         <a href="/index.html">A.&nbsp;Feder&nbsp;Cooper</a>,
         <a href="https://law.stanford.edu/mark-a-lemley/" target="_blank" rel="noopener">Mark&nbsp;A.&nbsp;Lemley</a>,
@@ -85,35 +102,168 @@
     </div>
 
     <article class="wrap article">
-      <div class="coming-soon">
-        <p><strong>Full post coming soon.</strong></p>
-        <p>In the meantime, here's an interactive walk-through of the algorithm we use in the paper to compute near-verbatim extraction probabilities.</p>
+      <p>Language models <b>memorize</b> some, but not all, of their training data.
+      Intuitively, a piece of training data is memorized if the model assigns that specific text very high probability; this means that piece of training data is encoded in the model's weights in some form (<a href="https://arxiv.org/abs/2404.12590" target="_blank" rel="noopener">Cooper and Grimmelmann, 2024</a>; <a href="https://nicholas.carlini.com/writing/2025/privacy-copyright-and-generative-models.html" target="_blank" rel="noopener">Carlini, 2025</a>; <a href="https://arxiv.org/abs/2505.12546" target="_blank" rel="noopener">Cooper et al., 2025</a>).
+      Arguably the most popular way to quantify memorization in LLMs is <b>extraction</b>: prompting the model so that it reproduces memorized training data in its outputs (<a href="https://arxiv.org/abs/2012.07805" target="_blank" rel="noopener">Carlini et al., 2021</a>).
+      Studying memorization can tell us about model quality, since it may indicate overfitting rather than generalization. Memorization and extraction also have extensive implications for privacy and copyright.</p>
+
+      <h2 id="measuring">Different ways of measuring extraction</h2>
+      <p>The most common method is <b>verbatim discoverable extraction</b> (<a href="https://arxiv.org/abs/2107.06499" target="_blank" rel="noopener">Lee et al., 2022</a>; <a href="https://arxiv.org/abs/2202.07646" target="_blank" rel="noopener">Carlini et al., 2023</a>). For an open-weight <b>base model</b>, you take a piece of its training data, split it into a <b>prefix</b> and a <b>target suffix</b>, prompt the model with the prefix, generate a <b>continuation</b> with <b>greedy decoding</b>, and check whether that continuation exactly matches the target suffix. In practice, both are usually 50 tokens; the prefix prompt could be longer or shorter, but 50 tokens is the minimum length for outputs that the field tends to accept as valid evidence for extraction.
+      Greedy decoding picks the single most likely (top-1) next token at every generation step, which makes it a cheap proxy for finding a high-probability continuation. It's also deterministic: for the same model, prefix, and continuation length, you get the same continuation every time.</p>
+
+      <p>This setup naturally extends to <b>near-verbatim</b> extraction (<a href="https://arxiv.org/abs/2210.17546" target="_blank" rel="noopener">Ippolito et al., 2023</a>). Instead of requiring an exact match between the greedy continuation and the target suffix, you take that same continuation, measure its distance to the target suffix with a chosen distance metric (in either token or character space), and count it as extracted if it's within a small distance. <a href="#fig-example">Figure 1</a> shows an example, for Llama 1 13B and a training sequence from <em>The Great Gatsby</em>. The greedy continuation (top row) matches the target suffix except at the very end, where it has an ellipsis instead of a period.<sup class="fn-ref"><a href="#fn-1" id="fnref-1">1</a></sup> This is just one punctuation difference from the verbatim target, so verbatim discoverable extraction wouldn't count it as extracted, but near-verbatim extraction would.</p>
+    </article>
+
+    <!-- The example figure is wider than the text column. -->
+    <div class="wrap--wide">
+      <figure class="wide-fig" id="fig-example">
+        <img src="fig1-careless-people.png" alt="For a Great Gatsby prefix ('They were careless people, Tom and Daisy - they smashed up things and creatures and then retreated'), three top-k continuations with their Levenshtein distances to the target suffix and their probabilities: the greedy continuation (distance 1, probability 0.1477), the verbatim match to the target suffix (distance 0, probability 0.1431, highlighted), and a third continuation (distance 2, probability 0.0671).">
+        <figcaption><strong>Figure 1.</strong> For Llama 1 13B and a training sequence from <em>The Great Gatsby</em>, we show the prefix and 3 of its continuations under top-<i>k</i> decoding (<i>k</i>&nbsp;=&nbsp;40), each with its Levenshtein distance to the target suffix and its probability given the prefix. The diffs mark characters added (blue) and deleted (red) relative to the target suffix. The verbatim match (highlighted) isn't the greedy continuation (top row), and all three continuations are near-verbatim matches to the target suffix.</figcaption>
+      </figure>
+    </div>
+
+    <article class="wrap article">
+
+      <p id="tau-min">Recent work introduces a <b>probabilistic</b> relaxation of verbatim discoverable extraction (<a href="https://arxiv.org/abs/2410.19482" target="_blank" rel="noopener">Hayes et al., 2025</a>). Since memorization means a sequence has unusually high probability under the model, why not measure that probability directly?
+      Concretely, we can easily compute the probability of generating the <em>exact</em> target suffix given the prefix under a chosen decoding scheme, and then count the sequence as extracted if that probability is at least some threshold, <i>τ</i><sub>min</sub>.<sup class="fn-ref"><a href="#fn-2" id="fnref-2">2</a></sup> In <a href="#fig-example">Figure 1</a>, the verbatim target suffix (highlighted) has probability 0.1431 under top-<i>k</i> decoding (<i>k</i>&nbsp;=&nbsp;40), which ranks slightly below the probability of the greedy continuation.
+      </p>
+
+      <p>This approach reveals significantly more memorization than its greedy, deterministic counterpart (<a href="https://arxiv.org/abs/2410.19482" target="_blank" rel="noopener">Hayes et al., 2025</a>; <a href="https://arxiv.org/abs/2505.12546" target="_blank" rel="noopener">Cooper et al., 2025</a>). It also conveys relative <b>extraction risk</b> across sequences, which greedy decoding can't. Two sequences might both count as extracted, but if one has probability 0.5 and the other 0.002, the first is far more likely to be generated: you'd expect to see it in about 2 samples, versus about 500 samples for the second. In contrast, greedy extraction would treat these two sequences the same way: it collapses extraction into the same binary, yes-or-no answer.
+      </p>
+
+      <p>
+      It's also significantly cheaper to compute at scale than greedy generation, in terms of wall-clock time. Instead of generating the continuation one token at a time, we can use <b>teacher-forced inference</b>: run a single forward pass over the entire 100-token sequence (the prefix and the target suffix), which gives the model's logits at every position at once. We can then cheaply post-process those logits to get the probability of each suffix token given everything before it, under whichever decoding policy we choose (for top-<i>k</i>, keep the <i>k</i> largest logits and renormalize). Multiplying those per-token probabilities gives the exact probability of the whole suffix.<sup class="fn-ref"><a href="#fn-3" id="fnref-3">3</a></sup>
+      </p>
+
+      <p>
+      Teacher forcing is what makes probabilistic extraction efficient, but it doesn't naturally extend to the near-verbatim case. That's because it requires feeding the model a <em>specific</em> sequence: the full verbatim prefix and suffix. But for near-verbatim, there are <em>many</em> possible suffixes that could count as successful extraction. For instance, in <a href="#fig-example">Figure 1</a>, all three continuations are near-verbatim matches, and there are many others. That makes the near-verbatim probability much trickier to compute.
+      </p>
+
+      <p>
+      And that's what this post is about. We've just walked through two overarching axes for measuring extraction: whether to use a deterministic (greedy) or probabilistic decoding scheme, and whether to require a verbatim match or accept a near-verbatim one.
+      </p>
+
+      <!-- The four kinds of extraction measurement: verbatim or near-verbatim, greedy or probabilistic. -->
+      <div class="quad" role="table" aria-label="Kinds of extraction measurement">
+        <div class="quad__corner" role="columnheader"></div>
+        <div class="quad__col" role="columnheader">Greedy</div>
+        <div class="quad__col" role="columnheader">Probabilistic</div>
+
+        <div class="quad__row" role="rowheader">Verbatim</div>
+        <div class="quad__cell" role="cell" data-kind="Greedy">
+          <p>Is the greedy continuation exactly the target suffix?</p>
+          <p class="quad__cite">(<a href="https://arxiv.org/abs/2107.06499" target="_blank" rel="noopener">Lee et al., 2022</a>; <a href="https://arxiv.org/abs/2202.07646" target="_blank" rel="noopener">Carlini et al., 2023</a>)</p>
+        </div>
+        <div class="quad__cell" role="cell" data-kind="Probabilistic">
+          <p>What is the probability of generating exactly the target suffix?</p>
+          <p class="quad__cite">(<a href="https://arxiv.org/abs/2410.19482" target="_blank" rel="noopener">Hayes et al., 2025</a>; <a href="https://arxiv.org/abs/2505.12546" target="_blank" rel="noopener">Cooper et al., 2025</a>)</p>
+        </div>
+
+        <div class="quad__row" role="rowheader">Near-verbatim</div>
+        <div class="quad__cell" role="cell" data-kind="Greedy">
+          <p>Is the greedy continuation within some small distance of the target suffix?</p>
+          <p class="quad__cite">(<a href="https://arxiv.org/abs/2210.17546" target="_blank" rel="noopener">Ippolito et al., 2023</a>)</p>
+        </div>
+        <div class="quad__cell quad__cell--this" role="cell" data-kind="Probabilistic">
+          <p>What is the probability of generating a continuation within some small distance of the target suffix?</p>
+          <p class="quad__cite">(<a href="https://arxiv.org/abs/2603.24917" target="_blank" rel="noopener">Cooper et al., 2026a</a>; this post)</p>
+        </div>
       </div>
 
-      <!-- kcbs-intro:begin (generated by nv-animation/src/build.py; edit the source there) -->
-      <h2 class="kcbs-title">Decoding-constrained beam search (<i>k</i>-CBS), step by step</h2>
-      <p>We step through an illustrative run of top-<i>k</i>-constrained beam search (<i>k</i>-CBS) with Levenshtein
-    <i>ε</i>-viability pruning for one prompt: a prefix from <em>The Great Gatsby</em> (which is in the training data).
-    Here, for simplicity, one word is one token. 
-    We measure probabilities under top-<i>k</i> decoding with <i>k</i>&nbsp;=&nbsp;5: at each position, only the model's 5 most
-    likely next words can be generated.
-    <i>k</i>-CBS keeps a beam of at most <i>B</i>&nbsp;=&nbsp;3 partial continuations.
-    At each step, the algorithm expands each partial continuation in the beam by its own <i>k</i>&nbsp;=&nbsp;5 most likely next words.
-    Partial continuations that can't end within 2 edits of the target suffix (<i>ε</i>&nbsp;=&nbsp;2) are pruned, and the remaining ones are ranked by their probability given the prefix, under top-<i>k</i> decoding. 
-    Only (up to) the <i>B</i>&nbsp;=&nbsp;3 most probable are kept to be expanded in the next step.</p>
-      <p>At the end, we sum the probabilities of all the returned 8-word continuations. By construction, each one is within
-    <i>ε</i>&nbsp;=&nbsp;2 edits of the target suffix. That sum is a deterministic lower bound on the near-verbatim probability
-    of the target suffix given the prefix.</p>
-      <p>The numbers in the walk-through are illustrative; they aren't from a real model. We show a simpler setup than in the paper. 
-    The experiments in the paper run with <i>k</i>&nbsp;=&nbsp;40, <i>B</i>&nbsp;=&nbsp;20, and <i>ε</i>&nbsp;=&nbsp;5 on 50-token prefixes and suffixes. Here, we show <i>k</i>&nbsp;=&nbsp;5, <i>B</i>&nbsp;=&nbsp;3, and <i>ε</i>&nbsp;=&nbsp;2 on 8-word prefixes and suffixes. In practice <i>k</i>-CBS adds log-probabilities instead of multiplying probabilities; the ranking is the same either way.
-    If the returned lower bound is at least a threshold <i>τ</i><sub>min</sub>&nbsp;=&nbsp;0.001, the target suffix counts as extracted. In this walk-through, we stop at the lower bound and don't apply a threshold, since we wouldn't consider something as short as an 8-word suffix extractable in practice.</p>
-      <p>Step through the animation with the buttons below it, or with the left and right arrow keys; pressing the spacebar toggles play/pause.</p>
-      <!-- kcbs-intro:end -->
-    </article>
+      <p>In our new paper (<a href="https://arxiv.org/abs/2603.24917" target="_blank" rel="noopener">Cooper et al., 2026a</a>), we introduce an algorithm for the missing piece: efficiently estimating near-verbatim probabilistic extraction. The other three cells each give an exact answer: a greedy check is a definite yes or no, and teacher forcing gives the exact verbatim probability. In contrast, our near-verbatim probabilistic method returns a deterministic lower bound, for about the cost of 20 samples. Settling for a lower bound is what keeps our approach tractable, because, as we'll see next, computing the near-verbatim probability exactly is far too expensive.</p>
+
+      <h2 id="expensive">The obvious ways to compute near-verbatim probabilities are expensive</h2>
+
+      <p>To compute a near-verbatim extraction probability, we first need to pin down which continuations count as "near-verbatim." Given a target suffix, a distance function, and a small maximum distance <i>ε</i>, the <b>near-verbatim ball</b> around the target suffix is the set of every continuation within <i>ε</i> of it. The near-verbatim probability is the total probability of everything in the near-verbatim ball: the sum of the probabilities of all of those continuations. As with verbatim probabilistic extraction, a sequence counts as extracted if this probability is at least <a href="#tau-min"><i>τ</i><sub>min</sub></a>.</p>
+
+      <p>To make this concrete, we use an illustrative example, which we also use in the <a href="#kcbs-walkthrough">walk-throughs below</a>: a prefix from <em>The Great Gatsby</em> (which is in the training data) and its 8-word target suffix.</p>
+      <blockquote class="example">
+        <p><span class="example__lbl">prefix</span><span class="lev-seq">smashed up things and creatures and then retreated</span></p>
+        <p><span class="example__lbl">target suffix</span><span class="lev-seq">back into their money or their vast carelessness</span></p>
+      </blockquote>
+      <p>Here, for simplicity, one word is one token, and the numbers are illustrative; they aren't from a real model.</p>
+
+      <p>Which continuations land in the near-verbatim ball depends on the distance function. <b>Hamming distance</b> compares two equal-length sequences position by position, and counts the positions where they differ. <b>Levenshtein distance</b> counts the fewest edits (substitutions, insertions, or deletions) needed to change one sequence into the other. Levenshtein is more forgiving of shifts: a continuation that skips the first word of the target suffix but otherwise matches is off by one at <em>every</em> position, so its Hamming distance is large, but its Levenshtein distance is just 2: insert the missing word at the start, and delete the extra word at the end (<a href="#fig-shift">Figure 2</a>).</p>
+      <!-- One-word shift: Hamming vs. Levenshtein. Built programmatically; do not edit by hand. -->
+      <figure class="shift-fig" id="fig-shift">
+      <div class="lev"><div class="lev-shift">
+  <p class="lev-shift-h">Position by position</p>
+  <div class="lev-shift-grid"><span class="lbl">target suffix</span><span>back</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span></span><span class="lbl">continuation</span><span class="diff">into</span><span class="diff">their</span><span class="diff">money</span><span class="diff">or</span><span class="diff">their</span><span class="diff">vast</span><span class="diff">carelessness</span><span class="diff">and</span><span></span></div>
+  <p class="lev-shift-note">every position differs</p>
+  <p class="lev-shift-h">Shifted by one</p>
+  <div class="lev-shift-grid"><span class="lbl">target suffix</span><span class="miss">back</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span class="gap">—</span><span class="lbl">continuation</span><span class="gap">—</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span class="extra">and</span></div>
+  <p class="lev-shift-note">2 edits to the continuation recover the target suffix: insert <span class="lev-seq">back</span>, delete <span class="lev-seq">and</span></p>
+</div></div>
+        <figcaption><strong>Figure 2.</strong> A continuation that skips the first word of the target suffix. Compared position by position, every word differs, a Hamming distance of 8; lined up, it's only 2 edits away, a Levenshtein distance of 2.</figcaption>
+      </figure>
+
+      <p>For this example target suffix, the Levenshtein ball with <i>ε</i>&nbsp;=&nbsp;2 contains every 8-word continuation within 2 edits of it. <a href="#fig-ball">Figure 3</a> visualizes the Levenshtein ball, showing a few of the continuations that are 1 or 2 edits away, along with their probabilities given the prefix. (Remember that these numbers are illustrative; this example doesn't use a real model.) Some are plausible, like <span class="lev-seq">back to their money or their vast carelessness</span> (probability 0.081); others, like <span class="lev-seq">back github their money or their vast carelessness</span>, have probability 0. The exact near-verbatim probability is the sum of the probabilities of all the sequences in the whole near-verbatim ball.</p>
+      <!-- The near-verbatim ball for the walk-through's target suffix (Levenshtein, eps = 2). Probabilities come
+           from an invented top-k model (k = 5): a continuation using a word outside a context's top 5 has
+           probability exactly 0. Shading: log scale. Built programmatically; do not edit by hand. -->
+      <figure class="ball" aria-label="Some of the continuations in the near-verbatim ball around the target suffix" id="fig-ball">
+        <div class="ball__shell ball__shell--2">
+          <p class="ball__lbl">within 2 edits</p>
+          <ul>
+            <li class="ball__m" style="opacity: 0.89"><span class="ball__s">back into their money<ins>,</ins> or their vast <del>carelessness</del></span><span class="ball__p">0.033</span></li>
+            <li class="ball__m" style="opacity: 0.73"><span class="ball__s">back <del>into</del><ins>to</ins> their money or their vast <del>carelessness</del><ins>indifference</ins></span><span class="ball__p">0.0069</span></li>
+            <li class="ball__m" style="opacity: 0.69"><span class="ball__s">back <del>into</del><ins>to</ins> their money or their vast <del>carelessness</del><ins>selfishness</ins></span><span class="ball__p">0.0049</span></li>
+            <li class="ball__m" style="opacity: 0.60"><span class="ball__s">back <del>into</del><ins>to</ins> their money or their vast <del>carelessness</del><ins>fortune</ins></span><span class="ball__p">0.0020</span></li>
+            <li class="ball__m" style="opacity: 0.30"><span class="ball__s">back into their money or <del>their</del><ins>the</ins> vast <del>carelessness</del><ins>indifference</ins></span><span class="ball__p">0.0001</span></li>
+          </ul>
+          <div class="ball__shell ball__shell--1">
+            <p class="ball__lbl">within 1 edit</p>
+            <ul>
+              <li class="ball__m" style="opacity: 0.98"><span class="ball__s">back <del>into</del><ins>to</ins> their money or their vast carelessness</span><span class="ball__p">0.081</span></li>
+              <li class="ball__m" style="opacity: 0.73"><span class="ball__s">back into their money or their vast <del>carelessness</del><ins>indifference</ins></span><span class="ball__p">0.0071</span></li>
+              <li class="ball__m" style="opacity: 0.73"><span class="ball__s">back into their <del>money</del><ins>wealth</ins> or their vast carelessness</span><span class="ball__p">0.0067</span></li>
+              <li class="ball__m" style="opacity: 0.69"><span class="ball__s">back into their money or their vast <del>carelessness</del><ins>selfishness</ins></span><span class="ball__p">0.0047</span></li>
+              <li class="ball__m" style="opacity: 0.68"><span class="ball__s">back into their money <del>or</del><ins>and</ins> their vast carelessness</span><span class="ball__p">0.0044</span></li>
+              <li class="ball__m" style="opacity: 0.46"><span class="ball__s">back into <del>their</del><ins>the</ins> money or their vast carelessness</span><span class="ball__p">0.0005</span></li>
+              <li class="ball__m" style="opacity: 0.45"><span class="ball__s">back into their money or <del>their</del><ins>the</ins> vast carelessness</span><span class="ball__p">0.0004</span></li>
+              <li class="ball__m ball__m--zero"><span class="ball__s">back <del>into</del><ins>github</ins> their money or their vast carelessness</span><span class="ball__p">0</span></li>
+              <li class="ball__m ball__m--zero"><span class="ball__s">back into their <del>money</del><ins>pizza</ins> or their vast carelessness</span><span class="ball__p">0</span></li>
+            </ul>
+            <div class="ball__center">
+              <p class="ball__lbl">target suffix (0 edits)</p>
+              <ul><li class="ball__m"><span class="ball__s">back into their money or their vast carelessness</span><span class="ball__p">0.101</span></li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="ball__key">
+          <span class="ball__item"><span class="ball__grad" aria-hidden="true"></span><span>probability under top-<i>k</i> decoding, 0.0001 to 0.1 (log scale)</span></span>
+          <span class="ball__item"><span class="ball__zero">0</span><span>impossible: uses a word outside the top <i>k</i></span></span>
+          <span class="ball__item"><del>word</del>deleted</span>
+          <span class="ball__item"><ins>word</ins>inserted</span>
+        </div>
+        <figcaption><strong>Figure 3.</strong> A few of the continuations in the near-verbatim ball (Levenshtein, <i>ε</i>&nbsp;=&nbsp;2), each shaded by its probability given the prefix under top-<i>k</i> decoding (<i>k</i>&nbsp;=&nbsp;5); lighter is less likely. Most of the near-verbatim ball isn't shown: nearly all of it, like continuations that swap in <span class="lev-seq">github</span> or <span class="lev-seq">pizza</span>, has probability 0.</figcaption>
+      </figure>
+      <h3 id="exact">Exact computation is intractable</h3>
+      <p>In principle, we could compute the near-verbatim probability exactly: list every continuation in the near-verbatim ball, teacher-force each one (appended to the prefix) to get its exact conditional probability, and add them all up. But in practice, the near-verbatim ball is far too large to do this. For our small 8-word example, with a 32,000-word vocabulary, the Hamming ball within 2 edits contains on the order of 10<sup>10</sup> continuations. For a 50-token suffix with a 32,000-token vocabulary (Llama 2's, for example), it's on the order of 10<sup>12</sup> sequences. (In general, the Levenshtein ball for the same number of edits is even larger.)</p>
+
+      <p>Teacher-forcing every one of these sequences just isn't possible, and it also shouldn't be necessary. Most of the near-verbatim ball has little or no probability. As in <a href="#fig-ball">Figure 3</a>, a continuation like <span class="lev-seq">back github their money or their vast carelessness</span> is technically within 2 edits of the target suffix, but under top-<i>k</i> decoding it can't even be generated at all. Ideally, we'd spend computation only on the small part of the near-verbatim ball that actually carries probability, since what we care about for extraction is whether the near-verbatim probability is unusually high.</p>
+      <h3 id="monte-carlo">Estimating via Monte Carlo sampling is infeasible</h3>
+      <p>Rather than computing the near-verbatim probability exactly, we could estimate it by sampling. Generate many continuations from the prefix under the decoding policy, check each one's distance to the target suffix, and estimate the near-verbatim probability as the fraction that land within <i>ε</i>. This Monte Carlo (MC) estimate is unbiased, and with enough samples, it converges to the true probability; continuations with high probability should show up often. The catch is what counts as "high." For a 50-token suffix, a near-verbatim probability of 0.01 is enormous for an LLM, and very likely a sign of extraction, but it's small in absolute terms. You'd need about 100 samples on average just to land in the near-verbatim ball once, and many more to estimate the probability reliably.</p>
+      <figure id="fig-mc">
+        <img src="mc-convergence.png" alt="Monte Carlo estimates of one sequence's near-verbatim probability against the number of samples, on a log scale from 10 to 10,000, with 95% Clopper-Pearson intervals. The estimates settle just above the k-CBS deterministic lower bound of about 0.01 after thousands of samples; k-CBS costs about as much as 20 samples.">
+        <figcaption><strong>Figure 4.</strong> Monte Carlo (MC) estimates of the near-verbatim probability can take thousands (or even hundreds of thousands) of samples to settle. The <i>k</i>-CBS algorithm returns a useful, deterministic lower bound for the cost of about 20 samples. Here, we show one 50-token suffix from <em>The Great Gatsby</em> and Llama 2 7B (which was trained on <em>The Great Gatsby</em>). <i>k</i>-CBS recovers 89.4% of the probability that MC captures after 10,000 samples.</figcaption>
+      </figure>
+      <p><a href="#fig-mc">Figure 4</a> shows this for one 50-token suffix from <em>The Great Gatsby</em> with Llama 2 7B, using Levenshtein distance with <i>ε</i>&nbsp;=&nbsp;5; there, MC's estimate for the near-verbatim probability eventually settles near 0.01. With 10 or 50 samples, MC never lands in the near-verbatim ball, so it estimates 0. With 100, it starts to find some, but the confidence interval is still wide, and it takes thousands of samples for the estimate to settle near 0.01. In contrast, our approach (<i>k</i>-CBS) gets a deterministic lower bound that's close to the MC estimate after 10,000 samples, for the cost of about 20 samples.</p>
+
+            <h2 class="kcbs-title" id="kcbs-walkthrough">Top-<i>k</i>-constrained beam search (<i>k</i>-CBS), step by step</h2>
+      <p>The intuition behind our approach is simple. <b>Beam search</b> is a standard decoding algorithm that tends to find continuations with high probability under the model. Memorized suffixes have unusually high probability. So when a sequence is memorized, beam search should find continuations in its near-verbatim ball. Like greedy decoding, beam search generates one token at a time, but instead of committing to the single most likely token, it keeps the <i>B</i> most probable partial continuations so far: the <b>beam</b>, of <b>beam width</b> <i>B</i>. At each step, it extends each of them by every possible next token, and keeps only the <i>B</i> highest-scoring results. Since a continuation's probability is a product over steps, only continuations whose probability stays among the highest at every step survive. So beam search concentrates its effort on a thin, high-probability slice of the possible continuations, without exploring all of them.</p>
+      <p>Our approach, <b>decoding-constrained beam search</b> (CBS), modifies beam search to work under a given decoding policy, so it returns continuations along with their exact probabilities under that policy. CBS can work with other decoding policies; we focus on top-<i>k</i> decoding with <i>k</i>&nbsp;=&nbsp;40 and temperature 1, since this is the main setting studied in prior work on probabilistic extraction (<a href="https://arxiv.org/abs/2410.19482" target="_blank" rel="noopener">Hayes et al., 2025</a>; <a href="https://arxiv.org/abs/2505.12546" target="_blank" rel="noopener">Cooper et al., 2025</a>). This version, <b>top-<i>k</i>-constrained beam search</b> (<i>k</i>-CBS), makes three changes to beam search:</p>
+      <ol>
+        <li>It extends each partial continuation only by its <i>k</i> most likely next tokens, since under top-<i>k</i> decoding no other token can be generated.</li>
+        <li>It scores continuations by their probability under top-<i>k</i> decoding, renormalizing each step's top <i>k</i> probabilities to sum to 1.</li>
+        <li>At the last step, it keeps all <i>B</i>&nbsp;&middot;&nbsp;<i>k</i> final candidates instead of cutting back to <i>B</i>. The last step of beam search has already produced those candidates, and they're all valid continuations under the decoding policy, so it costs no extra model calls to retain them.</li>
+      </ol>
+      <p>The animation below steps through <i>k</i>-CBS on the illustrative example from <a href="#fig-ball">Figure 3</a>: the same prefix, target suffix, and made-up model. To keep it small, it uses <i>k</i>&nbsp;=&nbsp;5, a beam of <i>B</i>&nbsp;=&nbsp;3, and <i>ε</i>&nbsp;=&nbsp;2 on 8-word suffixes. (The experiments in the paper use <i>k</i>&nbsp;=&nbsp;40, <i>B</i>&nbsp;=&nbsp;20, and <i>ε</i>&nbsp;=&nbsp;5 on 50-token suffixes.) The animation also prunes partial continuations during the search, once they can no longer end within 2 edits (Levenshtein distance) of the target suffix; we describe this further below. Step through it with the buttons below it, or with the left and right arrow keys; hitting the spacebar plays and pauses.</p>
+          </article>
 
     <!-- The k-CBS walkthrough needs more width than the text column. -->
     <div class="wrap--wide">
-      <!-- kcbs-figure:begin (generated by nv-animation/src/build.py; edit the source there) -->
+      <!-- kcbs-figure:begin (built programmatically; do not edit by hand) -->
       <div class="kcbs">
       <section class="figure" id="kcbs-figure" tabindex="-1" aria-label="k-CBS walkthrough">
         <div class="prompt">
@@ -158,25 +308,22 @@
     </div>
 
     <article class="wrap article">
-      <!-- lev-intro:begin (generated by nv-animation/src/lev_build.py; edit the source there) -->
-      <h2 class="lev-title">How <i>k</i>-CBS computes min. edits for the Levenshtein distance</h2>
-      <p>In the animation above, at each step, <i>k</i>-CBS computes min. edits for every partial continuation, and uses it to decide whether to prune that continuation. Min. edits is the fewest word edits (insertions, deletions, or substitutions) the continuation will need to match the target suffix, no matter which words come next. Min. edits isn't the number of positions where the words differ: a single insertion or deletion can shift every later word into line. For example, below, <span class="lev-seq">into their money or their vast carelessness and</span> differs from the target suffix, <span class="lev-seq">back into their money or their vast carelessness</span>, at every position, but it's only 2 edits away: insert <span class="lev-seq">back</span> at the start and delete <span class="lev-seq">and</span> at the end.</p>
-      <div class="lev"><div class="lev-shift">
-  <p class="lev-shift-h">Position by position</p>
-  <div class="lev-shift-grid"><span class="lbl">target suffix</span><span>back</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span></span><span class="lbl">continuation</span><span class="diff">into</span><span class="diff">their</span><span class="diff">money</span><span class="diff">or</span><span class="diff">their</span><span class="diff">vast</span><span class="diff">carelessness</span><span class="diff">and</span><span></span></div>
-  <p class="lev-shift-note">every position differs</p>
-  <p class="lev-shift-h">Shifted by one</p>
-  <div class="lev-shift-grid"><span class="lbl">target suffix</span><span class="miss">back</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span class="gap">—</span><span class="lbl">continuation</span><span class="gap">—</span><span>into</span><span>their</span><span>money</span><span>or</span><span>their</span><span>vast</span><span>carelessness</span><span class="extra">and</span></div>
-  <p class="lev-shift-note">2 edits to the continuation recover the target suffix: insert <span class="lev-seq">back</span>, delete <span class="lev-seq">and</span></p>
-</div></div>
-      <p>This means we can't just compare the continuation with the target suffix word by word as it's generated: a later-generated word can make an earlier word pair better with a different target word. With that new pairing, lining up the continuation with the target suffix can take fewer edits than with the old one. So at each step, we need to consider every way of lining up the continuation so far with the target suffix, to see whether it's still possible for the continuation to end within <i>ε</i> edits. A classic dynamic program does this efficiently, by reusing its results from the previous step (<a href="https://doi.org/10.1145/321796.321811">Wagner and Fischer</a>, 1974). (For two sequences of <i>T</i> words, we don't need the full (<i>T</i>&nbsp;+&nbsp;1)&nbsp;×&nbsp;(<i>T</i>&nbsp;+&nbsp;1) table: it's enough to keep the diagonal band of at most 2<i>ε</i>&nbsp;+&nbsp;1 cells per row; see <a href="https://doi.org/10.1016/S0019-9958(85)80046-2">Ukkonen</a>, 1985 and <a href="https://doi.org/10.1145/375360.375365">Navarro</a>, 2001.) Here, we walk through the dynamic program's table for three continuations of the same prefix.</p>
-      <p>Step through the animation with the buttons below it, or with the left and right arrow keys; pressing the spacebar toggles play/pause.</p>
-      <!-- lev-intro:end -->
+      <p>At the end, <i>k</i>-CBS adds up the probabilities of the returned continuations that are within <i>ε</i> of the target suffix. Every probability in that sum is exact, and every continuation in it is in the near-verbatim ball, so the sum is a deterministic lower bound on the near-verbatim probability. It's only a lower bound because, along the way, the search can cut continuations outside the top-<i>B</i> that could've ended up in the near-verbatim ball if they were expanded to the end; their probability never makes it into the sum. But for memorized sequences, we observe that the bound tends to be very useful in practice: a continuation with enough probability to indicate memorization has to pick one of the top-ranked tokens at almost every step, which is exactly the part of the space that <i>k</i>-CBS explores. In <a href="#fig-mc">Figure 4</a>, <i>k</i>-CBS recovers 89.4% of the probability that MC finds after 10,000 samples. And with <i>B</i>&nbsp;=&nbsp;20, as in our experiments, it costs about as much as 20 MC samples.</p>
+
+      <p><i>k</i>-CBS can also <b>prune</b> as it goes, which is what the animation does. If a partial continuation already needs more than <i>ε</i> edits to match the target suffix, no matter which tokens come next, there's no point keeping it in the beam: it can never end up in the near-verbatim ball, and it takes a slot from a continuation that perhaps still could. Pruning is optional, and it only works with distances with certain properties.<sup class="fn-ref"><a href="#fn-4" id="fnref-4">4</a></sup> (The pruned versions only return candidates within <i>ε</i>, so there's no need to filter before summing up their probabilities.) For the Hamming distance, it's simple: keep a running count of the positions that don't match the target suffix. That count can only go up, so once it's more than <i>ε</i>, the continuation can't be in the near-verbatim ball. Levenshtein distance is trickier, since a later insertion or deletion can line up words that looked mismatched (<a href="#fig-shift">Figure 2</a>). For Levenshtein, <i>k</i>-CBS uses a dynamic program, which we walk through <a href="#lev-table">next</a>.</p>
     </article>
+
+    <article class="wrap article">
+            <h3 class="lev-title" id="lev-table">Pruning with Levenshtein</h3>
+      <p>For Levenshtein distance, <i>k</i>-CBS keeps track of every way the continuation so far could line up with the start of the target suffix, using a classic dynamic program (<a href="https://doi.org/10.1145/321796.321811" target="_blank" rel="noopener">Wagner and Fischer, 1974</a>). The dynamic program fills in a table, with one row per generated token and one column per token of the target suffix: each cell holds the fewest edits needed to change the continuation so far into the target suffix up to that column. (For two sequences of <i>T</i> tokens, we don't need the full (<i>T</i>&nbsp;+&nbsp;1)&nbsp;&times;&nbsp;(<i>T</i>&nbsp;+&nbsp;1) table: it's enough to keep the diagonal band of at most 2<i>ε</i>&nbsp;+&nbsp;1 cells per row; see <a href="https://doi.org/10.1016/S0019-9958(85)80046-2" target="_blank" rel="noopener">Ukkonen, 1985</a> and <a href="https://doi.org/10.1145/375360.375365" target="_blank" rel="noopener">Navarro, 2001</a>.)</p>
+
+      <p>The smallest number in the newest row is what the <i>k</i>-CBS animation calls <b>min. edits</b>: the fewest edits the finished continuation could need to match the target suffix, no matter which tokens come next. As more tokens are generated, min. edits can stay the same or go up (but not down).<sup class="fn-ref"><a href="#fn-5" id="fnref-5">5</a></sup> So once it's more than <i>ε</i>, the continuation can be pruned.</p>
+      <p>To understand the state the dynamic program maintains to determine min. edits, step through the animation with the buttons below it, or with the left and right arrow keys; hitting the spacebar plays and pauses. You can pick from three continuations: one that matches verbatim, the one-word shift from <a href="#fig-shift">Figure 2</a>, and one that gets pruned because its min. edits exceed <i>ε</i>&nbsp;=&nbsp;2.</p>
+          </article>
 
     <!-- The Levenshtein table needs more width than the text column. -->
     <div class="wrap--wide">
-      <!-- lev-figure:begin (generated by nv-animation/src/lev_build.py; edit the source there) -->
+      <!-- lev-figure:begin (built programmatically; do not edit by hand) -->
       <div class="lev">
       <section class="figure" id="lev-figure" tabindex="-1" aria-label="Levenshtein table walkthrough">
         <div class="picker" id="lev-picker"><span class="lbl">Continuation</span></div>
@@ -210,6 +357,52 @@
       </div>
       <!-- lev-figure:end -->
     </div>
+
+    <article class="wrap article">
+      <h2 id="more-extraction">Near-verbatim reveals more extracted sequences and increased risk</h2>
+      <p>Accounting for near-verbatim matches reveals substantially more extraction, in two ways: more sequences count as extracted, and individual sequences may carry much more extraction risk. <a href="#fig-olmo">Figure 5</a> shows the first, for OLMo 2 on Wikipedia: <i>k</i>-CBS finds more extraction than greedy at every <i>ε</i> and model size.</p>
+    </article>
+
+    <!-- Results figures are wider than the text column. -->
+    <div class="wrap--wide">
+      <figure class="wide-fig" id="fig-olmo">
+        <img src="olmo2-extraction-rates.png" alt="Three panels, for OLMo 2 7B, 13B, and 32B: extraction rate (percent) against epsilon (Levenshtein) from 0 to 5, for greedy and k-CBS, on training and held-out data. On training data, k-CBS rates are above greedy rates and both rise with epsilon; the gap grows with model size, reaching about 2.6 percent for k-CBS versus 1.6 percent for greedy at epsilon 5 for 32B. Held-out rates stay near 0 percent.">
+        <figcaption><strong>Figure 5.</strong> Extraction rates for OLMo 2 7B, 13B, and 32B, on 10,000 Wikipedia sequences from their training data (solid lines, &quot;Training&quot;) and, as a negative control, 5,000 Wikipedia sequences written after their training cutoff (dashed lines, &quot;Held-out&quot;). <i>ε</i>&nbsp;=&nbsp;0 is verbatim extraction; <i>ε</i>&nbsp;=&nbsp;1 to 5 count a continuation within that many edits (Levenshtein) as extracted. Greedy checks only the single greedy continuation, and its rates are exact. <i>k</i>-CBS (<i>B</i>&nbsp;=&nbsp;20, about 20&times; the cost of greedy) can miss some extracted sequences; its rates are lower bounds.</figcaption>
+      </figure>
+    </div>
+
+    <article class="wrap article">
+      <p>The gap grows with model size (that is, the difference between greedy and probabilistic extraction rates gets wider as models get larger). For OLMo 2 32B at <i>ε</i>&nbsp;=&nbsp;5, 2.57% of sequences are extractable, compared with 1.42% for verbatim probabilistic extraction and 0.61% for greedy verbatim extraction.<sup class="fn-ref"><a href="#fn-6" id="fnref-6">6</a></sup> As a negative control, we also run the same experiments on non-training data (labeled "Held-out" in the figure): Wikipedia entries written after the models' training cutoff. By definition, the models can't have memorized non-training data, so for our extraction procedure to be valid, the rates need to (and do) stay near zero.<sup class="fn-ref"><a href="#fn-7" id="fnref-7">7</a></sup></p>
+
+      <p><a href="#fig-gatsby-mass">Figure 6</a> shows the second, for Llama 2 on <em>The Great Gatsby</em>. Each point is one sequence, with its near-verbatim probability (Levenshtein, <i>ε</i>&nbsp;=&nbsp;5) plotted against its verbatim probability. The orange and red points are sequences that verbatim probabilistic extraction misses, because their verbatim probability is below <i>τ</i><sub>min</sub> (orange) or exactly 0 (red), but that are extractable once near-verbatim continuations are accounted for. At 70B, 1,606 sequences are "unlocked" this way, and 1,289 of them have zero verbatim probability. And these unlocked sequences aren't borderline cases: on average, their near-verbatim probability is 0.086, which is 86 times <i>τ</i><sub>min</sub>. Often the only difference from the target is something tiny, like spacing around punctuation. The blue points are already verbatim-extractable; those above the dashed line carry more risk once we account for near-verbatim continuations.</p>
+    </article>
+
+    <div class="wrap--wide">
+
+      <figure class="wide-fig" id="fig-gatsby-mass">
+        <img src="llama2-gatsby-mass.png" alt="Three panels, for Llama 2 7B, 13B, and 70B on The Great Gatsby: each sequence's near-verbatim probability (Levenshtein, epsilon 5) against its verbatim probability, on log-log axes. Blue points have verbatim probability at least 0.001; orange points have verbatim probability between 0 and 0.001; red points, in a strip on the left of each panel, have verbatim probability 0. Most points sit above the y = x line. Counts (blue / orange / red): 164 / 42 / 34 for 7B, 327 / 81 / 127 for 13B, and 2718 / 317 / 1289 for 70B.">
+        <figcaption><strong>Figure 6.</strong> Near-verbatim probability against verbatim probability (the plot's axes call this "mass") for Llama 2 7B, 13B, and 70B on <em>The Great Gatsby</em>; each point is one sequence. Blue: verbatim probability at least <i>τ</i><sub>min</sub>&nbsp;=&nbsp;0.001. Orange: between 0 and <i>τ</i><sub>min</sub>. Red: exactly 0, shown in the strip at the left of each panel, since 0 can't go on a log scale. Dashed line: <i>y</i>&nbsp;=&nbsp;<i>x</i> (for points on the line, accounting for near-verbatim continuations doesn't change the extraction risk).</figcaption>
+      </figure>
+    </div>
+
+    <article class="wrap article">
+      <p>In the paper, we also run experiments on other model families and kinds of text, including Pythia on emails and Llama 2 on other books. 
+      Accounting for near-verbatim extraction, we observe different patterns in how extraction risk changes with model size, depending on the type of text being analyzed.
+      These two figures are just a preview; see <a href="https://arxiv.org/abs/2603.24917" target="_blank" rel="noopener">the paper</a> for those results and more.</p>
+
+      <section class="footnotes-fallback">
+        <h2>Notes</h2>
+        <ol>
+          <li id="fn-1">The probability in the figure, 0.1477, is with respect to top-<i>k</i> decoding, with <i>k</i>&nbsp;=&nbsp;40. Under greedy decoding, the greedy continuation is generated with probability 1, and every other continuation with probability 0.</li>
+          <li id="fn-2">In our <a href="#more-extraction">experiments</a>, with 50-token suffixes under top-<i>k</i> decoding with <i>k</i>&nbsp;=&nbsp;40, we use <i>τ</i><sub>min</sub>&nbsp;=&nbsp;0.001, following <a href="https://arxiv.org/abs/2505.12546" target="_blank" rel="noopener">Cooper et al., 2025</a>. Both that paper and ours chose this value by running the same measurement procedure on <i>non</i>-training data: data for which memorization is impossible. That baseline shows how probable unmemorized text is under the model and decoding policy; we do this as a sanity check to make sure our extraction procedure is valid, setting <i>τ</i><sub>min</sub> high enough so that the general ability of the model to generate fluent text doesn't get mixed up with memorization claims. <a href="https://arxiv.org/abs/2607.12649" target="_blank" rel="noopener">Cooper et al., 2026b</a> studies this in a lot more detail.</li>
+          <li id="fn-3">In practice, we equivalently add log-probabilities instead of multiplying probabilities, since that's more numerically stable.</li>
+          <li id="fn-4">Pruning needs a distance whose final value we can bound from below as new tokens get added, which Hamming and Levenshtein distance both allow. A similarity score like BLEU doesn't, but you can run <i>k</i>-CBS without pruning; this returns the full <i>B</i>&nbsp;&middot;&nbsp;<i>k</i> outputs, which can then be scored with BLEU and filtered to only those that exceed some minimum (Appendix F.9 in the paper).</li>
+          <li id="fn-5">Compare a simpler number: the distance between the continuation so far and the <em>whole</em> target suffix. That amount can go down as more words get added to the continuation, both because matching words arrive and because a later insertion or deletion can fix an earlier shift. (A 1-word continuation is at least 7 edits from an 8-word target suffix, just from the difference in length.) So it can't tell us when to prune. Min. edits can't go down, which is what makes it safe to prune on.</li>
+          <li id="fn-6">We set <i>ε</i>&nbsp;=&nbsp;5, 10% of the 50-token suffix length. Given how flat the held-out rates stay, a somewhat larger <i>ε</i> might still be valid, but we didn't test that.</li>
+          <li id="fn-7">Building a clean negative control from internet text is hard, and ours is a best effort. A Wikipedia page created after the training cutoff can still contain older text: it might reuse near-verbatim text from an earlier page, follow a template shared with older pages, or re-create a page that was deleted. The few held-out sequences that do register as extractable (5 across the three models) all trace back to cases like these, so they're real instances of extraction, not false positives; the paper documents each one (Appendix F.3.1).</li>
+        </ol>
+      </section>
+    </article>
 
     <article class="wrap article">
       <h2 id="cite">How to cite our work</h2>
@@ -250,5 +443,29 @@
   <script src="kcbs.js"></script>
   <script src="lev.js"></script>
   <script src="../app.js"></script>
+  <script>
+  // Section rail: use all the margin left of the wide figures and animations, as they're drawn
+  // (they zoom to fit the window, so their width varies), less a small gap. Hide only if that
+  // margin is too narrow for words.
+  (function () {
+    const toc = document.querySelector(".post-toc--wide");
+    if (!toc) return;
+    const WIDE = ".kcbs .figure, #lev-figure, .wide-fig, .article";
+    const GAP = 24, LEFT = 16, MAX = 200, MIN = 96;
+    function fit() {
+      let edge = Infinity;
+      document.querySelectorAll(WIDE).forEach(el => { const r = el.getBoundingClientRect(); if (r.width) edge = Math.min(edge, r.left); });
+      const w = Math.min(MAX, Math.floor(edge - GAP - LEFT));
+      toc.style.setProperty("--toc-w", w + "px");
+      toc.classList.toggle("is-cramped", !(w >= MIN));
+    }
+    let t = null;
+    const later = () => { clearTimeout(t); t = setTimeout(fit, 250); };   // after the figures re-zoom
+    addEventListener("resize", later);
+    addEventListener("load", later);
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(later);
+    fit();
+  })();
+  </script>
 </body>
 </html>

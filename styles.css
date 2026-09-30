@@ -1,6 +1,6 @@
 /* =========================================================================
    A. Feder Cooper — site styles
-   Editorial-minimal, content-first. Serif display + clean sans body.
+   Serif display, sans body.
    Display face is Spectral (static 400/500), body is IBM Plex Sans (variable
    400-600, real italics). Fallback metrics below are Capsize-style overrides:
    Spectral matched to Georgia at weight 500, Plex matched to Arial at 400 --
@@ -602,6 +602,62 @@ noscript .pub-fallback { color: var(--text-muted); }
   border-left: 2px solid var(--border-strong); color: var(--text-muted); font-style: italic;
 }
 .article figure { margin: 2rem 0; }
+/* 2 x 2 grid of extraction measurements (near-verbatim page): row and column headers,
+   four cells, one of them marked as the paper's. Stacks to one column on phones. */
+.quad { display: grid; grid-template-columns: auto 1fr 1fr; gap: 0.5rem; margin: 2rem 0; font-size: 0.92rem; }
+.quad__col, .quad__row { font-family: var(--font-display); font-weight: 500; color: var(--text); align-self: end; }
+.quad__col { text-align: center; padding-bottom: 0.2rem; }
+.quad__row { align-self: center; text-align: right; padding-right: 0.4rem; }
+.quad__cell { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-subtle); padding: 0.8rem 0.9rem; }
+.quad__cell p { margin: 0; }
+.quad__cell .quad__cite { margin-top: 0.5rem; font-size: 0.85em; color: var(--text-muted); }
+.quad__cell--this { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+@media (max-width: 560px) {
+  .quad { grid-template-columns: 1fr; }
+  .quad__corner { display: none; }
+  .quad__col { display: none; }
+  .quad__row { text-align: left; margin-top: 0.6rem; }
+  .quad__cell::before { display: block; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .quad__cell::before { content: attr(data-kind); }
+}
+
+/* The illustrative example's prefix and target suffix, set off and centered (near-verbatim page). */
+.article blockquote.example { margin: 1.4rem auto; font-style: normal; border-left: 1px solid var(--border); color: var(--text); padding: 0.9rem 1.2rem; max-width: 34rem; text-align: center;
+  background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); }
+.example p { margin: 0.25rem 0; }
+.example__lbl { display: block; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.example p + p { margin-top: 0.6rem; }
+
+/* Near-verbatim ball (near-verbatim page): nested shells for 2 edits, 1 edit, and the target
+   suffix; each continuation shaded toward the background by its probability (log scale, set inline),
+   continuations with probability 0 dashed. Edits marked like the paper's Figure 1. */
+.ball { margin: 2rem 0; }
+.ball ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.1rem; }
+.ball__shell, .ball__center { border: 1px dashed var(--border-strong); border-radius: 14px; padding: 0.45rem 0.65rem 0.55rem; }
+.ball__shell--1 { margin-top: 0.5rem; }
+.ball__center { margin-top: 0.5rem; border-style: solid; border-color: var(--accent); }
+.ball__lbl { margin: 0 0 0.25rem; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.ball__m { display: flex; gap: 0.8rem; align-items: baseline; justify-content: space-between;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.72rem; line-height: 1.45; color: var(--text); }
+.ball__m--zero { opacity: 0.25; }
+.ball__m--zero .ball__s { border-bottom: 1px dashed var(--text-muted); }
+.ball__p { flex: none; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.ball del, .ball ins { text-decoration: none; border-radius: 2px; padding: 0 1px; }
+.ball del { background: rgba(213, 94, 0, 0.22); text-decoration: line-through; }
+.ball ins { background: rgba(0, 114, 178, 0.22); }
+.ball del + ins { margin-left: 0.25em; }
+/* Legend: each swatch and its label stay together; clear space between items. */
+.ball__key { display: flex; flex-wrap: wrap; gap: 0.45rem 1.4rem; margin-top: 0.7rem; font-size: 0.8rem; color: var(--text-muted); }
+.ball__item { display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap; }
+.ball__key del, .ball__key ins { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.72rem; color: var(--text); }
+.ball__grad { width: 5rem; height: 0.6rem; border-radius: 3px; background: linear-gradient(to right, color-mix(in srgb, var(--text) 30%, var(--bg)), var(--text)); }
+.ball__zero { font-family: "IBM Plex Mono", ui-monospace, monospace; opacity: 0.25; border-bottom: 1px dashed var(--text-muted); }
+.ball figcaption { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.8rem; }
+
+/* A figure too wide for the text column, set in a .wrap--wide container. */
+.wide-fig { margin: 2rem auto; max-width: 1000px; }
+.wide-fig img { display: block; width: 100%; height: auto; box-sizing: border-box; padding: 1% 1.5%; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); }
+.wide-fig figcaption { max-width: 44rem; margin: 0.5rem auto 0; font-size: 0.88rem; color: var(--text-muted); }
 .article figure img { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); }
 .article figcaption { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem; }
 /* Closing "All writing" link; the nav carries it at the top. */
@@ -686,7 +742,7 @@ noscript .pub-fallback { color: var(--text-muted); }
     display: block;
     position: fixed;
     top: 50%; transform: translateY(-50%);
-    /* the prose column caps at 720px and is centred, so its left edge is at
+    /* the prose column caps at 720px and is centered, so its left edge is at
        50% - 360px; sit clear of that, but never off the left of the screen */
     left: max(1.5rem, calc(50% - 600px));
     width: 12.5rem; max-height: 74vh; overflow-y: auto;
@@ -705,6 +761,14 @@ noscript .pub-fallback { color: var(--text-muted); }
   /* "you are here" is a margin marker, not an enclosure -- no pill, no box */
   .post-toc a.is-current { color: var(--text); border-left-color: var(--accent); }
   .post-toc ol ol a { padding-left: 1.5rem; font-size: 0.95em; }
+}
+/* Pages with content wider than the prose column (the near-verbatim figures and animations):
+   a small script on the page sizes the rail to the margin left of that content, as drawn
+   (the animations zoom to fit the window, so their width varies), and sets --toc-w.
+   Until it runs, the rail keeps its usual width. */
+@media (min-width: 1200px) {
+  .post-toc--wide { left: 1rem; width: var(--toc-w, 12.5rem); }
+  .post-toc--wide.is-cramped { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .post-toc { transition: none; } }
 
@@ -764,7 +828,7 @@ noscript .pub-fallback { color: var(--text-muted); }
   margin: 0 0 0.6rem; letter-spacing: -0.015em; text-wrap: balance;
 }
 .project-hero .byline { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 1.2rem; }
-/* Eight author links in a row: accent on every one is a wall of colour, so
+/* Eight author links in a row: accent on every one is a wall of color, so
    they read as text with a hairline rule and take the accent only on hover. */
 .byline a { color: var(--text); border-bottom: 1px solid var(--border); }
 .byline a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
